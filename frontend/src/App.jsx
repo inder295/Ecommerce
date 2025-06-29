@@ -1,17 +1,22 @@
-import Body from "./components/body"
-import Footer from "./components/Footer"
-import Header from "./components/Header"
+import { Route, Routes } from "react-router-dom"
+import About from "./pages/About"
+import Market from "./pages/Market"
+import Product from "./pages/Product"
 
 
 
 function App() {
  
   return (
-    <>
-      <Header/>
-      <Body/>
-      <Footer/>
-    
+    < >
+   
+    <Routes>
+          <Route path="/" element={<About />} />
+          <Route path="/market" element={<Market/>} />
+          <Route path="/product/name" element={<Product/>} />
+    </Routes>
+
+  
 
      
     </>

@@ -1,5 +1,6 @@
 import React from 'react'
 import Search from './Search'
+import { Link } from 'react-router-dom'
 
 function Header() {
   return <>
@@ -7,8 +8,13 @@ function Header() {
         <div className='font-serif font-bold text-3xl font-style: italic cursor-pointer p-2 '>Shopme</div>
         
         <div className='flex p-2 space-x-10 text-xl '>
-            <p className='cursor-pointer hover:text-red-600'>About</p>
-            <p className='cursor-pointer hover:text-red-600'>Market</p>
+            <Link to="/" >
+                <p className='cursor-pointer hover:text-red-600'>About</p>
+            </Link>
+            
+            <Link to="/market" >
+                <p className='cursor-pointer hover:text-red-600'>Market</p>
+            </Link>
         </div>
 
         <div className='flex space-x-5'>
