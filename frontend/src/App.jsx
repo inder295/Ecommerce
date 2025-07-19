@@ -5,6 +5,7 @@ import Product from "./pages/Product"
 
 
 
+
 function App() {
  
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<About />} />
           <Route path="/market" element={<Market/>} />
           <Route path="/product/name" element={<Product/>} />
+         
     </Routes>
 
   

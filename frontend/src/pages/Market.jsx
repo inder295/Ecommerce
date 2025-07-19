@@ -5,21 +5,24 @@ import Footer from '../components/Footer'
 
 function Market() {
   return (
-    <div className="container min-h-screen mx-auto ">
+    <div className="container mx-auto ">
         <Header/>
-        <div className='flex items-center min-h-screen flex-wrap p-10'>
-            <ShoppingCart/>
-            <ShoppingCart/>
-            <ShoppingCart/>
-            <ShoppingCart/>
-            <ShoppingCart/>
-            <ShoppingCart/>
-            <ShoppingCart/>
-            <ShoppingCart/>
-            <ShoppingCart/>
-            <ShoppingCart/>
-            <ShoppingCart/>
+        <div className='flex min-h-screen flex-wrap  '>
            
+           <div className='w-1/4 p-10'>
+               filter section
+           </div>
+
+           <div className='w-3/4  '>
+                
+                 <div className='grid grid-cols-3 gap-2 p-10'>
+                    <ShoppingCart/>
+                    <ShoppingCart/>
+                    <ShoppingCart/>
+                    <ShoppingCart/>
+                    
+                </div>   
+           </div>
            
         </div>     
 
