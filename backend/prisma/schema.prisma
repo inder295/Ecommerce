@@ -49,7 +49,7 @@ model Product {
   reviews     Review[]
   cartItems  CartItems[]
   wishList Wishlist[]
-  
+
 }
 
 model Category {
