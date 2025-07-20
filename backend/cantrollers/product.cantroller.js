@@ -7,7 +7,7 @@ const Prisma = new PrismaClient();
 
 export const createProduct=async (req,res)=>{
 
-    const {name,description,price,inventory}=req.body;
+    const {name,description,price,inventory,categoryIds}=req.body;
     const imagePath=req.file ?req.file.path:null; 
 
     if(!name || !description || !price || !inventory) {
@@ -23,7 +23,10 @@ export const createProduct=async (req,res)=>{
             description:description,
             price:parseFloat(price),
             inventory:parseInt(inventory),
-            image:imagePath
+            image:imagePath,
+            categories:{
+                connect:categoryIds ? categoryIds.map((id)=>({id:id})) : []
+            }
         }
     })
 
@@ -136,7 +139,7 @@ export const getProductById=async(req,res)=>{
 
 export const updateProductById=async(req,res)=>{
     const {id}=req.params;
-    const {name,description,price,inventory}=req.body;
+    const {name,description,price,inventory,categoryIds}=req.body;
 
     try {
         const product= await Prisma.product.findUnique({
@@ -160,7 +163,13 @@ export const updateProductById=async(req,res)=>{
                 description:description || product.description,
                 price:price ? parseFloat(price): product.price,
                 inventory:inventory ? parseInt(inventory): product.inventory,
-                image:req.file ? req.file.path : product.image
+                image:req.file ? req.file.path : product.image,
+                categories:{
+                    set : categoryIds ? categoryIds.map((id)=>({id:id})) : [...product.categories]
+                }
+            },
+            include:{
+                categories:true
             }
         })
         
@@ -178,3 +187,39 @@ export const updateProductById=async(req,res)=>{
         
     }
 }
+
+export const getProductsByCategory=async(req,res)=>{
+    const {categoryId}=req.params;
+    try {
+        const products=await Prisma.product.findMany({
+            where:{
+                categories:{
+                    some:{
+                        id:categoryId
+                    }                   
+
+                }   
+
+            }
+
+        })
+
+        if(products.length===0){
+            return res.status(404).json({
+                message:"No products found for this category"
+            })
+        }
+
+        res.status(200).json({
+            message:"Products fetched successfully",
+            products:products
+        })
+        
+    } catch (error) {
+        return res.status(500).json({
+            message:"Error in fetching products by category"
+        })
+        
+    }
+}
+

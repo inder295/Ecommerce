@@ -45,7 +45,7 @@ model Product {
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
 
-  categories  Category[] @relation("ProductCategories")
+  categories  Category[] @relation("Products")
   reviews     Review[]
   cartItems  CartItems[]
   wishList Wishlist[]
@@ -59,7 +59,7 @@ model Category {
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
 
-  products    Product[]  @relation("ProductCategories")
+  products    Product[]  @relation("Products")
 }
 
 model Review {
@@ -110,3 +110,4 @@ model Wishlist {
   product Product @relation(fields: [productId],references: [id])
 
 }
+
