@@ -3,7 +3,7 @@ const Prisma=new PrismaClient();
 
 /**
  * 
- * userId -> cart ,
+ * testing not completed
  * 
  */
 
@@ -313,6 +313,54 @@ export const getCartTotalPrice=async(req,res)=>{
     } catch (error) {
         return res.status(500).json({
             message:"Error in fetching cart total price",
+            error:error.message
+        })
+        
+    }
+}
+
+export const cartSummary=async(req,res)=>{
+    const userId=req.user.id;
+    try {
+        
+        const CartItems=await Prisma.cartItems.findMany({
+            where:{
+                userId:userId
+            },
+            include:{
+                product:true
+            }
+        })
+
+        if(CartItems.length === 0){
+            return res.status(404).json({
+                message:"Cart is empty"
+            })
+        }
+
+        const SubPrice=CartItems.reduce((total,item)=> total + item.totalPrice,0);
+        const totalItems=CartItems.reduce((total,item)=>total + item.quantity,0);
+        const cartSummary={
+            totalItems:totalItems,
+            SubPrice:SubPrice,
+            Coupons:"Apply Coupon",
+            Shipping:"$ 0.00",
+            Tax:"$ 0.00",
+            GrandTotal:SubPrice
+        }
+
+        return res.status(200).json({
+            message:"Cart summary fetched successfully",
+            cartSummary:cartSummary,
+            
+        })
+
+
+        
+    } catch (error) {
+
+        return res.status(500).json({
+            message:"Errorn in fetching cart summary",
             error:error.message
         })
         
