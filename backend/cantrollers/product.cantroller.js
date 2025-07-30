@@ -214,7 +214,7 @@ export const getProductsByCategory=async(req,res)=>{
             message:"Products fetched successfully",
             products:products
         })
-        
+
     } catch (error) {
         return res.status(500).json({
             message:"Error in fetching products by category"
@@ -222,4 +222,7 @@ export const getProductsByCategory=async(req,res)=>{
         
     }
 }
+
+
+
 

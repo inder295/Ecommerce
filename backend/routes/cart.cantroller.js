@@ -11,9 +11,4 @@ cartRouter.delete("/delete-cart-item/:id",deleteProductFromCart);
 cartRouter.get("/get-cart-total-amount",getCartTotalPrice);
 cartRouter.get("/get-cart-summary",cartSummary);
 
-
-
-
-
-
 export default cartRouter;

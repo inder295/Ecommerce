@@ -19,12 +19,21 @@ enum Role {
   SELLER
 }
 
+enum ShippingType {
+  Free
+  Paid
+}
+
+enum PaymentType {
+   COD
+   STRIPE
+}
+
 model User {
   id         String   @id @default(uuid())
   name       String
   email      String   @unique
   password   String
-  address    String?
   isVerified Boolean  @default(false)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -33,6 +42,7 @@ model User {
   reviews    Review[]
   cartItems CartItems[]
   wishList Wishlist[]
+  address Address[]
 }
 
 model Product {
@@ -71,7 +81,6 @@ model Review {
   description String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-
   user        User     @relation(fields: [userId], references: [id])
   product     Product  @relation(fields: [productId], references: [id])
 }
@@ -98,8 +107,12 @@ model Order {
   status      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  shippingType ShippingType
+  paymentType PaymentType
+
 
   user        User     @relation(fields: [userId], references: [id])
+  
 }
 
 model Wishlist {
@@ -112,4 +125,23 @@ model Wishlist {
   product Product @relation(fields: [productId],references: [id])
 
 }
+
+model Address{
+  id String @id @default(uuid())
+  userId String
+  fullname String
+  phone String
+  address String
+  city String
+  state String
+  country String
+  zip String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user User @relation(fields: [userId],references: [id])
+  
+ 
+}
+
+
 
