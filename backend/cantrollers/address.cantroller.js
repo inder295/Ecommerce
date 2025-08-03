@@ -55,7 +55,7 @@ export const getAllAddresses=async(req,res)=>{
             where:{
                 userId:userId
             },
-            orederBy:{
+            orderBy:{
                 createdAt:'desc'
             }
         })
