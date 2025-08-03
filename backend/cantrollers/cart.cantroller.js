@@ -55,7 +55,7 @@ export const addToCart=async(req,res)=>{
 
           const existingCartItem=cartItem.find(item=> item.productId === productId);
           if(existingCartItem){
-            return await tx.cartItem.update({
+            return await tx.cartItems.update({
                 where:{
                     id:existingCartItem.id
 
@@ -72,7 +72,8 @@ export const addToCart=async(req,res)=>{
                 userId:userId,
                 productId:productId,
                 quantity:quantity,
-                totalPrice:quantity* item.price
+                totalPrice:quantity* item.price,
+                price:item.price
             }
           })
          
@@ -149,7 +150,7 @@ export const subtractCartItemByQuantity=async(req,res)=>{
         if(cartItem.quantity === quantity){
             await Prisma.cartItems.delete({
                 where:{
-                    productId:cartItem.id
+                    id:cartItem.id
                 }
             })
 
@@ -160,7 +161,7 @@ export const subtractCartItemByQuantity=async(req,res)=>{
 
         const updatedCartItem=await Prisma.cartItems.update({
             where:{
-                productId:cartItem.id,
+                id:cartItem.id,
                 userId:userId
             },
             data:{
@@ -184,10 +185,6 @@ export const subtractCartItemByQuantity=async(req,res)=>{
         })
         
     }
-
-
-
-
 }
 
 export const getCartItems=async(req,res)=>{
@@ -301,8 +298,9 @@ export const getCartTotalPrice=async(req,res)=>{
                 product:true
             }
         })
+        
 
-        const totalPrice=cartItems.reduce(totalPrice=> totalPrice+ item.totalPrice,0);
+        const totalPrice=cartItems.reduce((total,item)=> total + item.totalPrice,0);
 
         return res.status(200).json({
             message:"Cart total price fetched successfully",
@@ -360,7 +358,7 @@ export const cartSummary=async(req,res)=>{
     } catch (error) {
 
         return res.status(500).json({
-            message:"Errorn in fetching cart summary",
+            message:"Error in fetching cart summary",
             error:error.message
         })
         
