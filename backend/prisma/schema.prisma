@@ -19,14 +19,30 @@ enum Role {
   SELLER
 }
 
-enum ShippingType {
-  Free
-  Paid
+enum Method {
+  COD
+  STRIPE
 }
 
-enum PaymentType {
-   COD
-   STRIPE
+// enum Status {
+//   Pending
+//   OutForDelivery
+//   Delivered
+// }
+
+enum OrderStatus {
+  PENDING
+  COMPLETE
+}
+
+enum PaymentMethod {
+  COD
+  SRIPE
+}
+
+enum PaymentStatus {
+  SUCCESS
+  FAIL
 }
 
 model User {
@@ -38,11 +54,11 @@ model User {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   role Role @default(USER)
-  orders     Order[]
+  orders     Order[] 
   reviews    Review[]
-  cartItems CartItems[]
-  wishList Wishlist[]
-  address Address[]
+  cartItems  CartItems[]
+  wishList   Wishlist[]
+  address    Address[]
 }
 
 model Product {
@@ -59,6 +75,7 @@ model Product {
   reviews     Review[]
   cartItems  CartItems[]
   wishList Wishlist[]
+  orderItems OrderItem[]
 
 }
 
@@ -101,19 +118,32 @@ model CartItems{
 model Order {
   id          String   @id @default(uuid())
   userId      String
-  productName String
+  addressId   String
   quantity    Int
-  price       Float
-  status      String
+  price  Float
+  paymentMenthod PaymentMethod
+  paymentStatus PaymentStatus @default(FAIL)
+  orderStatus OrderStatus @default(PENDING)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  shippingType ShippingType
-  paymentType PaymentType
-
-
   user        User     @relation(fields: [userId], references: [id])
-  
+  address     Address  @relation(fields: [addressId], references: [id])
+  orderItem OrderItem[]
 }
+
+model OrderItem{
+  id String @id @default(uuid())
+  orderId String
+  productId String
+  quantity Int
+  price String
+  totalPrice String 
+  order     Order     @relation(fields: [orderId], references: [id])
+  product   Product   @relation(fields: [productId], references: [id])
+}
+  
+
+
 
 model Wishlist {
   id String @id @default(uuid())
@@ -139,9 +169,30 @@ model Address{
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   user User @relation(fields: [userId],references: [id])
+  order Order[]
   
  
 }
+
+// model Shipment{
+//   id String @id @default(uuid())
+//   method Method
+//   Delivered Boolean @default(false)
+//   orderId String 
+//   userId String
+//   addressId String
+//   status Status @default(Pending)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   user User @relation(fields: [userId],references: [id])
+//   address Address @relation(fields: [addressId],references: [id])
+//   order Order @relation(fields: [orderId],references: [id])
+
+
+
+  
+// }
 
 
 
