@@ -8,6 +8,7 @@ import categoryrouter  from "./routes/category.route.js";
 import cartRouter from "./routes/cart.route.js";   
 import addressRouter from "./routes/address.route.js";
 import path from "path";
+import orderRouter from "./routes/order.route.js";
 
 const app= express();
 
@@ -31,6 +32,7 @@ app.use("/api/v1/product",productRouter);
 app.use("/api/v1/category",categoryrouter);
 app.use("/api/v1/cart",cartRouter);
 app.use('/api/v1/address',addressRouter)
+app.use("/api/v1/order",orderRouter);
  
 
 

@@ -22,7 +22,7 @@ const productRouter=express.Router();
 
 productRouter.post("/create-product",authMiddleware,isAdmin,upload.single("image"),createProduct);
 productRouter.post("/delete-products",authMiddleware,isAdmin,deleteProducts);
-productRouter.put("/update-product/:id",authMiddleware,isAdmin,updateProductById);
+productRouter.patch("/update-product/:id",authMiddleware,isAdmin,updateProductById);
 productRouter.get("/get-products",getAllProducts)
 productRouter.get("/:id",getProductById)
 productRouter.get("/getProductsByCategory/:categoryId",getProductsByCategory);

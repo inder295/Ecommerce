@@ -7,6 +7,7 @@ dotenv.config();
 const prisma=new PrismaClient();
 export const authMiddleware=async (req,res,next)=>{
     const token=req.cookies.token;
+   
     if(!token){
         return res.status(401).json({
             message:"Unauthorized access, please login first"
