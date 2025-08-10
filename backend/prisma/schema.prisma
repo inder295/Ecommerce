@@ -27,7 +27,9 @@ enum Role {
 
 enum OrderStatus {
   PENDING
+  OUT_FOR_DELIVERY
   COMPLETE
+  CANCELLED
 }
 
 enum PaymentMethod {

@@ -1,5 +1,7 @@
 import { PaymentStatus, PrismaClient } from "@prisma/client";
 import { sendOrderConfirmationEmail } from "../utils/mail-templates.js/order-confirmation-template.js";
+import { outForDelivery } from "../utils/mail-templates.js/out-for-delivery-template.js";
+import { orderCompleted } from "../utils/mail-templates.js/order-completed-template.js";
  
 
 const Prisma=new PrismaClient();
@@ -138,5 +140,172 @@ export const placeOrder=async(req,res)=>{
         })
     }
 }
+
+export const changeOrderStatus=async(req,res)=>{
+    const {orderId}=req.params;
+    const {status}=req.body;
+
+    if(!orderId || !status){
+        return res.status(400).json({
+            message:"Order ID and status are required"
+        })
+    }
+
+    try {
+        const order=await Prisma.order.findUnique({
+            where:{
+                id:orderId
+            }
+        })
+
+        if(!order){
+            return res.status(404).json({
+                message:"Order not found"
+            })
+        }
+
+        if(order.orderStatus==="DELIVERED"){
+            return res.status(400).json({
+                message:"Order already delivered"
+            })
+        }
+
+        if(order.orderStatus==="CANCELLED"){
+            return res.status(400).json({
+                message:"Order already cancelled"
+            })
+        }
+
+        if(order.orderStatus===status){
+            return res.status(400).json({
+                message:"Order status is already set in this status"
+            })
+        }
+
+        const updatedOrder=await Prisma.order.update({
+            where:{
+                id:orderId
+            },
+            data:{
+                orderStatus:status
+            },
+            include:{
+                user:true
+            }
+        })
+
+        if(status==="OUT_FOR_DELIVERY"){
+            await outForDelivery(updatedOrder);
+        }
+
+        if(status==="COMPLETE"){
+            await orderCompleted(updatedOrder);
+        }
+
+        res.status(200).json({
+            message:"Order status updated successfully",
+            orderId:updatedOrder,
+        })
+            
+
+    } catch (error) {
+
+        return res.status(500).json({
+            message:"Error in updating order status",
+            error:error.message
+        })
+        
+    }
+}
+
+export const getAllOrders=async(req,res)=>{
+    try {
+        const orders=await Prisma.order.findMany({
+            orderBy:{
+                createdAt:"desc"
+            }
+
+        })
+
+        res.status(200).json({
+            message:"Orders fetched successfully",
+            orders:orders
+        })  
+    } catch (error) {
+
+        return res.status(500).json({
+            message:"Error in fetching orders",
+            error:error.message
+        })
+        
+    }
+}
+
+export const getAllOrderOfUser=async(req,res)=>{
+    const userId=req.user.id;
+
+    try {
+        const orders=await Prisma.order.findMany({
+            where:{
+                userId:userId
+            },
+            orderBy:{
+                createdAt:"desc"
+            }
+        })
+
+        res.status(200).json({
+            message:"Orders fetched successfully",
+            orders:orders
+        })
+    } catch (error) {
+
+        return res.status(500).json({
+            message:"Error in fetching orders",
+            error:error.message
+        })
+        
+    }
+}
+
+export const getUserOrderById=async(req,res)=>{
+    const userId=req.user.id;
+    const {orderId}=req.params;
+
+    if(!orderId){
+        return res.status(400).json({
+            message:"Order ID is required"
+        })
+    }
+
+    try {
+        const order=await Prisma.order.findUnique({
+            where:{
+                id:orderId
+            }
+        })
+
+        if(!order){
+            return res.status(404).json({
+                message:"Order not found"
+            })
+        }
+
+        res.status(200).json({
+            message:"Order fetched successfully",
+            order:order
+        })
+
+    } catch (error) {
+        
+        return res.status(500).json({
+            message:"Error in fetching order",
+            error:error.message
+        })
+        
+    }
+}
+
+
 
         
