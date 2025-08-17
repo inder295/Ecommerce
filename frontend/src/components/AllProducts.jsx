@@ -1,6 +1,9 @@
+import { Link } from "react-router-dom"
+
 export const AllProducts=()=>{
     return <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 pr-25 mr-20 '>
          
+         <Link to="/product-id">
          <div class="w-full max-w-xs bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg">
   <a href="#">
     <img class="p-2 rounded-t-lg h-40 w-full object-contain" src="/girl.webp" alt="product image" />
@@ -21,6 +24,7 @@ export const AllProducts=()=>{
     </div>
   </div>
         </div>
+        </Link>
 
         <div class="w-full max-w-xs bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg">
   <a href="#">
