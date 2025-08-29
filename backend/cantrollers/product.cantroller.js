@@ -4,11 +4,10 @@ import { promise } from "zod";
 const Prisma = new PrismaClient();
 
 
-
 export const createProduct=async (req,res)=>{
 
     const {name,description,price,inventory,categoryIds}=req.body;
-    const imagePath=req.file ?req.file.path:null; 
+    const imagePath=req.file ?req.file.path:"/default-image.jpg" ; 
 
     if(!name || !description || !price || !inventory) {
         return res.status(400).json({ message: "All fields are required" });

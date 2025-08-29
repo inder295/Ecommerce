@@ -1,10 +1,10 @@
 import React from 'react';
-import { Header } from '../components/Header';
-import { Category } from '../components/Category';
-import { Footer } from '../components/Footer';
-import { Filters } from '../components/Filters';
-import { AllProducts } from '../components/AllProducts';
-import { PlpMainSection } from '../components/PlpMainSection';
+import { Header } from '../components/Shopfront/Header';
+import { Category } from '../components/Shopfront/Category';
+import { Footer } from '../components/Shopfront/Footer';
+import { Filters } from '../components/Shopfront/Filters';
+import { AllProducts } from '../components/Shopfront/AllProducts';
+import { PlpMainSection } from '../components/Shopfront/PlpMainSection';
 
 export const ProductListPage = () => {
   return (

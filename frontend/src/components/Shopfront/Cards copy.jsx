@@ -3,7 +3,11 @@ export const Cards = () => {
     <div className="flex flex-wrap justify-center gap-2 p-4">
       <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg">
         <a href="#">
-          <img class="p-8 rounded-t-lg" src="/girl.webp" alt="product image" />
+          <img
+            class="p-8 rounded-t-lg h-80"
+            src="/adidas.jpeg"
+            alt="product image"
+          />
         </a>
         <div class="px-5 pb-5">
           <a href="#">
@@ -28,7 +32,11 @@ export const Cards = () => {
 
       <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg">
         <a href="#">
-          <img class="p-8 rounded-t-lg" src="/girl.webp" alt="product image" />
+          <img
+            class="p-8 rounded-t-lg h-80"
+            src="/camera.jpg"
+            alt="product image"
+          />
         </a>
         <div class="px-5 pb-5">
           <a href="#">
@@ -53,7 +61,11 @@ export const Cards = () => {
 
       <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg">
         <a href="#">
-          <img class="p-8 rounded-t-lg" src="/girl.webp" alt="product image" />
+          <img
+            class="p-8 rounded-t-lg h-80"
+            src="/macbok.jpg"
+            alt="product image"
+          />
         </a>
         <div class="px-5 pb-5">
           <a href="#">

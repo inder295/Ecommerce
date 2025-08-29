@@ -70,7 +70,7 @@ model Product {
   description String
   price       Float
   inventory   Int
-  image    String?
+  image    String 
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
   brand       String     @default("Unknown")
