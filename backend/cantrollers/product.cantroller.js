@@ -6,11 +6,20 @@ const Prisma = new PrismaClient();
 
 export const createProduct=async (req,res)=>{
 
-    const {name,description,price,inventory,categoryIds}=req.body;
+    const {name,description,price,inventory,categoryIds,brand }=req.body;
+    let {attributes}=req.body;
     const imagePath=req.file ?req.file.path:"/default-image.jpg" ; 
 
     if(!name || !description || !price || !inventory) {
         return res.status(400).json({ message: "All fields are required" });
+    }
+
+    if (  attributes && typeof attributes === "string") {
+    try {
+            attributes = JSON.parse(attributes);
+        } catch (err) {
+            return res.status(400).json({ message: "Invalid JSON in attributes" });
+        }
     }
 
 
@@ -23,6 +32,8 @@ export const createProduct=async (req,res)=>{
             price:parseFloat(price),
             inventory:parseInt(inventory),
             image:imagePath,
+            brand,
+            attributes,
             categories:{
                 connect:categoryIds ? categoryIds.map((id)=>({id:id})) : []
             }
