@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import AddressForm from '../components/Shopfront/Address';
-import PaymentMethod from '../components/Shopfront/PaymentMethod';
-import Shipment from '../components/Shopfront/Shipment';
+import AddressForm from '../../components/Shopfront/Address';
+import PaymentMethod from '../../components/Shopfront/PaymentMethod';
+import Shipment from '../../components/Shopfront/Shipment';
 
 export default function CheckoutPage() {
   const [address, setAddress] = useState({});

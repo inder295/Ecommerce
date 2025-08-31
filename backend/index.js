@@ -14,7 +14,10 @@ const app= express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173",   // allow only frontend
+  credentials: true                  // allow cookies/headers
+}));
 app.use(cookieParser());
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 

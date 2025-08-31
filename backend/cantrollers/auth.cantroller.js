@@ -18,7 +18,7 @@ export const signup = async(req,res) =>{
         })
 
         if(existingUser){
-            res.status(400).json({
+            return res.status(400).json({
                 message:"User already exists with this email"
             })
         }
@@ -90,7 +90,8 @@ export const signin=async (req,res)=>{
         res.cookie("token",token,cookieOptions);
 
         res.status(200).json({
-            message:"User signed in successfully"
+            message:"User signed in successfully",
+            user:user
         })
 
 
@@ -115,6 +116,23 @@ export const logout=async (req,res)=>{
             message:"Internal server error",
             error:error.message
         });
+        
+    }
+}
+
+export const check= async(req,res) =>{
+    try {
+         res.status(200).json({
+            success:true,
+            message:"User authenticated succcessfully",
+            user:req.user
+        })
+    } catch (error) {
+
+        res.status(500).json({
+            message:"Error in checking route",
+            error:error.message
+        })
         
     }
 }

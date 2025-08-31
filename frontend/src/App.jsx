@@ -1,23 +1,26 @@
-import { Signup } from './pages/Signup';
-import { Signin } from './pages/Signin';
+import { Signup } from './pages/Shopfront/Signup';
+import { Signin } from './pages/Shopfront/Signin';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Home } from './pages/Home';
-import { ProductListPage } from './pages/ProductListPage';
-import { ProductDetailPage } from './pages/Product-Detail-Page';
-import CartPage from './pages/CartPage';
-import CheckoutPage from './pages/CheckoutPage';
+import { Home } from './pages/Shopfront/Home';
+import { ProductListPage } from './pages/Shopfront/ProductListPage';
+import { ProductDetailPage } from './pages/Shopfront/Product-Detail-Page';
+import CartPage from './pages/Shopfront/CartPage';
+import CheckoutPage from './pages/Shopfront/CheckoutPage';
 import OrderConfirmation from './components/Shopfront/OrderConfirmation';
-import { PageNotFound } from './pages/PageNotFound';
+import { PageNotFound } from './pages/Shopfront/PageNotFound';
 import { Dashboard } from './pages/Admin/Dashboard';
 import { AdminProducts } from './components/AdminPanel/AdminProducts';
 import { AdminCustomers } from './components/AdminPanel/AdminCustomers';
 import AdminOrders from './components/AdminPanel/AdminOrders';
 import CreateProduct from './components/AdminPanel/CreateProduct';
 import { Admin } from './pages/Admin/Admin';
+import { AdminSignin } from './pages/Admin/AdminSignin';
+import {Toaster} from "react-hot-toast"
 
 function App() {
   return (
     <>
+    <Toaster position='top-right' />
       <Routes>
         //user routes wishlist and review
         <Route path="/signup" element={<Signup />} />
@@ -31,8 +34,10 @@ function App() {
         <Route path="order-success" element={<OrderConfirmation />} />
 
       //admin routes
+      <Route path="/admin-login" element={<AdminSignin/>} />
       <Route path="/admin/*" element={<Admin/>}>
-            <Route index element={<Navigate to="dashboard" replace/>}  />
+          {/* <Route index element={<Navigate to="login" replace/>}  /> */}
+            {/* <Route index element={<Navigate to="dashboard" replace/>}  /> */}
             <Route path="dashboard" element={<Dashboard/>} />
             
                 
@@ -43,12 +48,11 @@ function App() {
             
             <Route path="customers" element={<AdminCustomers/>} />
             <Route path="orders" element={<AdminOrders/>}/>
-            </Route>
+      </Route>
+
+      
          
-     
-                  
            
-       
       </Routes>
     </>
   );
