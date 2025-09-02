@@ -8,11 +8,15 @@ export const AdminPrivateRoute = ({ children }) => {
    
   useEffect(() => {
       checkAuth();
-    }, [authAdmin]);
+    }, []);
+  
 
-  if (!authAdmin) {
-    return navigate('/admin-login');
-  }
+    setTimeout(()=>{
+      if (!authAdmin) {
+        return navigate('/admin-login');
+      }
+
+    },500)
 
   return children;
 };

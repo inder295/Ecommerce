@@ -74,9 +74,9 @@ export const useAuth = create((set) => ({
     }
   },
 
-  logout: async (token) => {
+  logout: async () => {
     try {
-      const data = logout(token);
+      const data = await logout();
       set({ authUser: null });
       toast.success(data.message);
     } catch (error) {

@@ -1,32 +1,23 @@
 import { Search, Bell } from 'lucide-react';
 import { useAuth } from '../../store/useAuth';
 import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
 
 export const Header = () => {
   const { logout } = useAuth();
   const navigate = useNavigate();
 
-  function getCookie(name) {
-    const match = document.cookie.match(
-      new RegExp('(^| )' + name + '=([^;]+)')
-    );
-    if (match) return match[2];
-    return null;
-  }
+  
 
   const handleLogout = async () => {
-    const token = getCookie('token');
-    console.log('token =', token);
 
-    if (!token) {
-      return toast.error('User must login first for logout');
-    } else {
-      await logout(token);
-    }
-
-    navigate('/admin-login');
+    await logout();
+    await navigate('/admin-login');
+  
   };
+
+    
+    
+
 
   return (
     <div className="flex ml-64 p-2">

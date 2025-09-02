@@ -10,8 +10,8 @@ export const signin = async ({ email, password }) => {
   return res.data;
 };
 
-export const logout = async (token) => {
-  const res = await Api.post('/auth/logout', token);
+export const logout = async () => {
+  const res = await Api.post('/auth/logout');
   return res.data;
 };
 

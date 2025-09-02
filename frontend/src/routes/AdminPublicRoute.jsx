@@ -7,12 +7,15 @@ export const AdminPublicRoute = ({ children }) => {
 
   useEffect(() => {
     checkAuth();
-  }, [authAdmin]);
-
-
+  }, []);
+  
   if (authAdmin) {
     return <Navigate to="/admin/dashboard" replace />;
   }
 
+
   return children;
+
+
+  
 };
