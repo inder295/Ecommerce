@@ -6,7 +6,10 @@ dotenv.config();
 
 const prisma=new PrismaClient();
 export const authMiddleware=async (req,res,next)=>{
+    
     const token=req.cookies.token;
+    
+    
    
     if(!token){
         return res.status(401).json({
@@ -27,7 +30,7 @@ export const authMiddleware=async (req,res,next)=>{
 
         if(!user){
             return res.status(401).json({
-                messsga:"Unauthorized access,user not found"
+                message:"Unauthorized access,user not found"
             })
         }
 

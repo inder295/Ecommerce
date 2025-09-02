@@ -84,7 +84,10 @@ export const signin=async (req,res)=>{
         })
 
         const cookieOptions={
-            httpOnly:true
+            httpOnly:true,
+            sameSite: "lax",
+            secure:false
+
         }
 
         res.cookie("token",token,cookieOptions);
@@ -105,9 +108,82 @@ export const signin=async (req,res)=>{
     }
 }
 
+export const adminSignin= async (req,res)=>{
+    const {email,password}=req.body;
+    try {
+        if(!email || !password) {
+            return res.status(400).json({ message: "All fields are required" });
+        }
+
+        const user=await prisma.user.findUnique({
+            where:{
+                email:email
+            }
+        })
+
+        if(!user){
+            return res.status(404).json({
+                message:"User not found "
+            })
+        }
+
+        if(user.role!=="ADMIN"){
+           return res.status(400).json({
+            message:"Only Admins allowed to login"
+           })
+        }
+
+        const comparedPassword=await bcrypt.compare(password,user.password);
+        if(!comparedPassword){
+            return res.status(400).json({
+                message:"Invalid credentials"
+            })
+        }
+
+        const token=jwt.sign({id:user.id},process.env.JWT_SECRET,{
+            expiresIn:"7d"
+        })
+
+        const cookieOptions={
+            httpOnly:true,
+            maxAge:1000 * 60 * 60 * 24 * 7,
+            secure:false,
+            sameSite: "lax"
+        }
+
+        res.cookie("token",token,cookieOptions);
+
+        res.status(200).json({
+            message:"Admin signed in successfully",
+            user:user
+        })
+
+
+    } catch (error) {
+
+        res.status(500).json({
+            message:"Internal server error",
+            error:error.message
+        })
+        
+    }
+}
+
 export const logout=async (req,res)=>{
     try {
-        res.clearCookie("token");
+
+        if(!req.cookies?.token){
+            return res.status(400).json({
+                message:"NO active session found"
+            })
+        }
+        
+        
+        res.clearCookie("token",{
+            httpOnly:true,
+            sameSite: "lax",
+            secure: false
+        });
         res.status(200).json({
             message:"User logged out successfully"
         })

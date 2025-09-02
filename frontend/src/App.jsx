@@ -15,12 +15,16 @@ import AdminOrders from './components/AdminPanel/AdminOrders';
 import CreateProduct from './components/AdminPanel/CreateProduct';
 import { Admin } from './pages/Admin/Admin';
 import { AdminSignin } from './pages/Admin/AdminSignin';
-import {Toaster} from "react-hot-toast"
+import { Toaster } from 'react-hot-toast';
+import { AdminPublicRoute } from './routes/AdminPublicRoute';
+import { AdminPrivateRoute } from './routes/AdminPrivateRoute';
 
 function App() {
+  
+
   return (
     <>
-    <Toaster position='top-right' />
+      <Toaster position="top-right" />
       <Routes>
         //user routes wishlist and review
         <Route path="/signup" element={<Signup />} />
@@ -28,31 +32,22 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/product-list" element={<ProductListPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
-        <Route path="*" element={<PageNotFound />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="order-success" element={<OrderConfirmation />} />
-
-      //admin routes
-      <Route path="/admin-login" element={<AdminSignin/>} />
-      <Route path="/admin/*" element={<Admin/>}>
-          {/* <Route index element={<Navigate to="login" replace/>}  /> */}
-            {/* <Route index element={<Navigate to="dashboard" replace/>}  /> */}
-            <Route path="dashboard" element={<Dashboard/>} />
-            
-                
-            <Route path="products" element={<AdminProducts/>} />
-            <Route path="create-product" element={<CreateProduct/>}/>
-            
-                
-            
-            <Route path="customers" element={<AdminCustomers/>} />
-            <Route path="orders" element={<AdminOrders/>}/>
-      </Route>
-
-      
-         
-           
+        
+        
+        //admin routes
+        <Route path="/admin-login" element={<AdminPublicRoute> <AdminSignin /></AdminPublicRoute>  } />
+        <Route path="/admin/*" element={<AdminPrivateRoute> <Admin /> </AdminPrivateRoute> }>
+          <Route index element={<Navigate to="dashboard" replace />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="products" element={<AdminProducts />} />
+          <Route path="create-product" element={<CreateProduct />} />
+          <Route path="customers" element={<AdminCustomers />} />
+          <Route path="orders" element={<AdminOrders />} />
+        </Route>
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
   );
