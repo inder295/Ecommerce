@@ -9,13 +9,10 @@ export const AdminPublicRoute = ({ children }) => {
     checkAuth();
   }, []);
   
-  if (authAdmin) {
+
+   if (authAdmin) {
     return <Navigate to="/admin/dashboard" replace />;
   }
 
-
   return children;
-
-
-  
-};
+}

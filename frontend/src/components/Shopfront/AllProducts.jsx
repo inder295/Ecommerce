@@ -31,7 +31,7 @@ export const AllProducts = () => {
               <div class="w-full max-w-xs bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg">
                 <img
                   class="p-2 rounded-t-lg h-40 w-full object-contain"
-                  src={p.image || '/camera.jpg'}
+                  src={`${p.image}` || '/camera.jpg'}
                   alt="product image"
                 />
 
