@@ -77,10 +77,7 @@ model Product {
   rating      Float      @default(0)
   ratingCount Int        @default(0)
   attributes  Json? 
-  //ProductType String?
-
-  //userId      String
-  //user        User       @relation(fields: [userId], references: [id])
+  
   categories  Category[] @relation("Products")
   reviews     Review[]
   cartItems  CartItems[]

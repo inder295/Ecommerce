@@ -17,7 +17,7 @@ export const AdminSignin = () => {
     const { name, value } = e.target;
     
     setFormData({ ...formData, [name]: value });
-    console.log(formData);
+    
   };
 
   const handleSubmit = async (e) => {
@@ -26,7 +26,7 @@ export const AdminSignin = () => {
 
     const { email, password } = formData;
     await adminSignin({ email, password });
-    console.log('check request', authAdmin);
+    
 
     if (authAdmin) {
       navigate('admin/dashboard');
@@ -44,7 +44,7 @@ export const AdminSignin = () => {
         </div>
 
         <div class="my-5 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form onSubmit={handleSubmit} class="">
+          <form onSubmit={handleSubmit}>
             <div className='my-3'>
               <label
                 htmlFor="email"

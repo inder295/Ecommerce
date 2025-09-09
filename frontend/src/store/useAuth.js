@@ -21,7 +21,7 @@ export const useAuth = create((set) => ({
         set({ authUser: data.user });
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       set({ authAdmin: null });
       set({ authUser: null });
     } finally {

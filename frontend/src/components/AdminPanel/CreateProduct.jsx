@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
+import { Attribute } from './Attribute';
 
 const CreateProduct = () => {
   const [formData, setFormData] = useState({
@@ -8,9 +9,32 @@ const CreateProduct = () => {
     description: '',
     price: '',
     inventory: '',
+    brand:'',
     images:[],
     preview:[]
   });
+  
+  const [attribute, setAttribute] = useState({});
+  const [attrKey, setAttrKey] = useState("");
+  const [attrValue, setAttrValue] = useState("");
+
+  const handleAddAttribute = () => {
+    if (!attrKey || !attrValue) return;
+
+    setAttribute((prev) => {
+      // Split by comma and trim spaces
+      const newValues = attrValue.split(",").map((v) => v.trim());
+
+      // Merge with existing or create new
+      const updatedValues = prev[attrKey]
+        ? [...new Set([...prev[attrKey], ...newValues])]
+        : newValues;
+
+      return { ...prev, [attrKey]: updatedValues };
+    });
+    
+    setAttrValue(""); // clear after adding
+  };
 
   const navigate=useNavigate();
 
@@ -34,16 +58,21 @@ const CreateProduct = () => {
 
   const handleSubmit = (e) => {
       try {
-        e.preventDefault();
+      
+      e.preventDefault();
       const data=new FormData();
       data.append("name",formData.name);
       data.append("description",formData.description);
       data.append("price",formData.price);
       data.append("inventory",formData.inventory);
+      data.append("brand",formData.brand)
+      data.append("attribute",JSON.stringify(attribute));
 
       formData.images.forEach((img)=>{data.append("image",img)});
 
-      console.log(formData);
+      for (let [key, value] of data.entries()) {
+        console.log(key, value);
+      }
 
       toast.success("Product Created Successfully")
       navigate("/admin/products");
@@ -143,6 +172,69 @@ const CreateProduct = () => {
           />
           
         </div>
+
+        <div className="py-2">
+          <label
+            htmlFor="brand"
+            class="block mb-2 text-sm font-medium font-bold text-gray-900 dark:text-white"
+          >
+            Product Brand
+          </label>
+          <input
+            type="text"
+            id="brand"
+            class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full
+            p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            name="brand"
+            value={formData.brand}
+            placeholder="Brand"
+            required
+            onChange={handleChange}
+          />
+          
+        </div>
+        
+          <label
+            htmlFor="brand"
+            class="block mb-2 text-sm font-medium font-bold text-gray-900 dark:text-white mt-2"
+          >
+            Product Attributes
+          </label>
+        <div className="flex gap-2">
+        <input
+          type="text"
+          placeholder="Attribute (e.g. color)"
+          value={attrKey}
+          onChange={(e) => setAttrKey(e.target.value.toLowerCase())}
+          class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full
+            p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        />
+        <input
+          type="text"
+          placeholder="Value (e.g. red, blue)"
+          value={attrValue}
+          onChange={(e) => setAttrValue(e.target.value)}
+          class="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full
+            p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        />
+        <button
+          type="button"
+          onClick={handleAddAttribute}
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          Add
+        </button>
+      </div>
+
+      <Attribute attribute={attribute} />
+
+      
+
+       
+
+     
+
+      
 
        
           <div className='my-2'>
