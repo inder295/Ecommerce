@@ -1,26 +1,38 @@
 import { PrismaClient } from "@prisma/client";
-import { promise } from "zod";
+import { parse } from "path";
 
 const Prisma = new PrismaClient();
 
 
 export const createProduct=async (req,res)=>{
 
-    const {name,description,price,inventory,categoryIds,brand }=req.body;
-    let {attributes}=req.body;
+    let {name,description,price,inventory,category,brand,attributes }=req.body;
+    
     const imagePath=req.file ?req.file.path:"/default-image.jpg" ; 
 
     if(!name || !description || !price || !inventory) {
         return res.status(400).json({ message: "All fields are required" });
     }
 
-    if (  attributes && typeof attributes === "string") {
-    try {
-            attributes = JSON.parse(attributes);
-        } catch (err) {
-            return res.status(400).json({ message: "Invalid JSON in attributes" });
-        }
+   
+
+    if(attributes){
+        attributes=JSON.parse(attributes);
     }
+
+    console.log(category);
+    
+
+    if (category) {
+        
+        category = typeof category === "string" ? JSON.parse(category) : category;
+        
+        } else {
+        category = [];
+    }
+
+    console.log(category);
+    
 
 
 
@@ -35,10 +47,14 @@ export const createProduct=async (req,res)=>{
             brand,
             attributes,
             categories:{
-                connect:categoryIds ? categoryIds.map((id)=>({id:id})) : []
+                connect:category?.map((id)=>({id}))
             }
+        },
+        include:{
+            categories:true
         }
     })
+
 
     res.status(201).json({
         message:"Product created successfully",
@@ -52,6 +68,7 @@ export const createProduct=async (req,res)=>{
         
     }
 }
+
 
 export const deleteProducts=async (req,res)=>{
     const {ids}=req.body;

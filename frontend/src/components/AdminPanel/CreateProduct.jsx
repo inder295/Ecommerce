@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { Attribute } from './Attribute';
+import { useCategory } from '../../store/useCategory';
 
 const CreateProduct = () => {
   const [formData, setFormData] = useState({
@@ -11,12 +12,26 @@ const CreateProduct = () => {
     inventory: '',
     brand:'',
     images:[],
-    preview:[]
+    preview:[],
   });
   
   const [attribute, setAttribute] = useState({});
   const [attrKey, setAttrKey] = useState("");
   const [attrValue, setAttrValue] = useState("");
+  const [category,setCategory]=useState([])
+  
+  const {fetchAllCategories,categories}=useCategory();
+
+  useEffect(()=>{
+     try {
+       fetchAllCategories();
+       
+      
+     } catch (error) {
+       console.log(error);
+       
+     }
+  },[])
 
   const handleAddAttribute = () => {
     if (!attrKey || !attrValue) return;
@@ -33,7 +48,7 @@ const CreateProduct = () => {
       return { ...prev, [attrKey]: updatedValues };
     });
     
-    setAttrValue(""); // clear after adding
+    setAttrValue(""); 
   };
 
   const navigate=useNavigate();
@@ -56,6 +71,17 @@ const CreateProduct = () => {
 
   }
 
+  const handleCategory= (e)=>{
+    const {value,checked}=e.target;
+    if(checked){
+        setCategory((prev)=>[...prev,value])
+    }else{
+         setCategory((prev)=> prev.filter((p)=> p!==value))
+    }
+   
+    
+  }
+
   const handleSubmit = (e) => {
       try {
       
@@ -66,7 +92,8 @@ const CreateProduct = () => {
       data.append("price",formData.price);
       data.append("inventory",formData.inventory);
       data.append("brand",formData.brand)
-      data.append("attribute",JSON.stringify(attribute));
+      data.append("attributes",JSON.stringify(attribute));
+      data.append('categories',JSON.stringify(category));
 
       formData.images.forEach((img)=>{data.append("image",img)});
 
@@ -89,6 +116,8 @@ const CreateProduct = () => {
       
 
   };
+
+  
 
 
   return (
@@ -230,13 +259,6 @@ const CreateProduct = () => {
 
       
 
-       
-
-     
-
-      
-
-       
           <div className='my-2'>
             <label
             htmlFor="Image"
@@ -268,6 +290,32 @@ const CreateProduct = () => {
           />
         ))}
       </div>
+
+      <label
+            htmlFor="brand"
+            class="block mb-2 text-sm font-medium font-bold text-gray-900 dark:text-white mt-2"
+          >
+            Product Category
+          </label>
+        
+        {categories.map((category, id) => (
+          <div key={id} className="flex items-center m-4 ">
+            <input
+              id={`category-${id}`}
+              type="checkbox"
+              value={category.id}
+              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 cursor-pointer"
+              onChange={handleCategory}
+            />
+            <label
+              htmlFor={`category-${id}`}
+              className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer"
+            >
+              {category.name}
+            </label>
+          </div>
+        ))}
+                
 
 
 

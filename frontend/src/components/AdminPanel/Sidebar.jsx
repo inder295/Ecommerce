@@ -27,6 +27,14 @@ export const Sidebar = () => {
         </li>
         <li>
           <Link
+            to="/admin/category"
+            class="block p-2 hover:bg-slate-100 rounded"
+          >
+            Category
+          </Link>
+        </li>
+        <li>
+          <Link
             to="/admin/customers"
             class="block p-2 hover:bg-slate-100 rounded"
           >

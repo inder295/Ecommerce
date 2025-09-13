@@ -18,6 +18,8 @@ import { AdminSignin } from './pages/Admin/AdminSignin';
 import { Toaster } from 'react-hot-toast';
 import { AdminPublicRoute } from './routes/AdminPublicRoute';
 import { AdminPrivateRoute } from './routes/AdminPrivateRoute';
+import AdminCategories from './components/AdminPanel/AdminCategories';
+import CreateCategory from './components/AdminPanel/CreateCategory';
 
 function App() {
   
@@ -40,9 +42,11 @@ function App() {
         //admin routes
         <Route path="/admin-login" element={<AdminPublicRoute> <AdminSignin /></AdminPublicRoute>  } />
         <Route path="/admin/*" element={<AdminPrivateRoute> <Admin /> </AdminPrivateRoute> }>
-          <Route index element={<Navigate to="dashboard" replace />} />
+          {/* <Route index element={<Navigate to="dashboard" replace />} /> */}
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="products" element={<AdminProducts />} />
+          <Route path="category" element={<AdminCategories/>} />
+          <Route path='create-category' element={<CreateCategory/>} />
           <Route path="create-product" element={<CreateProduct />} />
           <Route path="customers" element={<AdminCustomers />} />
           <Route path="orders" element={<AdminOrders />} />
