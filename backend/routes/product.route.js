@@ -3,24 +3,13 @@ import { createProduct,deleteProducts,getAllProducts, getProductById, getProduct
 import { authMiddleware, isAdmin } from "../middleware/auth.middleware.js";
 import multer from "multer";
 
-const storage=multer.diskStorage({
-    destination: function(req,file,cb){
-        cb(null,"uploads/");
-    },
-    filename:function(req,file,cb){
-        const suffix=Date.now();
-        cb(null,suffix+"-"+file.originalname)
-    }
-
-});
-
-
+const storage=multer.diskStorage({});
 const upload=multer({storage:storage});
 
 const productRouter=express.Router();
 
 
-productRouter.post("/create-product",authMiddleware,isAdmin,upload.single("image"),createProduct);
+productRouter.post("/create-product",authMiddleware,isAdmin,upload.array("image",10),createProduct);
 productRouter.post("/delete-products",authMiddleware,isAdmin,deleteProducts);
 productRouter.patch("/update-product/:id",authMiddleware,isAdmin,updateProductById);
 productRouter.get("/get-products",getAllProducts)
