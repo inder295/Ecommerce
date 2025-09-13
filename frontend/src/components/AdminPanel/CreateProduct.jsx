@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { Attribute } from './Attribute';
 import { useCategory } from '../../store/useCategory';
+import { useProduct } from '../../store/useProduct';
 
 const CreateProduct = () => {
   const [formData, setFormData] = useState({
@@ -21,6 +22,7 @@ const CreateProduct = () => {
   const [category,setCategory]=useState([])
   
   const {fetchAllCategories,categories}=useCategory();
+  const {createProduct,isproductCreating}=useProduct();
 
   useEffect(()=>{
      try {
@@ -82,7 +84,7 @@ const CreateProduct = () => {
     
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async  (e) => {
       try {
       
       e.preventDefault();
@@ -97,12 +99,14 @@ const CreateProduct = () => {
 
       formData.images.forEach((img)=>{data.append("image",img)});
 
-      for (let [key, value] of data.entries()) {
-        console.log(key, value);
-      }
+      await createProduct(data);
+      
+
 
       toast.success("Product Created Successfully")
       navigate("/admin/products");
+
+
 
       
 
@@ -326,7 +330,7 @@ const CreateProduct = () => {
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             
           >
-            Submit
+            {isproductCreating ? "Submitting..." : "Submit"}
           </button>
           
         </div>

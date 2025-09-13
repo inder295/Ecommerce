@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import { useProduct } from '../../store/useProduct';
 
 export const AdminProducts = () => {
+
+  const {fetchAllProducts,isProductFetching,products}=useProduct();
+
+  useEffect(()=>{
+    fetchAllProducts()
+  },[])
+
   return (
     <div className="ml-64 p-5">
       <div className="flex justify-between">
@@ -24,41 +32,45 @@ export const AdminProducts = () => {
                 ID
               </th>
               <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">
+                Image
+              </th>
+              <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">
                 Name
               </th>
               <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">
                 Price
               </th>
-              <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">
-                Category
-              </th>
+              
               <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">
                 Stock
               </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            <tr className="hover:bg-gray-50">
-              <td className="px-4 py-2 text-sm">1</td>
-              <td className="px-4 py-2 text-sm">Wireless Headphones</td>
-              <td className="px-4 py-2 text-sm">₹2999</td>
-              <td className="px-4 py-2 text-sm">Electronics</td>
-              <td className="px-4 py-2 text-sm">25</td>
-            </tr>
-            <tr className="hover:bg-gray-50">
-              <td className="px-4 py-2 text-sm">2</td>
-              <td className="px-4 py-2 text-sm">Running Shoes</td>
-              <td className="px-4 py-2 text-sm">₹1999</td>
-              <td className="px-4 py-2 text-sm">Footwear</td>
-              <td className="px-4 py-2 text-sm">10</td>
-            </tr>
-            <tr className="hover:bg-gray-50">
-              <td className="px-4 py-2 text-sm">3</td>
-              <td className="px-4 py-2 text-sm">Coffee Mug</td>
-              <td className="px-4 py-2 text-sm">₹499</td>
-              <td className="px-4 py-2 text-sm">Home</td>
-              <td className="px-4 py-2 text-sm">50</td>
-            </tr>
+
+            {
+              isProductFetching ? <tr>
+                <td className="px-4 py-2 text-sm">Loading....</td>
+              </tr> :
+              (products.map((product,index)=>(
+                <tr className="hover:bg-gray-50" key={product.id || index}>
+                  <td className="px-4 py-2 text-sm">{product.id}</td>
+                  <td className="px-4 py-2 text-sm">
+                    <img
+            src={product.image[0]}
+            alt={product.name}
+            className="w-12 h-15 object-cover rounded"
+          />
+                  </td>
+                  <td className="px-4 py-2 text-sm">{product.name}</td>
+                  <td className="px-4 py-2 text-sm">${product.price}</td>
+                  
+                  <td className="px-4 py-2 text-sm">{product.inventory}</td>
+                </tr>
+
+              )))
+            }
+            
           </tbody>
         </table>
       </div>
