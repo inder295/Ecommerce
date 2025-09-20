@@ -1,34 +1,38 @@
+import { useEffect } from "react";
+import { useCategory } from "../../store/useCategory";
+
 export const Category = () => {
+
+  const {isCategoryFetching,categories,fetchAllCategories}=useCategory();
+
+
+  useEffect(()=>{
+     fetchAllCategories();
+  },[])
+
+  console.log(categories);
+  
+
   return (
     <div className="fixed top-16 left-0 right-0 z-50 mb-6 ">
       <nav className="bg-gray-50 dark:bg-gray-700">
         <div className="max-w-screen-xl px-4 py-3 mx-auto">
           <div className="flex items-center">
             <ul className="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-900 dark:text-white hover:underline"
-                >
-                  Men
-                </a>
+            {
+              isCategoryFetching? <p className="">Loading...</p> : categories.map((category,index)=>(
+
+              <li className="cursor-pointer hover:text-blue-600" key={category.id || index}>
+                
+                  {category.name}
+                
               </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-900 dark:text-white hover:underline"
-                >
-                  Women
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-900 dark:text-white hover:underline"
-                >
-                  Children
-                </a>
-              </li>
+
+              ))
+            }
+            
+            
+              
             </ul>
           </div>
         </div>

@@ -20,6 +20,7 @@ import { AdminPublicRoute } from './routes/AdminPublicRoute';
 import { AdminPrivateRoute } from './routes/AdminPrivateRoute';
 import AdminCategories from './components/AdminPanel/AdminCategories';
 import CreateCategory from './components/AdminPanel/CreateCategory';
+import { ScrollToTop } from './routes/ScrollToTop';
 
 function App() {
   
@@ -27,7 +28,10 @@ function App() {
   return (
     <>
       <Toaster position="top-right" />
+       <ScrollToTop/>
       <Routes>
+
+       
         //user routes wishlist and review
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />

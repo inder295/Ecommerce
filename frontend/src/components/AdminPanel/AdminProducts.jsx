@@ -62,7 +62,7 @@ export const AdminProducts = () => {
             className="w-12 h-15 object-cover rounded"
           />
                   </td>
-                  <td className="px-4 py-2 text-sm">{product.name}</td>
+                  <td className="px-4 py-2 text-sm w-20">{product.name}</td>
                   <td className="px-4 py-2 text-sm">${product.price}</td>
                   
                   <td className="px-4 py-2 text-sm">{product.inventory}</td>

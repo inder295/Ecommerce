@@ -11,6 +11,8 @@ export const useProduct = create((set)=>({
         set({isProductFetching:true})
         try {
             const data=await getAllPrducts();
+            
+            
             set({products:data.products})
         } catch (error) {
             console.log(error);

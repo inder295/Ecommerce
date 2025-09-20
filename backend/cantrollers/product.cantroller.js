@@ -7,7 +7,7 @@ const Prisma = new PrismaClient();
 export const createProduct=async (req,res)=>{
 
     let {name,description,price,inventory,category,brand,attributes }=req.body;
-    
+    const placeholderImage=["https://res.cloudinary.com/dafbi3qbv/image/upload/v1757789300/products_images/ksxkcyucydr1jhaeicia.png"]
     
     if(req.files.length>0){
         var imageurl=await req.files.map(async (file)=>
@@ -53,7 +53,7 @@ export const createProduct=async (req,res)=>{
             description:description,
             price:parseFloat(price),
             inventory:parseInt(inventory),
-            image:urls || [],
+            image:urls || placeholderImage,
             brand,
             attributes,
             categories:{
@@ -68,7 +68,6 @@ export const createProduct=async (req,res)=>{
 
     res.status(201).json({
         message:"Product created successfully",
-        product:product
     })
     } catch (error) {
         res.status(500).json({
