@@ -6,10 +6,17 @@ export const getAllPrducts = async () => {
   return res.data;
 };
 
-export const createProduct =(formData)=>{
-   return Api.post("/product/create-product",formData,{
+export const createProduct =async(formData)=>{
+   return await Api.post("/product/create-product",formData,{
       headers:{
           "Content-Type":"multipart/form-data"
       },
    })
+}
+
+export const getProductById=async (id) =>{
+   const res= await Api.get(`/product/${id}`);
+   console.log(res.data);
+   
+   return res.data;
 }

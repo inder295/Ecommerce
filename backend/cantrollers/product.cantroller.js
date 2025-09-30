@@ -125,7 +125,11 @@ export const deleteProducts=async (req,res)=>{
 
 export const getAllProducts=async(req,res)=>{
     try {
-        const products =await Prisma.product.findMany();
+        const products =await Prisma.product.findMany({
+            orderBy:{
+               createdAt:"desc" 
+            }
+        });
 
         res.status(200).json({
             message:"Products fetched successfully",

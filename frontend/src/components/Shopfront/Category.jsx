@@ -10,7 +10,7 @@ export const Category = () => {
      fetchAllCategories();
   },[])
 
-  console.log(categories);
+  
   
 
   return (

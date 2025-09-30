@@ -1,11 +1,13 @@
 import { create } from "zustand";
-import { getAllPrducts,createProduct } from "../Api/product.api";
+import { getAllPrducts,createProduct, getProductById } from "../Api/product.api";
 
 export const useProduct = create((set)=>({
 
     isProductFetching:false,
     products:[],
     isproductCreating:false,
+    isPdpFetching:false,
+    productDetails:{},
 
     async fetchAllProducts(){
         set({isProductFetching:true})
@@ -33,7 +35,28 @@ export const useProduct = create((set)=>({
         } finally{
             set({isproductCreating:false});
         }
+    },
+
+    async fetchProductById(id){
+        set({isPdpFetching:true});
+        try {
+            const data=await getProductById(id);
+            console.log('data =',data);
+            
+            set({productDetails:data.product})
+
+
+        } catch (error) {
+            console.log(error);
+            
+        }finally{
+            set({
+                 isPdpFetching:false
+            })
+        }
     }
+
+    
 
     
 

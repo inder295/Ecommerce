@@ -1,46 +1,16 @@
 [
-    {
-        "key": "color",
-        "values": [
+    [
+        "color",
+        [
             "red",
             "blue"
         ]
-    },
-    {
-        "key": "storage",
-        "values": [
+    ],
+    [
+        "storage",
+        [
             "128 GB",
-            "246 GB",
-            "1 TB",
-            "2 TB"
+            "246 GB"
         ]
-    },
-    {
-        "key": "lens",
-        "values": [
-            "10 mm",
-            "20mm"
-        ]
-    },
-    {
-        "key": "edition",
-        "values": [
-            "Deluxe",
-            "Dual"
-        ]
-    },
-    {
-        "key": "gender",
-        "values": [
-            "Male",
-            "Female"
-        ]
-    },
-    {
-        "key": "size",
-        "values": [
-            "small",
-            "large"
-        ]
-    }
+    ]
 ]

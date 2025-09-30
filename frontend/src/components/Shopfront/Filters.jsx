@@ -1,11 +1,24 @@
 import { useMemo } from "react";
 
 
-export const Filters =  ({products}) => {
+export const Filters = ({products}) => {
   
   
-  const filter= useMemo(()=>{
-       let data = products.map(product => product.attributes);
+  const {filter,minPrice,maxPrice}=useMemo(()=>{
+       let data = products.map(product => product.attributes );
+       let prices=products.map(product=>product.price) || []
+       console.log(products);
+       
+        console.log(prices);
+        
+        let minPrice=0;
+        let maxPrice=0;
+
+        minPrice=prices.length ? Math.min(...prices).toString() : "0";
+        maxPrice=prices.length ? Math.max(...prices).toString() : "1000";
+
+        console.log(minPrice,maxPrice);
+        
         
         function buildFilter2DArray(data) {
         let filterMap = new Map();
@@ -38,7 +51,7 @@ export const Filters =  ({products}) => {
           filter.push({ key: attributes[i], values: attributes[i + 1] });
         }
 
-        return filter;
+        return {filter,minPrice,maxPrice};
      },[products])
  
   
@@ -92,13 +105,13 @@ export const Filters =  ({products}) => {
           </h3>
           <input
             type="range"
-            min="0"
-            max="1000"
+            min= {minPrice} 
+            max= {maxPrice}
             className="w-full accent-blue-600"
           />
           <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
-            <span>$0</span>
-            <span>$1000</span>
+            <span>${minPrice}</span>
+            <span>${maxPrice}</span>
           </div>
         </div>
 
