@@ -8,14 +8,16 @@ export const useProduct = create((set)=>({
     isproductCreating:false,
     isPdpFetching:false,
     productDetails:{},
+    pagination:{},
 
-    async fetchAllProducts(){
+    async fetchAllProducts(page){
         set({isProductFetching:true})
         try {
-            const data=await getAllPrducts();
+            const data=await getAllPrducts(page);
             
             
             set({products:data.products})
+            set({pagination:data.pagination})
         } catch (error) {
             console.log(error);
             

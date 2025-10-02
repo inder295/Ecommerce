@@ -125,15 +125,45 @@ export const deleteProducts=async (req,res)=>{
 
 export const getAllProducts=async(req,res)=>{
     try {
+
+        let {page=1,limit=12,categoryId=null}=req.query;
+        page =parseInt(page);
+        limit=parseInt(limit)
+        let category
+
+        if(categoryId){
+           category={where:{
+               categories:{
+                 some:{
+                    id:categoryId
+                 }
+               }
+            }}
+        }
+
+        
+
         const products =await Prisma.product.findMany({
+            skip:(page-1)*limit,
+            take:limit,
+            category:category,
             orderBy:{
                createdAt:"desc" 
             }
         });
 
+        const totalProducts=await Prisma.product.count();
+        const totalPages=Math.ceil(totalProducts/limit)
+
         res.status(200).json({
             message:"Products fetched successfully",
-            products:products
+            products:products,
+            pagination:{
+                totalProducts,
+                totalPages,
+                page,
+                limit
+            }
         })
         
     } catch (error) {

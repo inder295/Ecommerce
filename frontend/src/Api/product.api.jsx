@@ -1,8 +1,8 @@
 
 import Api from './index';
 
-export const getAllPrducts = async () => {
-  const res = await Api.get('/product/get-products');
+export const getAllPrducts = async (page) => {
+  const res = await Api.get(`/product/get-products?page=${page || 1}&limit=12`);
   return res.data;
 };
 
