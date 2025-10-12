@@ -7,17 +7,15 @@ export const Filters = ({products}) => {
   const {filter,minPrice,maxPrice}=useMemo(()=>{
        let data = products.map(product => product.attributes );
        let prices=products.map(product=>product.price) || []
-       console.log(products);
+      
        
-        console.log(prices);
-        
+     
         let minPrice=0;
         let maxPrice=0;
 
         minPrice=prices.length ? Math.min(...prices).toString() : "0";
         maxPrice=prices.length ? Math.max(...prices).toString() : "1000";
 
-        console.log(minPrice,maxPrice);
         
         
         function buildFilter2DArray(data) {

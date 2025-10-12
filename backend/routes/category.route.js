@@ -5,7 +5,7 @@ import { createCategory, deleteCategory, getAllCategories, updateCategory } from
 const categoryrouter=express.Router();
 
 categoryrouter.post("/create-category",authMiddleware,isAdmin,createCategory);
-categoryrouter.get("/getAllCategories",authMiddleware,getAllCategories);
+categoryrouter.get("/getAllCategories",getAllCategories);
 categoryrouter.delete("/delete-category/:id",authMiddleware,isAdmin,deleteCategory);
 categoryrouter.put("/updateCategory/:id",authMiddleware,isAdmin,updateCategory);
 

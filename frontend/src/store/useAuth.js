@@ -2,10 +2,11 @@ import { create } from 'zustand';
 import { adminLogin, check, logout, signin, signup } from '../Api/auth.api';
 import toast from 'react-hot-toast';
 
+
 export const useAuth = create((set) => ({
   authUser: null,
-  isSignUp: false,
-  isSignIn: false,
+  isSigningUp: false,
+  isSigningIn: false,
   isAdminSignin: false,
   isCheckingAuth: false,
   authAdmin: null,
@@ -20,6 +21,8 @@ export const useAuth = create((set) => ({
       } else {
         set({ authUser: data.user });
       }
+
+      return data.authenticated;
     } catch (error) {
        console.log(error);
       set({ authAdmin: null });
@@ -29,32 +32,36 @@ export const useAuth = create((set) => ({
     }
   },
 
-  signup: async ({ name, email, password }) => {
-    set({ isSignUp: true });
-
+  signup: async (formData) => {
+    set({ isSigningUp: true });
     try {
-      const data = await signup({ name, email, password });
-      set({ authUser: data.user });
+      const data = await signup(formData);
       toast.success(data.message);
+      return true;
     } catch (error) {
-      console.log('error in signup', error);
-      toast('Error in signup');
+      console.log(error);
+      
+      toast.error("Error in Signup",error);
     } finally {
-      set({ isSignUp: false });
+      set({ isSigningUp: false });
     }
   },
 
-  signin: async ({ email, password }) => {
-    set({ isSignIn: true });
+  signin: async (formData) => {
+    set({ isSigningIn: true });
     try {
-      const data = await signin({ email, password });
-      set({ authUser: data.user });
-      toast.success(data.message);
+      const data = await signin(formData);
+      await set({ authUser: data.user })
+     
+      await toast.success(data.message);
+
+      return true;
+      
     } catch (error) {
-      console.log('error in signin', error);
-      toast.error('Error in signing in');
+      console.log(error);
+      toast.error('Please Enter Valid Email or Password !');
     } finally {
-      set({ isSignIn: false });
+      set({ isSigningIn: false });
     }
   },
 
@@ -80,8 +87,8 @@ export const useAuth = create((set) => ({
       set({ authUser: null });
       toast.success(data.message);
     } catch (error) {
-      console.log(error);
-      toast.error('Error in logout');
+
+      toast.error('Error in logout',error);
     }
   },
 }));

@@ -4,19 +4,29 @@ import { useProduct } from '../../store/useProduct';
 import { AllProducts } from './AllProducts';
 import { Filters } from './Filters';
 import {Pagination} from "@mui/material"
+import { useParams } from 'react-router-dom';
 
 export const PlpMainSection = () => {
   
-  const {products,fetchAllProducts,isProductFetching,pagination}=useProduct();
+  const {products,fetchAllProducts,isProductFetching,pagination,fetchProductsByCategory}=useProduct();
   const [page,setPage]=useState(1);
-
-  useEffect(()=>{
-   fetchAllProducts(page);
-   
-  },[page])
-
-  console.log(pagination);
   
+  const id=useParams();
+
+  
+  
+  useEffect(()=>{
+     
+    if(id.categoryId){
+       fetchProductsByCategory(id.categoryId)
+    }else{
+      fetchAllProducts(page);
+
+    }
+
+  
+   
+  },[page,id])
   
   
   return  <>  
@@ -37,7 +47,7 @@ export const PlpMainSection = () => {
             <AllProducts products={products} />
           </div>  
           <div className='flex justify-end m-10 mx-25'>
-            <Pagination count={pagination.totalPages} color="primary" onChange={(e,value)=>setPage(value)} />
+            <Pagination count={pagination.totalPages} color="primary" onChange={(e,value)=>setPage(()=>value)} />
         
           </div>  
     </div> 

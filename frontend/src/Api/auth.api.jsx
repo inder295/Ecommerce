@@ -1,12 +1,16 @@
 import Api from './index';
 
-export const signup = async ({ name, email, password }) => {
-  const res = await Api.post('/auth/signup', { name, email, password });
+export const signup = async (formData) => {
+  
+  const res = await Api.post('/auth/signup',formData,{
+    headers: { "Content-Type": "application/json" },
+    withCredentials: true
+  });
   return res.data;
 };
 
-export const signin = async ({ email, password }) => {
-  const res = await Api.post('/auth/signin', { email, password });
+export const signin = async (formData) => {
+  const res = await Api.post('/auth/signin',formData);
   return res.data;
 };
 

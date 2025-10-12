@@ -13,6 +13,7 @@ export const authMiddleware=async (req,res,next)=>{
    
     if(!token){
         return res.status(401).json({
+            authenticated:false,
             message:"Unauthorized access, please login first"
         })
     }

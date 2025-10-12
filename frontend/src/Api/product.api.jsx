@@ -2,7 +2,10 @@
 import Api from './index';
 
 export const getAllPrducts = async (page) => {
-  const res = await Api.get(`/product/get-products?page=${page || 1}&limit=12`);
+  let url = `/product/get-products?page=${page}&limit=12`;
+
+  
+  const res = await Api.get(url);
   return res.data;
 };
 
@@ -16,7 +19,13 @@ export const createProduct =async(formData)=>{
 
 export const getProductById=async (id) =>{
    const res= await Api.get(`/product/${id}`);
-   console.log(res.data);
+   
+   return res.data;
+}
+
+export const getProductByCategory=async(categoryId)=>{
+   const res=await Api.get(`/product/getProductsByCategory/${categoryId}`);
+   await console.log(res.data);
    
    return res.data;
 }

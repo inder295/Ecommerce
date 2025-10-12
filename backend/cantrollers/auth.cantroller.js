@@ -206,6 +206,7 @@ export const check= async(req,res) =>{
     } catch (error) {
 
         res.status(500).json({
+            success:false,
             message:"Error in checking route",
             error:error.message
         })

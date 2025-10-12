@@ -1,6 +1,52 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Loader } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../store/useAuth';
 
 export const Signup = () => {
+
+  const {isSigningUp,signup}=useAuth();
+
+   const [formData,setFormData]=useState({
+    name:"",
+    email:"",
+    password:""
+
+  })
+
+  const navigate=useNavigate();
+
+
+  const handleChange=(e)=>{
+    const {name,value}=e.target;
+    setFormData({...formData,[name]:value});
+    
+    
+  }
+
+  const submit=async (e)=>{
+
+    e.preventDefault();
+
+    try {
+      if(await signup(formData)){
+        await navigate("/signin"); 
+
+      }
+      
+     
+     
+      
+    } catch (error) {
+      
+      console.log(error);
+      
+    }
+
+    
+
+  }
+
   return (
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div class="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -10,21 +56,22 @@ export const Signup = () => {
       </div>
 
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form action="#" method="POST" class="space-y-6">
+        <form onSubmit={submit} class="space-y-6">
           <div>
             <label
-              for="fullname"
+              for="Fullname"
               class="block text-sm/6 font-medium text-gray-900"
             >
               Full Name
             </label>
             <div class="mt-2">
               <input
-                id="fullname"
+                id="name"
                 type="text"
-                name="fullname"
+                name="name"
                 required
                 autocomplete="text"
+                onChange={handleChange}
                 placeholder="John Doe"
                 class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
               />
@@ -45,6 +92,7 @@ export const Signup = () => {
                 name="email"
                 required
                 autocomplete="email"
+                onChange={handleChange}
                 placeholder="john@example.com"
                 class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
               />
@@ -76,6 +124,7 @@ export const Signup = () => {
                 required
                 autocomplete="current-password"
                 placeholder="Enter Your Passowrd"
+                onChange={handleChange}
                 class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
               />
             </div>
@@ -86,7 +135,7 @@ export const Signup = () => {
               type="submit"
               class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              Sign Up
+              {isSigningUp? <Loader className='animate-spin'/> : "Sign Up"}
             </button>
           </div>
         </form>
