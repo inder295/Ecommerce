@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useProduct } from '../../store/useProduct';
 import { PdpImageCorosel } from './PdpImageCorosel';
 import { PdpAttributes } from './pdpAttributes';
+import { Quantity } from './Quantity';
 
 
 
@@ -30,7 +31,7 @@ export const PdpSection = () => {
     ):(
       
       <div className='grid grid-cols-2 pt-0 mx-auto'>
-        {/* image */}
+        {/* image ... will add corosel */}
         <div className='col-span-1 w-full'>
           <PdpImageCorosel image={productDetails.image} />
         </div>
@@ -40,6 +41,8 @@ export const PdpSection = () => {
              
               <div className=' text-3xl mt-5'>${productDetails.price}</div>
               <PdpAttributes attributes={productDetails.attributes} />
+
+              <Quantity/>
             <button
               type="button"
               class="text-white mt-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-3 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
