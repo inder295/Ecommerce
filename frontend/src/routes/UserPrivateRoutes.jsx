@@ -1,12 +1,20 @@
+import { useEffect } from "react";
+import { useAuth } from "../store/useAuth"
+import { useNavigate } from "react-router-dom";
 
 
-export const userPrivateRoutes=()=>{
+export const UserPrivateRoutes=({children})=>{
 
-    
-    
-  return <>
-    
-  </>
-    
-    
+   const {checkAuth,isAuthenticatedUser}=useAuth(); 
+   const navigate=useNavigate();
+
+   useEffect(()=>{
+     checkAuth();
+        if(!isAuthenticatedUser){
+            navigate("/signin");
+        }
+   },[])
+
+   return <>{children}</>
+
 }

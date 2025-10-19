@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Loader } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../store/useAuth';
+import Spinner from '../../components/Shopfront/Spinner';
 
 export const Signup = () => {
 
@@ -47,7 +48,7 @@ export const Signup = () => {
 
   }
 
-  return (
+  return isSigningUp ? <Spinner /> : (
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div class="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">

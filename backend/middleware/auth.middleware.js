@@ -7,7 +7,7 @@ dotenv.config();
 const prisma=new PrismaClient();
 export const authMiddleware=async (req,res,next)=>{
     
-    const token=req.cookies.token;
+    const token=req.cookies.token || req.cookies.admin_token;
     
     
    

@@ -24,6 +24,11 @@ export const adminLogin = async ({ email, password }) => {
   return res.data;
 };
 
+export const adminLogout=async()=>{
+   const res=await Api.get('/auth/admin-logout');
+   return res.data;
+}
+
 export const check = async () => {
   const res = await Api.get('/auth/check');
   return res.data;

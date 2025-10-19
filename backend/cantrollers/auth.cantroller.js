@@ -151,7 +151,7 @@ export const adminSignin= async (req,res)=>{
             sameSite: "lax"
         }
 
-        res.cookie("token",token,cookieOptions);
+        res.cookie("admin_token",token,cookieOptions);
 
         res.status(200).json({
             message:"Admin signed in successfully",
@@ -169,12 +169,38 @@ export const adminSignin= async (req,res)=>{
     }
 }
 
+export const adminLogout=async (req,res)=>{
+    try {
+        if(!req.cookies?.admin_token){
+            return res.status(400).json({
+                message:"NO active admin session found"
+            })
+
+        }
+
+        res.clearCookie('admin_token',{
+            httpOnly:true,
+            sameSite: "lax",
+            secure: false
+        })
+        
+        return res.status(200).json({
+            message:"Admin logged out successfully"
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            message:"Error in admin logout"
+        })
+    }
+}
+
 export const logout=async (req,res)=>{
     try {
 
-        if(!req.cookies?.token){
+        if(!req.cookies?.token ){
             return res.status(400).json({
-                message:"NO active session found"
+                message:"No active session found"
             })
         }
         
@@ -184,6 +210,7 @@ export const logout=async (req,res)=>{
             sameSite: "lax",
             secure: false
         });
+
         res.status(200).json({
             message:"User logged out successfully"
         })

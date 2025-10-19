@@ -21,6 +21,8 @@ import { AdminPrivateRoute } from './routes/AdminPrivateRoute';
 import AdminCategories from './components/AdminPanel/AdminCategories';
 import CreateCategory from './components/AdminPanel/CreateCategory';
 import { ScrollToTop } from './routes/ScrollToTop';
+import { UserPrivateRoutes } from './routes/UserPrivateRoutes';
+import { UserPublicRoute } from './routes/UserPublicRoute';
 
 function App() {
   
@@ -33,21 +35,23 @@ function App() {
 
        
         //user routes wishlist and review
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/signin" element={<Signin />} />
+        
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/signin" element={<Signin />} />
+      
         <Route path="/" element={<Home />} />
         <Route path="/product-list" element={<ProductListPage />} />
         <Route path="/product-list/:categoryId" element={<ProductListPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="order-success" element={<OrderConfirmation />} />
-        
+        <Route element={<UserPrivateRoutes />}>
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="order-success" element={<OrderConfirmation />} />
+        </Route>
         
         //admin routes
         <Route path="/admin-login" element={<AdminPublicRoute> <AdminSignin /></AdminPublicRoute>  } />
         <Route path="/admin/*" element={<AdminPrivateRoute> <Admin /> </AdminPrivateRoute> }>
-          {/* <Route index element={<Navigate to="dashboard" replace />} /> */}
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="products" element={<AdminProducts />} />
           <Route path="category" element={<AdminCategories/>} />

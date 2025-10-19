@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { adminLogin, check, logout, signin, signup } from '../Api/auth.api';
+import { adminLogin, adminLogout, check, logout, signin, signup } from '../Api/auth.api';
 import toast from 'react-hot-toast';
 
 
@@ -10,6 +10,8 @@ export const useAuth = create((set) => ({
   isAdminSignin: false,
   isCheckingAuth: false,
   authAdmin: null,
+  isAuthenticatedUser:false,
+  adminLoggingOut:false,
 
   checkAuth: async () => {
     set({ isCheckingAuth: true });
@@ -20,6 +22,7 @@ export const useAuth = create((set) => ({
         set({ authAdmin: data.user });
       } else {
         set({ authUser: data.user });
+        await set({isAuthenticatedUser:true})
       }
 
       return data.authenticated;
@@ -27,6 +30,7 @@ export const useAuth = create((set) => ({
        console.log(error);
       set({ authAdmin: null });
       set({ authUser: null });
+      
     } finally {
       set({ isCheckingAuth: false });
     }
@@ -54,11 +58,13 @@ export const useAuth = create((set) => ({
       await set({ authUser: data.user })
      
       await toast.success(data.message);
+      set({isAuthenticatedUser:true})
 
       return true;
       
     } catch (error) {
       console.log(error);
+      
       toast.error('Please Enter Valid Email or Password !');
     } finally {
       set({ isSigningIn: false });
@@ -81,11 +87,25 @@ export const useAuth = create((set) => ({
     }
   },
 
+  adminLogout:async()=>{
+    try {
+      set({adminLoggingOut:true})
+      const data=await adminLogout();
+      set({authAdmin:null});
+      toast.success(data.message);
+    } catch (error) {
+       toast.error('Error in admin logout',error);
+    }finally{
+      set({adminLoggingOut:false})
+    }
+  },
+
   logout: async () => {
     try {
       const data = await logout();
       set({ authUser: null });
       toast.success(data.message);
+      set({isAuthenticatedUser:false})
     } catch (error) {
 
       toast.error('Error in logout',error);

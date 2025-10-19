@@ -1,25 +1,22 @@
 import { Search, Bell } from 'lucide-react';
 import { useAuth } from '../../store/useAuth';
 import { useNavigate } from 'react-router-dom';
+import Spinner from '../Shopfront/Spinner';
 
 export const Header = () => {
-  const { logout } = useAuth();
+  const { adminLogout,adminLoggingOut } = useAuth();
   const navigate = useNavigate();
 
   
 
   const handleLogout = async () => {
 
-    await logout();
+    await adminLogout();
     await navigate('/admin-login');
   
   };
 
-    
-    
-
-
-  return (
+  return adminLoggingOut ? <Spinner/> :(
     <div className="flex ml-64 p-2">
       <header className="w-full h-16 bg-white-800  flex items-center justify-between px-6 shadow-sm">
         {/* Search Bar */}
