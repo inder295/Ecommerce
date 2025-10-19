@@ -113,7 +113,7 @@ const CreateProduct = () => {
       
       } catch (error) {
         console.log(error);
-        toast.error("Product not created.")
+        
         
         
       }

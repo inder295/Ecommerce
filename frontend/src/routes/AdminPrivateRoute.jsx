@@ -5,22 +5,22 @@ import { Loader } from 'lucide-react';
 
 
 export const AdminPrivateRoute = ({ children }) => {
-  const { checkAuth, authAdmin,isCheckingAuth } = useAuth();
+  const { checkAdminAuth, authAdmin,checkingAdmin } = useAuth();
   const navigate = useNavigate();
    
   useEffect(() => {
-      checkAuth();
+      checkAdminAuth();
     }, []);
 
     useEffect(()=>{
       setTimeout(()=>{
-        if(!isCheckingAuth && !authAdmin){
-        navigate("/admin-login")
+        if(!checkingAdmin && !authAdmin){
+          navigate("/admin-login")
         }
-      },500)
-    },[isCheckingAuth,authAdmin,navigate])
+      },10)
+    },[authAdmin])
 
-    if (isCheckingAuth) {
+    if (checkingAdmin) {
     return (
       <div className="flex items-center justify-center h-screen">
         <Loader className="animate-spin w-8 h-8 text-blue-500" />

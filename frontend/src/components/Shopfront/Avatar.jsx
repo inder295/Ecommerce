@@ -1,10 +1,16 @@
+import { useEffect } from 'react';
 import { useAuth } from '../../store/useAuth'
 import { Link } from 'react-router-dom';
 
 
 export const Avatar = () => {
   
-    const {logout,authUser}=useAuth();
+    const {logout,authUser,checkAuth}=useAuth();
+
+
+    useEffect(()=>{
+        checkAuth();
+    },[])
 
     async function handleLogout(){
          await logout();

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { adminLogin, adminLogout, check, logout, signin, signup } from '../Api/auth.api';
+import { adminLogin, adminLogout, check, checkAdmin, logout, signin, signup } from '../Api/auth.api';
 import toast from 'react-hot-toast';
 
 
@@ -12,28 +12,34 @@ export const useAuth = create((set) => ({
   authAdmin: null,
   isAuthenticatedUser:false,
   adminLoggingOut:false,
+  checkingAdmin:false,
 
   checkAuth: async () => {
     set({ isCheckingAuth: true });
     try {
-      const data = await check();
-
-      if (data.user.role === 'ADMIN') {
-        set({ authAdmin: data.user });
-      } else {
+      const data = await check();     
         set({ authUser: data.user });
-        await set({isAuthenticatedUser:true})
-      }
-
-      return data.authenticated;
+        await set({isAuthenticatedUser:true})     
     } catch (error) {
-       console.log(error);
-      set({ authAdmin: null });
-      set({ authUser: null });
-      
+       console.log(error); 
     } finally {
       set({ isCheckingAuth: false });
     }
+  },
+
+  checkAdminAuth:async()=>{
+    let data; 
+    try {
+       set({checkingAdmin:true});
+        data=await checkAdmin();
+        set({authAdmin:data.user});
+     } catch (error) {
+        console.log('Error in checking admin auth',error);
+        toast.error(data.message + error)
+     }finally{
+      set({checkingAdmin:false})
+     }
+
   },
 
   signup: async (formData) => {
@@ -93,6 +99,7 @@ export const useAuth = create((set) => ({
       const data=await adminLogout();
       set({authAdmin:null});
       toast.success(data.message);
+      return true;
     } catch (error) {
        toast.error('Error in admin logout',error);
     }finally{

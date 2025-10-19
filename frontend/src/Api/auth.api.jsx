@@ -33,3 +33,8 @@ export const check = async () => {
   const res = await Api.get('/auth/check');
   return res.data;
 };
+
+export const checkAdmin=async()=>{
+  const res=await Api.get('/auth/admin-check');
+  return res.data;
+}

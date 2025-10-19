@@ -11,8 +11,10 @@ export const Header = () => {
 
   const handleLogout = async () => {
 
-    await adminLogout();
-    await navigate('/admin-login');
+    if(await adminLogout()){
+      await navigate('/admin-login');
+
+    }
   
   };
 

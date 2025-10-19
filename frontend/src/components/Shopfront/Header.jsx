@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { Avatar } from './Avatar';
 
 export const Header = () => {
-  // You can manage cart count state here or pass it as props
-  const cartItemCount = 10; // Example cart count
+
+  const cartItemCount = 10; 
 
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 fixed top-0 left-0 right-0 z-50">

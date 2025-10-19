@@ -7,7 +7,7 @@ dotenv.config();
 const prisma=new PrismaClient();
 export const authMiddleware=async (req,res,next)=>{
     
-    const token=req.cookies.token || req.cookies.admin_token;
+    const token=req.cookies.token;
     
     
    
@@ -43,6 +43,42 @@ export const authMiddleware=async (req,res,next)=>{
     } catch (error) {
         res.status(401).json({
             message:"Invalid token, please login again",
+            error:error.message
+        })
+    }
+}
+
+export const checkAdminToken=async(req,res,next)=>{
+    const token=req.cookies.admin_token;
+
+    if(!token){
+        return res.status(400).json({
+            message:"Unauthorized access, admin login required"
+        })
+    }
+
+    let decode;
+
+    try {
+        decode=jwt.verify(token,process.env.JWT_SECRET);
+         
+        const user=await prisma.user.findUnique({
+            where:{
+                id:decode.id
+            }
+        })
+
+        if(!user || user.role !=="ADMIN"){
+            return res.status(401).json({
+                message:"Unauthorized access, admin privileges required"
+            })
+        }
+
+        req.user=user;
+        next();
+    } catch (error) {
+        return res.status(401).json({
+            message:"Invalid admin token, please login again",
             error:error.message
         })
     }

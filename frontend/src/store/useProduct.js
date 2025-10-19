@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { getAllPrducts,createProduct, getProductById, getProductByCategory } from "../Api/product.api";
+import toast from "react-hot-toast";
 
 export const useProduct = create((set)=>({
 
@@ -30,12 +31,13 @@ export const useProduct = create((set)=>({
     },
 
     async createProduct(formData){
+        let data;
         set({isproductCreating:true});
         try {
-            const data=await createProduct(formData);
+            data=await createProduct(formData);
             return data;
         } catch (error) {
-            console.log(error);
+            toast.error(error)
             
         } finally{
             set({isproductCreating:false});

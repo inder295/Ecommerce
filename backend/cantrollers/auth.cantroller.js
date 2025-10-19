@@ -240,3 +240,17 @@ export const check= async(req,res) =>{
         
     }
 }
+
+export const checkAdmin=async(req,res)=>{
+    try {
+        res.status(200).json({
+            success:true,
+            message:"Admin authenticated successfully",
+            user:req.user
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message:"Error in checking admin",
+        })
+    }
+}

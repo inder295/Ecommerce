@@ -1,14 +1,23 @@
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../store/useAuth';
 import { useEffect } from 'react';
 
 export const AdminPublicRoute = ({ children }) => {
-  const { authAdmin, checkAuth } = useAuth();
+ const { checkAdminAuth, authAdmin,checkingAdmin } = useAuth();
   const location=useLocation();
+  const navigate=useNavigate();
 
   useEffect( () => {
-    checkAuth();
-  }, []);  
+    checkAdminAuth();
+  }, []); 
+  
+  useEffect(()=>{
+      setTimeout(()=>{
+        if(!checkingAdmin && !authAdmin){
+          navigate("/admin-login")
+        }
+      },10)
+    },[authAdmin])
 
    if (authAdmin && location.pathname === ("/admin-login") ) {
     return <Navigate to="/admin/dashboard" />;
