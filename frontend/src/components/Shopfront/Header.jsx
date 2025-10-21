@@ -1,12 +1,23 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Avatar } from './Avatar';
+import Spinner from './Spinner';
+import { useAuth } from '../../store/useAuth';
+import { useCart } from '../../store/useCart';
+import { useEffect } from 'react';
 
 export const Header = () => {
 
-  const cartItemCount = 10; 
+  const {cartTotalCount,cartCount,addToCart}=useCart();
 
-  return (
+  useEffect(()=>{
+     cartTotalCount();
+  },[addToCart])
+
+ 
+
+  const {loggingOut}=useAuth();
+
+  return loggingOut ? <Spinner/> : (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 fixed top-0 left-0 right-0 z-50">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link
@@ -93,9 +104,9 @@ export const Header = () => {
                 d="M6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0h8m-8 0-1-4m9 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-9-4h10l2-7H3m2 7L3 4m0 0-.792-3H1"
               />
             </svg>
-            {cartItemCount > 0 && (
+            {cartCount > 0 && (
               <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                {cartItemCount > 99 ? '99+' : cartItemCount}
+                {cartCount > 99 ? '99+' : cartCount}
               </span>
             )}
             <span className="sr-only">Cart</span>

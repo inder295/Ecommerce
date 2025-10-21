@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 export const UserPrivateRoutes=({children})=>{
 
-   const {checkAuth,isAuthenticatedUser}=useAuth(); 
+   const {checkAuth,authUser}=useAuth(); 
    const navigate=useNavigate();
 
    useEffect(()=>{
      checkAuth();
-        if(!isAuthenticatedUser){
-            navigate("/signin");
+        if(!authUser){
+            navigate(-1);
         }
    },[])
 

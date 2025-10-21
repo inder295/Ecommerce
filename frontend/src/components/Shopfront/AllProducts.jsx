@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useProduct } from '../../store/useProduct';
+import {motion} from 'motion/react';
 
 
 export const AllProducts = ({products}) => {
@@ -24,7 +25,10 @@ export const AllProducts = ({products}) => {
           products.map((p) => {
             return (
               <Link key={p.id} to={`/product/${p.id}`}>
-                <div class="w-full max-w-xs bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg">
+                <motion.div 
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                class="w-full max-w-xs bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg">
                   <img
                     class="p-2 rounded-t-lg h-80 w-full object-contain"
                     src={`${p.image}` || '/camera.jpg'}
@@ -55,7 +59,7 @@ export const AllProducts = ({products}) => {
                       
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </Link>
           )}
 

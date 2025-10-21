@@ -6,7 +6,7 @@ const Faq = () => {
 
     const faqs = [
         {
-            question: "How can I start selling on this platform??",
+            question: "How can I start selling on this platform?",
             answer: "Simply sign up as a seller, create your shop profile, and add your products.Our step-by-step setup guide helps you list your items, set prices, and customize your store — no coding or design skills needed!",
         },
         {

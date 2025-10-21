@@ -17,7 +17,7 @@ export const AdminPublicRoute = ({ children }) => {
           navigate("/admin-login")
         }
       },10)
-    },[authAdmin])
+    },[])
 
    if (authAdmin && location.pathname === ("/admin-login") ) {
     return <Navigate to="/admin/dashboard" />;

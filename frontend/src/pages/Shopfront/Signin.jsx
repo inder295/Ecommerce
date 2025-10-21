@@ -15,7 +15,7 @@ export const Signin = () => {
 
   useEffect(() => {
     if (useAuth.getState().authUser) {
-      navigate('/');
+      navigate("/");
     }
   }, [authUser, navigate]);
 
@@ -28,7 +28,7 @@ export const Signin = () => {
     e.preventDefault();
     try {
       if (await signin(formData)) {
-        navigate('/');
+        navigate("/");
       }
     } catch (error) {
       console.log(error);

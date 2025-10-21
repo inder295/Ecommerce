@@ -11,7 +11,7 @@ export const UserPublicRoute = ({children}) => {
    useEffect(()=>{
       checkAuth();
       if(isAuthenticatedUser){
-            navigate("/");
+            navigate(-1);
       }else{
         navigate("/signin");
       }

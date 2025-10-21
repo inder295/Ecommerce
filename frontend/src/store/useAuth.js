@@ -13,6 +13,7 @@ export const useAuth = create((set) => ({
   isAuthenticatedUser:false,
   adminLoggingOut:false,
   checkingAdmin:false,
+  loggingOut:false,
 
   checkAuth: async () => {
     set({ isCheckingAuth: true });
@@ -109,13 +110,18 @@ export const useAuth = create((set) => ({
 
   logout: async () => {
     try {
+      set({loggingOut:true})
       const data = await logout();
       set({ authUser: null });
       toast.success(data.message);
       set({isAuthenticatedUser:false})
+      window.location.reload();
+
     } catch (error) {
 
       toast.error('Error in logout',error);
+    }finally{
+      set({loggingOut:false})
     }
   },
 }));
