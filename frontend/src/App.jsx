@@ -23,6 +23,7 @@ import CreateCategory from './components/AdminPanel/CreateCategory';
 import { ScrollToTop } from './routes/ScrollToTop';
 import { UserPrivateRoutes } from './routes/UserPrivateRoutes';
 import { UserPublicRoute } from './routes/UserPublicRoute';
+import About from './pages/Shopfront/About';
 
 function App() {
   
@@ -38,6 +39,7 @@ function App() {
         
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
+          <Route path='/about' element={<About/>} />
       
         <Route path="/" element={<Home />} />
         <Route path="/product-list" element={<ProductListPage />} />

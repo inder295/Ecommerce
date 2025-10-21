@@ -10,7 +10,7 @@ export const Avatar = () => {
 
     useEffect(()=>{
         checkAuth();
-    },[])
+    },[authUser])
 
     async function handleLogout(){
          await logout();
