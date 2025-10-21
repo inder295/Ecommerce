@@ -5,20 +5,23 @@ import { Loader } from 'lucide-react';
 
 
 export const AdminPrivateRoute = ({ children }) => {
-  const { checkAdminAuth, authAdmin,checkingAdmin } = useAuth();
+  const { checkAdminAuth, checkingAdmin } = useAuth();
   const navigate = useNavigate();
    
   useEffect(() => {
-      checkAdminAuth();
-    }, []);
-
-    useEffect(()=>{
-      setTimeout(()=>{
-        if(!checkingAdmin && !authAdmin){
-          navigate("/admin-login")
-        }
-      },10)
-    },[authAdmin])
+    let mounted = true;
+    const run = async () => {
+      await checkAdminAuth();
+      // after check completes, if no admin, navigate
+      if (mounted && !useAuth.getState().authAdmin) {
+        navigate('/admin-login');
+      }
+    };
+    run();
+    return () => {
+      mounted = false;
+    };
+  }, [checkAdminAuth, navigate]);
 
     if (checkingAdmin) {
     return (

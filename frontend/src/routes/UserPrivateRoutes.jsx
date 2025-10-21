@@ -1,20 +1,27 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import { useAuth } from "../store/useAuth"
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 
-export const UserPrivateRoutes=({children})=>{
 
-   const {checkAuth,authUser}=useAuth(); 
-   const navigate=useNavigate();
 
-   useEffect(()=>{
-     checkAuth();
-        if(!authUser){
-            navigate(-1);
-        }
-   },[])
 
-   return <>{children}</>
+export const UserPrivateRoutes=()=>{
+
+    const {checkAuth,authUser}=useAuth();
+    const navigate=useNavigate();
+
+    useState(()=>{
+      checkAuth();
+    },[])
+
+    if(!authUser){
+      return navigate('signin');
+    }
+
+
+   return <>
+   <Outlet/>
+   </>
 
 }

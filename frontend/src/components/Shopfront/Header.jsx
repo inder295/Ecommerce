@@ -7,11 +7,12 @@ import { useEffect } from 'react';
 
 export const Header = () => {
 
-  const {cartTotalCount,cartCount,addToCart}=useCart();
-
+  const cartTotalCount=useCart(state=>state.cartTotalCount);
+  const cartCount=useCart(state=>state.cartCount);
+  
   useEffect(()=>{
-     cartTotalCount();
-  },[addToCart])
+    cartTotalCount();
+  },[cartCount, cartTotalCount])
 
  
 

@@ -115,7 +115,7 @@ export const useAuth = create((set) => ({
       set({ authUser: null });
       toast.success(data.message);
       set({isAuthenticatedUser:false})
-      window.location.reload();
+      
 
     } catch (error) {
 

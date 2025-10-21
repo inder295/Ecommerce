@@ -7,10 +7,6 @@ export const AllProducts = ({products}) => {
 
   const {isProductFetching}=useProduct();
 
-  //console.log(products);
-  
-  
-
   
   return <>
     {
