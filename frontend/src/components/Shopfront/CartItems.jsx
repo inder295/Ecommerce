@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import { useCart } from "../../store/useCart"
 import Spinner from "./Spinner";
+import { Link } from "react-router-dom";
 
 export const CartItems = () => {
         // use selectors to subscribe only to the pieces we need
@@ -105,10 +106,11 @@ export const CartItems = () => {
                         <span>Grand Total</span><span>$ {summary?.GrandTotal ?? "-"}</span>
                     </p>
                 </div>
-
+                <Link to="checkout">
                 <button className="w-full py-3 mt-6 cursor-pointer bg-indigo-500 text-white font-medium hover:bg-indigo-600 transition">
                     Checkout
                 </button>
+                </Link>
             </div>
         </div>
         </>

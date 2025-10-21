@@ -16,7 +16,7 @@ const CartPage = () => {
      <Category/>
      <BackNavigation/>
      <CartItems/>
-      
+      <Footer/>
     </>
   );
 };

@@ -48,7 +48,7 @@ function App() {
         
         <Route element={<UserPrivateRoutes />}>
           <Route path="/cart" element={<CartPage />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/cart/checkout" element={<CheckoutPage />} />
           <Route path="order-success" element={<OrderConfirmation />} />
         </Route>
         
