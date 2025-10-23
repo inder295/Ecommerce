@@ -23,7 +23,7 @@ export const placeOrder=async(req,res)=>{
     }
 
     if(!paymentMethod){
-        return res.json(404).json({
+        return res.status(404).json({
             message:"payment method is required."
         })
     }

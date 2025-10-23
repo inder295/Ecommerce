@@ -170,6 +170,7 @@ model Address{
   id String @id @default(uuid())
   userId String
   fullname String
+  email String 
   phone String
   address String
   city String

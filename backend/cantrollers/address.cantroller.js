@@ -4,10 +4,15 @@ import { PrismaClient } from "@prisma/client";
 const Prisma=new PrismaClient();
 
 export const addAddress=async(req,res)=>{
-    const {fullname,phone,address,city,state,country,zip}=req.body;
+    
+    
+    
+    const {fullname,phone,address,city,state,country,zip,email}=req.body;
     const userId=req.user.id;
 
-    if(!fullname || !phone || !address || !city || !state || !country || !zip) {
+    
+
+    if(!fullname || !phone || !address || !city || !state || !country || !zip || !email) {
         return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -22,7 +27,8 @@ export const addAddress=async(req,res)=>{
                 city:city,
                 state:state,
                 country:country,
-                zip:zip
+                zip:zip,
+                email:email
 
             }
         })
@@ -40,9 +46,6 @@ export const addAddress=async(req,res)=>{
         })
         
     }
-
-
-
 
 }
 

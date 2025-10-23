@@ -4,10 +4,9 @@ import { authMiddleware } from "../middleware/auth.middleware.js";
 
 const addressRouter = express.Router();
 
-addressRouter.use(authMiddleware);
 
-addressRouter.post('/add-address',addAddress);
-addressRouter.get('/get-all-addresses',getAllAddresses);
-addressRouter.delete('/delete-address/:id',deleteAddress);
+addressRouter.post('/add-address',authMiddleware,addAddress);
+addressRouter.get('/get-all-addresses',authMiddleware,getAllAddresses);
+addressRouter.delete('/delete-address/:id',authMiddleware,deleteAddress);
 
 export default addressRouter;
