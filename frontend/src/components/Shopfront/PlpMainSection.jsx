@@ -5,6 +5,7 @@ import { AllProducts } from './AllProducts';
 import { Filters } from './Filters';
 import {Pagination} from "@mui/material"
 import { useParams } from 'react-router-dom';
+import Spinner from './Spinner';
 
 export const PlpMainSection = () => {
   
@@ -29,16 +30,9 @@ export const PlpMainSection = () => {
   },[page,id])
   
   
-  return  <>  
+  return isProductFetching ? <Spinner/> : <>  
   
-    {
-      
-      isProductFetching ? <div>
-        <div className="flex justify-center items-center h-96">
-          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-black"></div>
-        </div>
-      </div> : null
-    }
+   
          
        <div className='w-80% mx-auto'>
            <p className='flex justify-end m-3 mx-20 font-semibold'>{pagination.totalProducts} products</p>

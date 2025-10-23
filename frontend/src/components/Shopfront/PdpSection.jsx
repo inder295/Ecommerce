@@ -7,6 +7,7 @@ import { PdpAttributes } from './pdpAttributes';
 import { useCart } from '../../store/useCart';
 import { Loader } from 'lucide-react';
 import { useAuth } from '../../store/useAuth';
+import Spinner from './Spinner';
 
 
 
@@ -52,15 +53,12 @@ export const PdpSection = () => {
 
 
 
-  return <>
+  return isPdpFetching ? <Spinner/> : <>
   <div className='mt-2 w-[80%] m-auto flex justify-center'>
     
-    {
-    isPdpFetching ? (
-      <div className='flex justify-center align-center'>Loading...</div>
-    ):(
+    
       
-      <div className='grid grid-cols-2 pt-0 mx-auto'>
+    <div className='grid grid-cols-2 pt-0 mx-auto'>
         {/* image ... will add corosel */}
         <div className='col-span-1 w-full'>
           <PdpImageCorosel image={productDetails.image} />
@@ -104,9 +102,8 @@ export const PdpSection = () => {
     </div>
 
           
-      </div>
-    )
-    }
+     </div>
+   
 
     </div>
     
