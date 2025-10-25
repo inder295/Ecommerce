@@ -4,9 +4,9 @@ import { authMiddleware, isAdmin } from '../middleware/auth.middleware.js';
 
 const orderRouter=express.Router();
 
-orderRouter.use(authMiddleware);
 
-orderRouter.post("/place-order",placeOrder);
+
+orderRouter.post("/place-order",authMiddleware,placeOrder);
 orderRouter.patch("/update-order-status/:orderId",isAdmin ,changeOrderStatus);
 orderRouter.get("/all-orders",isAdmin,getAllOrders);
 orderRouter.get("/my-orders",getAllOrderOfUser);

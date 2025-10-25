@@ -49,7 +49,7 @@ function App() {
         <Route element={<UserPrivateRoutes />}>
           <Route path="/cart" element={<CartPage />} />
           <Route path="/cart/checkout" element={<CheckoutPage />} />
-          <Route path="order-success" element={<OrderConfirmation />} />
+          <Route path="/cart/checkout/order-success" element={<OrderConfirmation />} />
         </Route>
         
         //admin routes

@@ -8,7 +8,15 @@ const Prisma=new PrismaClient();
 
 export const placeOrder=async(req,res)=>{
     const userId=req.user.id;
-    const {addressId,shipmentMehod,paymentMethod}=req.body;
+    let {addressId,shipmentMehod,paymentMethod}=req.body;
+    
+    addressId=addressId[0];
+    shipmentMehod=shipmentMehod[0];
+    paymentMethod=paymentMethod[0];
+    
+
+    
+    
 
     if(!addressId || !shipmentMehod || !paymentMethod){
         return res.status(400).json({
@@ -33,24 +41,24 @@ export const placeOrder=async(req,res)=>{
     }
 
     
+    const orderItems=await Prisma.cartItems.findMany({
+        where:{
+            userId:userId
+        },
+        include:{
+            product:true
+        }
+    })
+
+    if(orderItems.length===0 || !orderItems){
+        return res.status(400).json({
+            message:"No items in cart to place order"
+        })
+    }
 
     try {
         const {order,address,items}=await Prisma.$transaction(async (tx)=>{
 
-            const orderItems=await tx.cartItems.findMany({
-                where:{
-                    userId:userId
-                },
-                include:{
-                    product:true
-                }
-            })
-
-            if(orderItems.length===0){
-                return res.status(400).json({
-                    message:"No items in cart to place order"
-                })
-            }
 
             await tx.cartItems.deleteMany({
                 where:{
@@ -76,7 +84,7 @@ export const placeOrder=async(req,res)=>{
                         create:orderItems.map(item=>({
                             productId:item.productId,
                             name:item.product.name,
-                            image:item.product.image,
+                            image:item.product.image[0],
                             price:item.product.price,
                             quantity:item.quantity,
                             totalPrice:item.totalPrice

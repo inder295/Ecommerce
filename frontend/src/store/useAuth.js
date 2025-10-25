@@ -36,7 +36,7 @@ export const useAuth = create((set) => ({
         set({authAdmin:data.user});
      } catch (error) {
         console.log('Error in checking admin auth',error);
-        toast.error(data.message + error)
+        
      }finally{
       set({checkingAdmin:false})
      }
