@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client";
+import {io} from "../index.js"
 const Prisma=new PrismaClient();
+
 
 /**
  * 
@@ -205,6 +207,8 @@ export const getCartItems=async(req,res)=>{
             })
         }
 
+       
+
         res.status(200).json({
             message:"Cart items fetched successfully",
             cartItems:cartItems
@@ -228,6 +232,8 @@ export const getCartItemsByCount=async(req,res)=>{
                 userId:userId
             }
         })
+
+         io.to(userId.toString()).emit("cartCount",count);
 
         return res.status(200).json({
             message:"Cart item count fetched successfully",

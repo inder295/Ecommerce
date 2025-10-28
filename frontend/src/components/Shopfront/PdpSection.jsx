@@ -20,6 +20,7 @@ export const PdpSection = () => {
 
   const {fetchProductById,isPdpFetching,productDetails}=useProduct();
   const {addToCart,addingInCart}=useCart();
+  const cartTotalCount=useCart(state=>state.cartTotalCount);
   const {authUser}=useAuth();
   
   const navigate=useNavigate();
@@ -49,6 +50,7 @@ export const PdpSection = () => {
        
        e.preventDefault();
        await addToCart({productId:id,quantity});
+       await cartTotalCount();
     }
 
 

@@ -1,4 +1,6 @@
+import http from 'http'
 import express from "express";
+import {Server} from 'socket.io'
 import dotenv from "dotenv"
 import cors from "cors";
 import authRouter from "./routes/user.route.js";
@@ -11,6 +13,15 @@ import path from "path";
 import orderRouter from "./routes/order.route.js";
 
 const app= express();
+
+const server=http.createServer(app);
+
+const io=new Server(server,{
+   cors:{
+     origin: "http://localhost:5173", 
+     methods: ["GET"],
+   }
+})
 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
@@ -38,8 +49,20 @@ app.use('/api/v1/address',addressRouter)
 app.use("/api/v1/order",orderRouter);
  
 
+io.on('connection',(socket)=>{
+  console.log('user connected',socket.id);
 
-app.listen(port,()=>{
+  socket.on('disconnect',()=>{
+    console.log('user disconnected',socket.id);
+    
+  })
+  
+})
+
+export { io };
+
+
+server.listen(port,()=>{
     console.log(`server is running on port ${port}`);
     
 })

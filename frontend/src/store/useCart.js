@@ -1,6 +1,9 @@
 import toast from 'react-hot-toast';
 import {create} from 'zustand';
 import { addToCart, cartSummaryApi, cartTotalCount, getCartItems } from '../Api/cart.api';
+import {io } from "socket.io-client"
+
+const socket=io('http://localhost:3000')
 
 
 

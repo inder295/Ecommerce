@@ -12,7 +12,7 @@ export const Header = () => {
   
   useEffect(()=>{
     cartTotalCount();
-  },[cartCount, cartTotalCount])
+  },[cartCount])
 
  
 
