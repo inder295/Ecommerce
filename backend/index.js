@@ -11,6 +11,7 @@ import cartRouter from "./routes/cart.route.js";
 import addressRouter from "./routes/address.route.js";
 import path from "path";
 import orderRouter from "./routes/order.route.js";
+import wishlistRouter from './routes/wishlist.route.js';
 
 const app= express();
 
@@ -37,9 +38,6 @@ dotenv.config();
 
 const port= process.env.PORT || 3000;
 
-app.get("/",(req,res)=>{ 
-    res.send("Hello World")
-})
 
 app.use("/api/v1/auth",authRouter);
 app.use("/api/v1/product",productRouter);
@@ -47,19 +45,10 @@ app.use("/api/v1/category",categoryrouter);
 app.use("/api/v1/cart",cartRouter);
 app.use('/api/v1/address',addressRouter)
 app.use("/api/v1/order",orderRouter);
+app.use("/api/v1/wishlist",wishlistRouter);
  
 
-io.on('connection',(socket)=>{
-  console.log('user connected',socket.id);
 
-  socket.on('disconnect',()=>{
-    console.log('user disconnected',socket.id);
-    
-  })
-  
-})
-
-export { io };
 
 
 server.listen(port,()=>{

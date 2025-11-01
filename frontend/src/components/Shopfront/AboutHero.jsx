@@ -19,7 +19,7 @@ const AboutHero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
  
-            className="min-h-screen pb-20 mt-10">
+            className="min-h-screen pb-20 mt-10 ">
                 {/* Navbar */}
 
                 {/* Hero Section */}
