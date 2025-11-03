@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { getAllPrducts,createProduct, getProductById, getProductByCategory } from "../Api/product.api";
+import { getAllPrducts,createProduct, getProductById, getProductByCategory, searchProducts } from "../Api/product.api";
 import toast from "react-hot-toast";
 
 export const useProduct = create((set)=>({
@@ -79,6 +79,21 @@ export const useProduct = create((set)=>({
             
         }finally{
           set({isProductsByCategoryFetching:false})
+        }
+    },
+
+    async searchProduct(search){
+        try {
+            set({isProductFetching:true})
+            const data=await searchProducts(search);
+            if(data.products){
+                set({products:data.products})
+            }
+        } catch (error) {
+            console.log(error);
+            
+        }finally{
+            set({isProductFetching:false})
         }
     }
 

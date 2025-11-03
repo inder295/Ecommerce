@@ -29,3 +29,8 @@ export const getProductByCategory=async(categoryId)=>{
    
    return res.data;
 }
+
+export const searchProducts =async (search)=>{
+   const res=await Api.post('/product/search',search);
+   return res.data;
+}

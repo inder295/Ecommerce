@@ -85,6 +85,8 @@ model Product {
   
   orderItems OrderItem[]
 
+   
+
 }
 
 model Category {

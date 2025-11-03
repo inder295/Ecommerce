@@ -88,12 +88,26 @@ export const getWishlistItems=async(req,res)=>{
     const WishlistItems=await Prisma.wishlist.findMany({
         where:{
             userId:userId
+        },
+        select:{
+           productId:true
         }
     });
+
+    const productIds = WishlistItems.map(item => item.productId);
+
+
+    const items=await Prisma.product.findMany({
+        where:{
+            id:{ 
+                in:productIds
+            }
+        }
+    })
     
     return res.status(200).json({
         message:"All wishlist items fetched successfully",
-        items:WishlistItems
+        items:items
     })
 }
 

@@ -1,6 +1,6 @@
 import express from "express";
-import { createProduct,deleteProducts,getAllProducts, getProductById, getProductsByCategory, updateProductById } from "../cantrollers/product.cantroller.js";
-import { authMiddleware, checkAdminToken, isAdmin } from "../middleware/auth.middleware.js";
+import { createProduct,deleteProducts,getAllProducts, getProductById, getProductsByCategory, searchProduct, updateProductById } from "../cantrollers/product.cantroller.js";
+import { checkAdminToken } from "../middleware/auth.middleware.js";
 import multer from "multer";
 
 const storage=multer.diskStorage({});
@@ -15,6 +15,7 @@ productRouter.patch("/update-product/:id",checkAdminToken,updateProductById);
 productRouter.get("/get-products",getAllProducts)
 productRouter.get("/:id",getProductById)
 productRouter.get("/getProductsByCategory/:categoryId",getProductsByCategory);
+productRouter.post("/search",searchProduct)
 
 
 

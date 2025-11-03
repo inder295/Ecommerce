@@ -3,20 +3,34 @@ import { Avatar } from './Avatar';
 import Spinner from './Spinner';
 import { useAuth } from '../../store/useAuth';
 import { useCart } from '../../store/useCart';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useProduct } from '../../store/useProduct';
 
 export const Header = () => {
-
+  
+  const [search,setSearch]=useState("");
   const cartTotalCount=useCart(state=>state.cartTotalCount);
   const cartCount=useCart(state=>state.cartCount);
+  const {searchProduct}=useProduct();
+  const {loggingOut}=useAuth();
   
   useEffect(()=>{
     cartTotalCount();
   },[cartCount])
+   
+  const handleSearch=async(e)=>{
+    
+    e.preventDefault();
+    setTimeout(() => {
+     setSearch(e.target.value);
+     console.log(search);
+    
+     searchProduct(search);
+     setSearch('')
+    }, 500);
+  }
+   
 
- 
-
-  const {loggingOut}=useAuth();
 
   return loggingOut ? <Spinner/> : (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 fixed top-0 left-0 right-0 z-50">
@@ -32,6 +46,9 @@ export const Header = () => {
 
         <div className="flex md:order-2 items-center space-x-3">
           {/* Search button for mobile */}
+
+        <form onClick={handleSearch}> 
+          
           <button
             type="button"
             data-collapse-toggle="navbar-search"
@@ -79,11 +96,13 @@ export const Header = () => {
             </div>
             <input
               type="text"
-              id="search-navbar"
+              onChange={(e) => setSearch(e.target.value)}
+              value={search}
               className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Search..."
             />
           </div>
+        </form>   
 
           {/* Cart Icon with Badge */}
           <Link

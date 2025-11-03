@@ -1,8 +1,11 @@
 import { create } from "zustand";
-import { addRemovewishlist, checkWishlistItem } from "../Api/wishlist.api";
+import { addRemovewishlist, checkWishlistItem, getAllWishlistItems } from "../Api/wishlist.api";
 import toast from "react-hot-toast";
 
-export const useWishlist=create(()=>({
+export const useWishlist=create((set)=>({
+   
+    wishlistItems:[],
+    fetchWishlist:false,
     
     async addRemoveInWishlist(productId){
        try {
@@ -16,6 +19,7 @@ export const useWishlist=create(()=>({
 
     async checkItemInWishlist(productId){
         try {
+           
             const data=await checkWishlistItem(productId);
            
             
@@ -24,6 +28,20 @@ export const useWishlist=create(()=>({
         } catch (error) {
             console.log(error);
             
+        }
+    },
+
+    async getAllWishlistItems(){
+        try {
+            set({fetchWishlist:true})
+            const data=await getAllWishlistItems();
+            set({wishlistItems:data.items})
+            
+        } catch (error) {
+            console.log(error);
+            
+        }finally{
+            set({fetchWishlist:false})
         }
     }
 
