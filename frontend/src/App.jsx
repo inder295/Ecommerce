@@ -1,6 +1,6 @@
 import { Signup } from './pages/Shopfront/Signup';
 import { Signin } from './pages/Shopfront/Signin';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route,  } from 'react-router-dom';
 import { Home } from './pages/Shopfront/Home';
 import { ProductListPage } from './pages/Shopfront/ProductListPage';
 import { ProductDetailPage } from './pages/Shopfront/Product-Detail-Page';
@@ -24,9 +24,13 @@ import { ScrollToTop } from './routes/ScrollToTop';
 import { UserPrivateRoutes } from './routes/UserPrivateRoutes';
 import { UserPublicRoute } from './routes/UserPublicRoute';
 import About from './pages/Shopfront/About';
+import WishlistProducts from './pages/Shopfront/WishlistProducts';
+
 
 function App() {
   
+  
+
 
   return (
     <>
@@ -41,7 +45,7 @@ function App() {
           <Route path="/signin" element={<Signin />} />
         </Route>
           <Route path='/about' element={<About/>} />
-        <Route path="/" element={<Home />} />
+          <Route path='/' element={<Home/>} />
         <Route path="/product-list" element={<ProductListPage />} />
         <Route path="/product-list/:categoryId" element={<ProductListPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
@@ -50,6 +54,7 @@ function App() {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/cart/checkout" element={<CheckoutPage />} />
           <Route path="/cart/checkout/order-success" element={<OrderConfirmation />} />
+          <Route path="/wishlist" element={<WishlistProducts/>} />
         </Route>
         
         //admin routes

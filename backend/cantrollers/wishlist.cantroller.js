@@ -5,7 +5,9 @@ const Prisma = new PrismaClient();
 export const addRemoveWishlistItem=async (req,res)=>{
   
     const {productId}=req.params;
-    const userId=req.user.id;
+    
+    
+    const userId=req.user.id; 
 
     
     if(!productId || !userId){
@@ -15,6 +17,19 @@ export const addRemoveWishlistItem=async (req,res)=>{
     }
 
     try {
+       
+        const product=await Prisma.product.findFirst({
+                where:{
+                    id:productId
+                }
+        })
+
+        if(!product){
+            return res.status(400).json({
+                message:"product not existed."
+            })
+        }
+
         const item=await Prisma.wishlist.findFirst({
            where:{
              userId:userId,
@@ -23,6 +38,9 @@ export const addRemoveWishlistItem=async (req,res)=>{
         })
 
         if(!item){
+
+            
+
             await Prisma.wishlist.create({
                 data:{
                     userId:userId,
@@ -77,4 +95,36 @@ export const getWishlistItems=async(req,res)=>{
         message:"All wishlist items fetched successfully",
         items:WishlistItems
     })
+}
+
+export const checkWishlistItem=async(req,res)=>{
+
+    const {productId}=req.params;
+    const userId=req.user.id;
+    
+    try {
+        const item=await Prisma.wishlist.findFirst({
+            where:{
+                userId:userId,
+                productId:productId
+            }
+        }) 
+
+        if(!item){
+            return res.status(200).json({
+                present:false
+            })
+        }
+
+        return res.status(201).json({
+            present:true
+        })
+
+    } catch (error) {
+        return res.status(400).json({
+            message:"something went wrong"
+        })
+    }
+
+
 }

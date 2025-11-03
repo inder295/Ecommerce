@@ -37,12 +37,14 @@ export const Avatar = () => {
             >
               Profile
             </li>
+          <Link to="/wishlist">
             <li
-              // onClick={handleLogout}
+              
               className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
             >
               Wishlist
             </li>
+          </Link>
 
             <li
               // onClick={handleLogout}

@@ -6,6 +6,7 @@ import { Header } from '../../components/Shopfront/Header';
 import { Hero } from '../../components/Shopfront/Hero';
 import { ViewAllButton } from '../../components/Shopfront/ViewAllButton';
 
+
 export const Home = () => {
   return (
     <>

@@ -9,6 +9,8 @@ import { Loader } from 'lucide-react';
 import { useAuth } from '../../store/useAuth';
 import Spinner from './Spinner';
 
+import { Wishlist } from './wishlist';
+
 
 
 
@@ -18,10 +20,13 @@ export const PdpSection = () => {
   const {id}=useParams();
   
 
+ 
+
   const {fetchProductById,isPdpFetching,productDetails}=useProduct();
   const {addToCart,addingInCart}=useCart();
   const cartTotalCount=useCart(state=>state.cartTotalCount);
   const {authUser}=useAuth();
+
   
   const navigate=useNavigate();
 
@@ -60,18 +65,29 @@ export const PdpSection = () => {
     
     
       
-    <div className='grid grid-cols-2 pt-0 mx-auto'>
+    <div className='grid grid-cols-2 pt-0 mx-auto '>
         {/* image ... will add corosel */}
         <div className='col-span-1 w-full'>
           <PdpImageCorosel image={productDetails.image} />
         </div>
         {/* name */}
           <div className='col-span-1 font-bold text-wrap mx-10'>
-             <div className='text-3xl'> {productDetails.name}</div>
+             <div className=' flex justify-between'> 
+                 <div className='text-2xl'>
+                  {productDetails.name}
+
+                 </div>
+                 <div className='mx-10 mr-0'>
+                      <Wishlist />  
+
+                 </div>
+          
+             </div>
+
              
 
           
-              <div className=' text-3xl mt-5'>${productDetails.price}</div>
+              <div className=' text-xl mt-5 ml-0'>${productDetails.price}</div>
               <PdpAttributes attributes={productDetails.attributes} />
 
           <form>    
@@ -98,6 +114,10 @@ export const PdpSection = () => {
               onClick={submitForm}
               class="text-white mt-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-3 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
             >{addingInCart? <Loader className='animate-spin'/>:"Add To Cart"}</button>
+             
+          
+       
+
       </form>    
           
           
