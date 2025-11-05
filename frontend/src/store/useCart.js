@@ -1,10 +1,6 @@
 import toast from 'react-hot-toast';
 import {create} from 'zustand';
 import { addToCart, cartSummaryApi, cartTotalCount, getCartItems } from '../Api/cart.api';
-import {io } from "socket.io-client"
-
-const socket=io('http://localhost:3000')
-
 
 
 export const useCart=create((set)=>({
@@ -32,7 +28,8 @@ export const useCart=create((set)=>({
             const data=await cartTotalCount();
             set({cartCount:data.count})
         } catch (error) {
-            toast.error("Error in fetching cart count",error)
+            console.log(error);
+            
         }
     },
     cartSummary:async()=>{
@@ -41,7 +38,7 @@ export const useCart=create((set)=>({
             
             set({fetchingSummary:true})
             const data=await cartSummaryApi();
-            console.log("data -> ",data);
+            
             
             set({summary:data.cartSummary});
             

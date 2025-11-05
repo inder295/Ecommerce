@@ -23,6 +23,7 @@ export const useAuth = create((set) => ({
         await set({isAuthenticatedUser:true})     
     } catch (error) {
        console.log(error); 
+       
     } finally {
       set({ isCheckingAuth: false });
     }
