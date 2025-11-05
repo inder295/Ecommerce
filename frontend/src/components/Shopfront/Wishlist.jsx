@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { FaHeart } from "react-icons/fa";
 import { useWishlist } from '../../store/useWishlist';
-import {  useParams } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
+import { useAuth } from '../../store/useAuth';
 
 
 export const Wishlist = () => {
@@ -10,13 +11,18 @@ export const Wishlist = () => {
     const [load,setLoad]=useState(false);
 
     const {addRemoveInWishlist,checkItemInWishlist}=useWishlist();
+    const {authUser}=useAuth();
     
     const productId=useParams();
+    const navigate=useNavigate();
     
     
     const handleWishlist=async()=>{
 
-       
+       if(!await authUser){
+         await navigate('/signin')
+         return 
+       }
                
         setLoad(true)
         setLike(!like)

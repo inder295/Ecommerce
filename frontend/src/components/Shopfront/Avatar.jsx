@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 export const Avatar = () => {
   
     const {logout,authUser,checkAuth}=useAuth();
+    
     const navigate=useNavigate(0);
 
 
