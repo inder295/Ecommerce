@@ -83,11 +83,12 @@ export const useProduct = create((set)=>({
     },
 
     async searchProduct(search){
+        
         try {
             set({isProductFetching:true})
             const data=await searchProducts(search);
-            if(data.products){
-                set({products:data.products})
+            if(await data.products.length>0){
+                set({products:data.products})            
             }
         } catch (error) {
             console.log(error);

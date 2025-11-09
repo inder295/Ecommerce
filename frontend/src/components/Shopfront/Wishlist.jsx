@@ -3,6 +3,10 @@ import { FaHeart } from "react-icons/fa";
 import { useWishlist } from '../../store/useWishlist';
 import {  useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../store/useAuth';
+import { io } from "socket.io-client";
+
+const socket = io("http://localhost:3000");
+
 
 
 export const Wishlist = () => {
@@ -41,9 +45,20 @@ export const Wishlist = () => {
            await setLike(result);
     }
 
-    useEffect( ()=>{
+    useEffect(()=>{
         
         check();
+       
+        socket.on("wishlist:check", (data) => {
+          console.log("Wishlist check:", data.action);
+          
+
+    });
+   
+    return () => {
+      socket.off("wishlist:check");
+    };
+
           
     },[productId] )
 

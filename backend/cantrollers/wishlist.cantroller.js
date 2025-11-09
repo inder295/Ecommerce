@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import {io} from "../index.js"
 
 const Prisma = new PrismaClient();
 
@@ -125,10 +126,13 @@ export const checkWishlistItem=async(req,res)=>{
         }) 
 
         if(!item){
+             io.to(userId).emit("wishlist:check",{action:false})
             return res.status(200).json({
                 present:false
             })
         }
+
+         io.to(userId).emit("wishlist:check",{action:true})
 
         return res.status(201).json({
             present:true

@@ -31,6 +31,10 @@ export const getProductByCategory=async(categoryId)=>{
 }
 
 export const searchProducts =async (search)=>{
-   const res=await Api.post('/product/search',search);
+   const res=await Api.post('/product/search',{search:search},{
+      withCredentials:true,
+      headers: { "Content-Type": "application/json" }
+
+   });
    return res.data;
-}
+} 

@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 
 
+
 export const Filters = ({products}) => {
-  
-  
+
   const {filter,minPrice,maxPrice}=useMemo(()=>{
        let data = products.map(product => product.attributes );
        let prices=products.map(product=>product.price) || []

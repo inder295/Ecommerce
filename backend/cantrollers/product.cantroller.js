@@ -301,6 +301,9 @@ export const searchProduct=async(req,res)=>{
                 {description:{contains:search,mode:'insensitive'}},
                 {brand:{contains:search,mode:"insensitive"}},
             ]
+        },
+        orderBy:{
+            createdAt:"desc"
         }
     }) 
 

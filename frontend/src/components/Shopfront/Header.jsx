@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Avatar } from './Avatar';
 import Spinner from './Spinner';
 import { useAuth } from '../../store/useAuth';
@@ -13,19 +13,23 @@ export const Header = () => {
   const cartCount=useCart(state=>state.cartCount);
   const {searchProduct}=useProduct();
   const {loggingOut}=useAuth();
+  const naviagte=useNavigate()
   
   useEffect(()=>{
-    cartTotalCount();
+    cartTotalCount(); 
   },[cartCount])
    
   const handleSearch=async(e)=>{
     
     e.preventDefault();
+    naviagte('/product-list');
     setTimeout(() => {
-     setSearch(e.target.value);
-     console.log(search);
+      setSearch(e.target.value);
+      
+      
+      searchProduct(search);
     
-     searchProduct(search);
+     
      setSearch('')
     }, 500);
   }
@@ -47,7 +51,7 @@ export const Header = () => {
         <div className="flex md:order-2 items-center space-x-3">
           {/* Search button for mobile */}
 
-        <form onClick={handleSearch}> 
+        <form onSubmit={handleSearch}> 
           
           <button
             type="button"
