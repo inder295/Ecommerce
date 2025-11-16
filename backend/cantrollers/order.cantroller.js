@@ -2,6 +2,8 @@ import { PaymentStatus, PrismaClient } from "@prisma/client";
 import { sendOrderConfirmationEmail } from "../utils/mail-templates.js/order-confirmation-template.js";
 import { outForDelivery } from "../utils/mail-templates.js/out-for-delivery-template.js";
 import { orderCompleted } from "../utils/mail-templates.js/order-completed-template.js";
+import { stripePaymentMethod } from "../utils/payment-methods/stripe.js";
+import { createOrder } from "../utils/orders/create-order.js";
  
 
 const Prisma=new PrismaClient();
@@ -9,7 +11,6 @@ const Prisma=new PrismaClient();
 export const placeOrder=async(req,res)=>{
     const userId=req.user.id;
     let {addressId,shipmentMehod,paymentMethod}=req.body;
-    console.log(req.body);
     
     
     addressId=addressId[0];
@@ -22,120 +23,59 @@ export const placeOrder=async(req,res)=>{
             message:"Error in placing the order"
         })
     }
+     
 
-    if(!(shipmentMehod=="FREE") && !(shipmentMehod=="PAID")){
-        return res.status(401).json({
-            message:"Please select shipment method"
-        })
-    }
+    
+        if(!(shipmentMehod=="FREE") && !(shipmentMehod=="PAID")){
+            return res.status(401).json({
+                message:"Please select shipment method"
+            })
+        }
 
-    if(!paymentMethod){
+        if(!paymentMethod){
         return res.status(404).json({
             message:"payment method is required."
         })
-    }
-
-    if(paymentMethod=="SRIPE"){
-       //will integrate in future
-    }
-
+       }
     
-    const orderItems=await Prisma.cartItems.findMany({
-        where:{
-            userId:userId
-        },
-        include:{
-            product:true
-        }
-    })
+        const orderItems=await Prisma.cartItems.findMany({
+            where:{
+                userId:userId
+            },
+            include:{
+                product:true
+            }
+        })
 
-    if(orderItems.length===0 || !orderItems){
+        if(orderItems.length===0 || !orderItems){
         return res.status(400).json({
             message:"No items in cart to place order"
         })
     }
-
+        
     try {
-        const {order,address,items}=await Prisma.$transaction(async (tx)=>{
 
-
-            await tx.cartItems.deleteMany({
-                where:{
-                    userId:userId
-                }
-            })         
-
-            const grandTotal=await orderItems.reduce((total,item)=>total + item.totalPrice,0)
-            
-
-            const order=await tx.order.create({
-
-                data:{
-                    userId:userId,
-                    addressId:addressId,
-                    paymentMethod:paymentMethod,
-                    paymentStatus:PaymentStatus.SUCCESS,
-                    shipmentMehod:shipmentMehod,
-                    orderStatus:"PENDING",
-                    grandTotal:grandTotal,
-                    shipmentMehod:shipmentMehod,
-                    orderItem:{
-                        create:orderItems.map(item=>({
-                            productId:item.productId,
-                            name:item.product.name,
-                            image:item.product.image[0],
-                            price:item.product.price,
-                            quantity:item.quantity,
-                            totalPrice:item.totalPrice
-                        }))
-                    },
-                    },
-                    include:{
-                        user:true
-                    }                 
-                })
-
-                for(const item of orderItems){
-                    await tx.product.update({
-                        where:{
-                            id:item.productId
-                        },
-                        data:{
-                            inventory:{
-                                decrement:item.quantity
-                            }
-                        }
+            if(paymentMethod==="COD"){
+                const {order,address,items}=await createOrder(addressId,shipmentMehod,paymentMethod,userId,orderItems);
+                await sendOrderConfirmationEmail(order,items,address);
+ 
+                return  res.status(200).json({
+                        message:"Order placed successfully",
+                        order:order,
+                        adreess:address,
+                        products:items
                     })
-                }
-
-                const address=await tx.address.findUnique({
-                where:{
-                    id:addressId
-                }
-        })
-
-         if(!address){
-            return res.status(404).json({
-                message:"Address not found"
-            })
-        }
-
-        const items=await tx.orderItem.findMany({
-            where:{
-                orderId:order.id
             }
-        })
-                return {order,address,items};
-    });
 
-    await sendOrderConfirmationEmail(order,items,address);
+            if(paymentMethod==="STRIPE"){
+                const session=await stripePaymentMethod(orderItems,userId,addressId,shipmentMehod,paymentMethod);
 
-    res.status(200).json({
-        message:"Order placed successfully",
-        order:order,
-        adreess:address,
-        products:items
-    })
+                return res.status(200).json({
+                    message:"Stripe session created successfully",
+                    sessionId:session.id,
+                    url:session.url
+                })
+            }
 
 
     } catch (error) {
