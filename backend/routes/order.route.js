@@ -1,12 +1,14 @@
 import express from 'express';
-import { changeOrderStatus, getAllOrderOfUser, getAllOrders, getUserOrderById, placeOrder } from '../cantrollers/order.cantroller.js';
+import { changeOrderStatus, getAllOrderOfUser, getAllOrders, getUserOrderById, placeOrder, verifyStripePayment } from '../cantrollers/order.cantroller.js';
 import { authMiddleware, isAdmin } from '../middleware/auth.middleware.js';
+import bodyParser  from 'body-parser';
 
 const orderRouter=express.Router();
 
 
 
 orderRouter.post("/place-order",authMiddleware,placeOrder);
+orderRouter.post("/verify-payment/webhook",bodyParser.raw({type:"application/json"}),verifyStripePayment);
 orderRouter.patch("/update-order-status/:orderId",isAdmin ,changeOrderStatus);
 orderRouter.get("/all-orders",isAdmin,getAllOrders);
 orderRouter.get("/my-orders",getAllOrderOfUser);

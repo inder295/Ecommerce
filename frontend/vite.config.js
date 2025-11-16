@@ -15,9 +15,5 @@ export default defineConfig({
   server: {
     historyApiFallback: true, // ensures React Router handles all routes
   },
-  resolve: {
-    alias: {
-      crypto: path.resolve(__dirname, 'node_modules/crypto-browserify'),
-    },
-  },
+
 });

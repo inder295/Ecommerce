@@ -2,11 +2,20 @@ import {PrismaClient,PaymentStatus} from '@prisma/client';
 
 const Prisma=new PrismaClient();
 
-export const createOrder=async(addressId,shipmentMehod,paymentMethod,userId,orderItems)=>{
+export const createOrder=async(addressId,shipmentMehod,paymentMethod,userId)=>{
+
+    
     
       const {order,address,items}=await Prisma.$transaction(async (tx)=>{
     
-    
+          const orderItems=await tx.cartItems.findMany({
+                where:{
+                    userId:userId
+                },
+                include:{
+                    product:true
+                }
+            })
                 await tx.cartItems.deleteMany({
                     where:{
                         userId:userId

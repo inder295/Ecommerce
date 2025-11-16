@@ -29,7 +29,7 @@ export const stripePaymentMethod=async(orderItems,userId,addressId,shipmentMehod
               userId:userId,
               addressId:addressId,
               shipmentMehod:shipmentMehod,
-              paymentMethod:paymentMethod
+              paymentMethod:paymentMethod,
            }
       })
 
