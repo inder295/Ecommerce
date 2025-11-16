@@ -16,5 +16,5 @@ export const addAddress=async(form)=>{
 
 export const getAddresses=async()=>{
     const res=await Api.get('address/get-all-addresses');
-    return res.data;
-}
+    return res.data; 
+} 

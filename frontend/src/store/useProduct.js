@@ -10,12 +10,12 @@ export const useProduct = create((set)=>({
     isPdpFetching:false,
     productDetails:{},
     pagination:{},
-    isProductsByCategoryFetching:false,
+    categoryProductFetching:false,
 
-    async fetchAllProducts(page=1,categoryId){
+    async fetchAllProducts(page=1){
         set({isProductFetching:true})
         try {
-            const data=await getAllPrducts(page,categoryId);
+            const data=await getAllPrducts(page);
             
             
             set({products:data.products})
@@ -63,28 +63,31 @@ export const useProduct = create((set)=>({
     },
 
     async fetchProductsByCategory(categoryId){
-        console.log(categoryId);
+       
         
-        set({isProductsByCategoryFetching:true})
+        set({categoryProductFetching:true})
         try {
+            
+            
             const data=await getProductByCategory(categoryId);
-
-            set({products:data.products})
             
-            
+            if(await data.products){
+                set({products:data.products})
+            }
 
 
         } catch (error) {
             console.log(error);
             
         }finally{
-          set({isProductsByCategoryFetching:false})
+          set({categoryProductFetching:false})
         }
     },
 
     async searchProduct(search){
         
         try {
+
             set({isProductFetching:true})
             const data=await searchProducts(search);
             if(await data.products.length>0){

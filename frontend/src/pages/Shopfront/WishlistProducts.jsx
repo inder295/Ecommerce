@@ -11,7 +11,7 @@ const WishlistProducts = () => {
        
         <BackNavigation/>
           <h1 className="text-4xl font-bold w-[80%] ml-48 text-center">WishList</h1>
-        <UserWishlistProducts/>
+        <UserWishlistProducts />
        
     </>
   )

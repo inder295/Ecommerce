@@ -249,7 +249,19 @@ export const updateProductById=async(req,res)=>{
 
 export const getProductsByCategory=async(req,res)=>{
     const {categoryId}=req.params;
+    console.log(categoryId);
+    
     try {
+
+        const category=await Prisma.category.findUnique({
+            where:{
+                id:categoryId
+            },
+            select:{
+                name:true
+            }
+        })
+
         const products=await Prisma.product.findMany({
             where:{
                 categories:{
@@ -263,14 +275,10 @@ export const getProductsByCategory=async(req,res)=>{
 
         })
 
-        if(products.length===0){
-            return res.status(404).json({
-                message:"No products found for this category"
-            })
-        }
-
+        
         res.status(200).json({
             message:"Products fetched successfully",
+            category:category,
             products:products
         })
 

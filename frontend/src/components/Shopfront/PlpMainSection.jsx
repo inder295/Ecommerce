@@ -5,18 +5,19 @@ import { AllProducts } from './AllProducts';
 import { Filters } from './Filters';
 import {Pagination} from "@mui/material"
 import Spinner from './Spinner';
+import { useLocation } from 'react-router-dom';
 
 export const PlpMainSection = () => {
   
-  const {fetchAllProducts,isProductFetching,pagination,products}=useProduct();
+  const {fetchAllProducts,isProductFetching,pagination,products,categoryProductFetching}=useProduct();
   const [page,setPage]=useState(1);
-  
+  const location=useLocation();
   
   
   
   useEffect(()=>{   
     fetchAllProducts(page);   
-  },[])
+  },[location.pathname==="/product-list"]);
 
   function handlePage(e,value){
     setPage(value);
@@ -24,7 +25,7 @@ export const PlpMainSection = () => {
   }
   
   
-  return isProductFetching ? <Spinner/> : <>  
+  return isProductFetching || categoryProductFetching ? <Spinner/> : <>  
   
    
          

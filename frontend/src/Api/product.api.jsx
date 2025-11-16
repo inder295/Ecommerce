@@ -25,7 +25,7 @@ export const getProductById=async (id) =>{
 
 export const getProductByCategory=async(categoryId)=>{
    const res=await Api.get(`/product/getProductsByCategory/${categoryId}`);
-   await console.log(res.data);
+   console.log(res.data);
    
    return res.data;
 }

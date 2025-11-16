@@ -1,15 +1,42 @@
 import { useEffect } from "react";
 import { useCategory } from "../../store/useCategory";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
+import { useProduct } from "../../store/useProduct";
+import toast from "react-hot-toast";
 
 export const Category = () => {
 
   const {isCategoryFetching,categories,fetchAllCategories}=useCategory();
+  const {fetchProductsByCategory}=useProduct();
+
+  const location=useLocation();
   
+  
+  const {categoryId}=useParams();
+
   useEffect(()=>{
      fetchAllCategories();
      
   },[])
+  
+  useEffect(()=>{
+     fetchProductsByCategory(categoryId);
+  },[location.pathname===`/category/${categoryId}`,categoryId]);
+  
+  async function handleCategory(){
+      
+    try {
+      fetchProductsByCategory(categoryId);
+    } catch (error) {
+      toast.error(error.message)
+      
+    }
+    
+  }
+
+
+  
+  
   
 
   return (
@@ -21,9 +48,9 @@ export const Category = () => {
             {
               isCategoryFetching? <p className="">Loading...</p> : categories.map((category)=>(
              
-                <li className="cursor-pointer hover:text-blue-600" key={category.id } >
+                <li className="cursor-pointer hover:text-blue-600" key={category.id }  onClick={handleCategory}>
                 
-                <Link to={`/product-list/${category.id}`}>
+                <Link to={`/category/${category.id}`}>
                   {category.name}
                 </Link>  
                 

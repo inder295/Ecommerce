@@ -11,7 +11,7 @@ export const Header = () => {
   const [search,setSearch]=useState("");
   const cartTotalCount=useCart(state=>state.cartTotalCount);
   const cartCount=useCart(state=>state.cartCount);
-  const {searchProduct}=useProduct();
+  const {searchProduct,fetchAllProducts}=useProduct();
   const {loggingOut}=useAuth();
   const naviagte=useNavigate()
   
@@ -22,9 +22,16 @@ export const Header = () => {
   const handleSearch=async(e)=>{
     
     e.preventDefault();
+    setSearch(e.target.value);
+
+    if(search.trim()===""){
+      fetchAllProducts();
+       return;
+    }
+
+
     naviagte('/product-list');
     setTimeout(() => {
-      setSearch(e.target.value);
       
       
       searchProduct(search);
@@ -205,7 +212,7 @@ export const Header = () => {
                 className="block py-2 px-3  rounded-sm md:bg-transparent  md:p-0 hover:text-blue-500"
                 aria-current="page"
               >
-                Shop
+                Market
               </Link>
             </li>
            
@@ -213,7 +220,8 @@ export const Header = () => {
               <Link
                 to="/product-list"
                 className="block py-2 px-3  rounded-sm md:bg-transparent  md:p-0 hover:text-blue-500"
-                aria-current="page"
+                aria-current="page" 
+                onClick={()=>{naviagte("/product-list")}}
               >
                 Home
               </Link>

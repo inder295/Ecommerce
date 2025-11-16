@@ -6,16 +6,36 @@ import {motion} from 'motion/react';
 export const AllProducts = ({products}) => {
 
   const {isProductFetching}=useProduct();
+  const productNotFound="https://stores.lifestylestores.com/VendorpageTheme/Enterprise/EThemeForLifestyleUpdated/images/product-not-found.jpg"
 
   
-  return <>
-    {
-      isProductFetching ? <div>
+  if(isProductFetching){
+    return <>
+        <div>
         <div className="flex justify-center items-center h-96">
           <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-black"></div>
         </div>
-      </div> : null
-    }
+      </div> 
+    
+    </>
+  }
+    
+  
+  if( products.length===0){
+        return <>
+          <div className='text-center w-full mx-auto my-60'>
+            <image src={productNotFound} alt=""  width="100" height="100"/>
+            <p className='text-2xl'>Products not found</p>
+          </div>
+        </>
+      }
+
+ 
+  
+
+  
+  return <>
+    
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 pr-25 mr-20 ">
         {
           products.map((p) => {

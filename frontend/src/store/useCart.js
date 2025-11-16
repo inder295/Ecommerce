@@ -44,7 +44,7 @@ export const useCart=create((set)=>({
             
 
         } catch (error) {
-            toast.error("Error in fetching cart summary",error)
+            //toast.error("Error in fetching cart summary",error)
             console.log(error);
             
         } finally{
@@ -60,7 +60,9 @@ export const useCart=create((set)=>({
                 set({cartItems:data.cartItems});
 
             } catch (error) {
-                toast.error("Error in fetching cart items",error)
+                //toast.error("Error in fetching cart items",error)
+                console.log(error);
+                
             } finally {
                 set({fetchingCartItems:false})
             }

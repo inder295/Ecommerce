@@ -9,13 +9,12 @@ const Prisma=new PrismaClient();
 export const placeOrder=async(req,res)=>{
     const userId=req.user.id;
     let {addressId,shipmentMehod,paymentMethod}=req.body;
+    console.log(req.body);
+    
     
     addressId=addressId[0];
     shipmentMehod=shipmentMehod[0];
     paymentMethod=paymentMethod[0];
-    
-
-    
     
 
     if(!addressId || !shipmentMehod || !paymentMethod){
@@ -108,9 +107,6 @@ export const placeOrder=async(req,res)=>{
                         }
                     })
                 }
-
-               
-
 
                 const address=await tx.address.findUnique({
                 where:{
