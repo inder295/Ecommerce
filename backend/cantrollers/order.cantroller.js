@@ -76,7 +76,9 @@ export const placeOrder=async(req,res)=>{
             if(paymentMethod==="STRIPE"){
                 const session=await stripePaymentMethod(orderItems,userId,addressId,shipmentMehod,paymentMethod);
 
-                return res.status(200).json({
+              
+
+                return await res.status(200).json({
                     message:"Stripe session created successfully",
                     sessionId:session.id,
                     url:session.url

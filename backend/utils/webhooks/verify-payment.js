@@ -13,7 +13,7 @@ export const verifyStripePayment=async(req,res)=>{
 
     let event;
 
-    console.log("webhook called 1");
+    
 
     try {
         event = stripe.webhooks.constructEvent(
@@ -30,20 +30,18 @@ export const verifyStripePayment=async(req,res)=>{
 
         if(event.type === "checkout.session.completed") {
         const session =event.data.object;
+
+        
         const userId=session.metadata.userId;
         const addressId=session.metadata.addressId;
-        const shipmentMehod=session.metadata.shipmentMehod;
+        const shipmentMethod = session.metadata.shipmentMethod;  
         const paymentMethod=session.metadata.paymentMethod;
-        
-        console.log("webhook called 2");
+
     
-        const {order,address,items}=await createOrder(addressId,shipmentMehod,paymentMethod,userId);
+        const {order,address,items}=await createOrder(addressId,shipmentMethod,paymentMethod,userId);
 
         await sendOrderConfirmationEmail(order,items,address);
         
-   
-
-       console.log("webhook called 3");
 
         return res.status(200).json({
             message:"Order created successfully from Stripe payment",

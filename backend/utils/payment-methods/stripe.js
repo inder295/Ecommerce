@@ -5,8 +5,10 @@ dotenv.config();
 
 const stripe=new Stripe(process.env.STRIPE_SECRET_KEY);
 
-export const stripePaymentMethod=async(orderItems,userId,addressId,shipmentMehod,paymentMethod)=>{
-
+export const stripePaymentMethod=async(orderItems,userId,addressId,shipmentMethod,paymentMethod)=>{
+    
+   console.log(userId,addressId,shipmentMethod,paymentMethod);
+   
       const items=orderItems.map((item)=>({
          price_data:{
             currency:"usd",
@@ -25,13 +27,16 @@ export const stripePaymentMethod=async(orderItems,userId,addressId,shipmentMehod
            mode:'payment',
            success_url:`${process.env.FRONTEND_URL}/cart/checkout/order-success`,
            cancel_url:`${process.env.FRONTEND_URL}/cart`,
-           metadata:{
-              userId:userId,
-              addressId:addressId,
-              shipmentMehod:shipmentMehod,
-              paymentMethod:paymentMethod,
-           }
+           metadata: {
+            userId: userId,
+            addressId: addressId,
+            shipmentMethod: shipmentMethod,  
+            paymentMethod: paymentMethod,
+         }
+
       })
+
+      
 
     return session;
     

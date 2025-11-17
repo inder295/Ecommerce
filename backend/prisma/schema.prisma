@@ -36,6 +36,7 @@ enum OrderStatus {
 enum PaymentMethod {
   COD
   SRIPE
+  STRIPE
 }
 
 enum PaymentStatus {
