@@ -12,6 +12,7 @@ import addressRouter from "./routes/address.route.js";
 import path from "path";
 import orderRouter from "./routes/order.route.js";
 import wishlistRouter from './routes/wishlist.route.js';
+import { verifyStripePayment } from './utils/webhooks/verify-payment.js';
 
 const app= express();
 
@@ -24,7 +25,7 @@ export const io=new Server(server,{
    }
 })
 
-app.use(express.json());
+
 app.use(express.urlencoded({extended:false}));
 app.use(cors({
   origin: "http://localhost:5173",   // allow only frontend
@@ -33,12 +34,21 @@ app.use(cors({
 app.use(cookieParser());
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
+app.use((req, res, next) => {
+  if (req.originalUrl.includes("/verify-payment/webhook")) {
+    next(); 
+  } else {
+    express.json()(req, res, next);
+  }
+});
+
+app.post("/verify-payment/webhook",express.raw({ type: "application/json" }),verifyStripePayment);
 
 dotenv.config();
 
 const port= process.env.PORT || 3000;
 
-
+app.use(express.json());
 app.use("/api/v1/auth",authRouter);
 app.use("/api/v1/product",productRouter);
 app.use("/api/v1/category",categoryrouter);
@@ -49,7 +59,7 @@ app.use("/api/v1/wishlist",wishlistRouter);
  
 
 io.on("connection", (socket) => {
-  console.log("User connected:", socket.id);
+  //console.log("User connected:", socket.id);
 });
 
 

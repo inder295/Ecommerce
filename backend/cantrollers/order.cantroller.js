@@ -5,10 +5,12 @@ import { orderCompleted } from "../utils/mail-templates.js/order-completed-templ
 import { stripePaymentMethod } from "../utils/payment-methods/stripe.js";
 import { createOrder } from "../utils/orders/create-order.js";
 import dotenv from 'dotenv';
+import Stripe from "stripe";
 
 dotenv.config();
 
 const Prisma=new PrismaClient();
+const stripe=new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export const placeOrder=async(req,res)=>{
     const userId=req.user.id;
@@ -89,44 +91,7 @@ export const placeOrder=async(req,res)=>{
     }
 }
 
-export const verifyStripePayment=async(req,res)=>{
 
-    const sig = req.headers["stripe-signature"];
-
-    let event;
-
-    try {
-        event = stripe.webhooks.constructEvent(
-        req.body,
-        sig,
-        process.env.STRIPE_WEBHOOK_SECRET
-        );
-    } catch (err) {
-        console.error("Webhook error:", err.message);
-        return res.status(400).send(`Webhook Error: ${err.message}`);
-    }
-
-    if(event.type === "checkout.session.completed") {
-        const session =event.data.object;
-        const userId=session.metadata.userId;
-        const addressId=session.metadata.addressId;
-        const shipmentMehod=session.metadata.shipmentMehod;
-        const paymentMethod=session.metadata.paymentMethod;
-        
-
-        const {order,address,items}=await createOrder(addressId,shipmentMehod,paymentMethod,userId,orderItems);
-
-        await sendOrderConfirmationEmail(order,items,address);
-
-        return res.status(200).json({
-            message:"Order created successfully from Stripe payment",
-            order:order,
-            address:address,
-            items:items
-        })
-    }
-
-}
 
 export const changeOrderStatus=async(req,res)=>{
     const {orderId}=req.params;
