@@ -25,7 +25,7 @@ export const stripePaymentMethod=async(orderItems,userId,addressId,shipmentMetho
            payment_method_types:['card'],
            line_items:items,
            mode:'payment',
-           success_url:`${process.env.FRONTEND_URL}/cart/checkout/order-success`,
+           success_url:`${process.env.FRONTEND_URL}/cart/checkout/order-success?session_id={CHECKOUT_SESSION_ID}`,
            cancel_url:`${process.env.FRONTEND_URL}/cart`,
            metadata: {
             userId: userId,

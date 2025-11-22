@@ -19,17 +19,31 @@ export default function CheckoutPage() {
 
    async function handleInput(e){
      const updated={...formData,[e.target.name]:[e.target.value]};
-     await setFormData(updated)   
+     await setFormData(updated)  
+    
+      
      
       
   }
 
   async function handleSubmit(){
+   
+    
     const success= await placeOrder(formData);
 
-    if(await success){
+    if(await success.url){
+      
+      // window.location.href=success.url;
+      await navigate(success.url)
+      
+      //await navigate(success.url)
+    }else{
       await navigate('/cart/checkout/order-success');
+
     }
+
+    // if(await success===true){
+    // }
   }
   
 
@@ -87,7 +101,7 @@ export default function CheckoutPage() {
           <input
             type="radio"
             name="paymentMethod"
-            value="stripe"
+            value="STRIPE"
             
           />
           Pay with Stripe

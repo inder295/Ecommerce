@@ -37,18 +37,25 @@ export const verifyStripePayment=async(req,res)=>{
         const shipmentMethod = session.metadata.shipmentMethod;  
         const paymentMethod=session.metadata.paymentMethod;
 
+        const sessionId=session.id;
+
     
-        const {order,address,items}=await createOrder(addressId,shipmentMethod,paymentMethod,userId);
+        const {order,address,items}=await createOrder(addressId,shipmentMethod,paymentMethod,userId,sessionId);
 
         await sendOrderConfirmationEmail(order,items,address);
         
 
-        return res.status(200).json({
-            message:"Order created successfully from Stripe payment",
-            order:order,
-            address:address,
-            items:items
-        })
+        // return res.status(200).json({
+        //     message:"Order created successfully from Stripe payment",
+        //     order:order,
+        //     address:address,
+        //     items:items
+        // })
+
+        return res.status(200).send('ok')
+
+
+
     }
 
         

@@ -2,7 +2,7 @@ import {PrismaClient,PaymentStatus} from '@prisma/client';
 
 const Prisma=new PrismaClient();
 
-export const createOrder=async(addressId,shipmentMehod,paymentMethod,userId)=>{
+export const createOrder=async(addressId,shipmentMehod,paymentMethod,userId,sessionId)=>{
 
     
     
@@ -37,6 +37,7 @@ export const createOrder=async(addressId,shipmentMehod,paymentMethod,userId)=>{
                           orderStatus:"PENDING",
                           grandTotal:grandTotal,
                           shipmentMehod:shipmentMehod,
+                          sessionId: sessionId || "",
                           orderItem:{
                               create:orderItems.map(item=>({
                                   productId:item.productId,
@@ -47,6 +48,7 @@ export const createOrder=async(addressId,shipmentMehod,paymentMethod,userId)=>{
                                   totalPrice:item.totalPrice
                               }))
                           },
+                          
                           },
                           include:{
                               user:true

@@ -134,6 +134,7 @@ model Order {
   paymentMethod PaymentMethod
   paymentStatus PaymentStatus @default(FAIL)
   shipmentMehod ShipmentMethod
+  sessionId    String @default("")
   orderStatus OrderStatus @default(PENDING)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

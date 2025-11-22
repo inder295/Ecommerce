@@ -27,6 +27,9 @@ export const placeOrder=async(req,res)=>{
             message:"Error in placing the order"
         })
     }
+
+   
+    
      
 
     
@@ -62,7 +65,8 @@ export const placeOrder=async(req,res)=>{
     try {
 
             if(paymentMethod==="COD"){
-                const {order,address,items}=await createOrder(addressId,shipmentMehod,paymentMethod,userId);
+                const sessionId="";
+                const {order,address,items}=await createOrder(addressId,shipmentMehod,paymentMethod,userId,sessionId);
                 await sendOrderConfirmationEmail(order,items,address);
  
                 return  res.status(200).json({
@@ -93,6 +97,47 @@ export const placeOrder=async(req,res)=>{
     }
 }
 
+export const orderConfirmation=async(req,res)=>{
+      const { session_id } = req.params;
+
+    if(!session_id){
+        return res.status(400).json({
+            message:"Session Id is required."
+        })
+    }
+
+    try {
+        
+        const order=await Prisma.order.findFirst({
+            where:{
+                sessionId:session_id
+            },
+            include:{
+                orderItem:true,
+                user:true,
+                address:true
+
+            }
+        })
+
+        if(!order){
+            return res.status(404).json({
+                message:"Error in order creation.PLease try again later."
+            })
+        }
+
+        return res.status(200).json({
+            message:"Order confirmed successfully",
+            order:order
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            message:"Error in fetching order details",
+            error:error.message
+        })
+    }
+}
 
 
 export const changeOrderStatus=async(req,res)=>{

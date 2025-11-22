@@ -1,5 +1,5 @@
 import express from 'express';
-import { changeOrderStatus, getAllOrderOfUser, getAllOrders, getUserOrderById, placeOrder } from '../cantrollers/order.cantroller.js';
+import { changeOrderStatus, getAllOrderOfUser, getAllOrders, getUserOrderById, orderConfirmation, placeOrder } from '../cantrollers/order.cantroller.js';
 import { authMiddleware, isAdmin } from '../middleware/auth.middleware.js';
 // import bodyParser  from 'body-parser';
 const orderRouter=express.Router();
@@ -11,6 +11,7 @@ orderRouter.patch("/update-order-status/:orderId",isAdmin ,changeOrderStatus);
 orderRouter.get("/all-orders",isAdmin,getAllOrders);
 orderRouter.get("/my-orders",getAllOrderOfUser);
 orderRouter.get("/my-order/:orderId",getUserOrderById);
+orderRouter.get("/order-confirmation/:session_id", authMiddleware, orderConfirmation);
 
 
 
