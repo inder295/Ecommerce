@@ -14,7 +14,6 @@ export default function OrderConfirmation() {
 
   useEffect(() => {
     if (!session_id) {
-      navigate("/cart");
       return;
     }
 

@@ -67,7 +67,7 @@ export const placeOrder=async(req,res)=>{
             if(paymentMethod==="COD"){
                 const sessionId="";
                 const {order,address,items}=await createOrder(addressId,shipmentMehod,paymentMethod,userId,sessionId);
-                await sendOrderConfirmationEmail(order,items,address);
+                // await sendOrderConfirmationEmail(order,items,address);
  
                 return  res.status(200).json({
                         message:"Order placed successfully",

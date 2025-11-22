@@ -19,11 +19,7 @@ export default function CheckoutPage() {
 
    async function handleInput(e){
      const updated={...formData,[e.target.name]:[e.target.value]};
-     await setFormData(updated)  
-    
-      
-     
-      
+     await setFormData(updated)   
   }
 
   async function handleSubmit(){
@@ -41,9 +37,6 @@ export default function CheckoutPage() {
       await navigate('/cart/checkout/order-success');
 
     }
-
-    // if(await success===true){
-    // }
   }
   
 
