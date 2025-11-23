@@ -10,6 +10,7 @@ export const useOrders=create((set)=>({
     orderAddress:null,
     orderedProducts:null,
     fetchingUserOrders:false,
+    userOrdersDetails:[],
 
     placeOrder:async (formData)=>{
         try {
@@ -57,6 +58,7 @@ export const useOrders=create((set)=>({
         try {
             set({fetchingUserOrders:true});
             const data=await getUsersOrders();
+            set({userOrdersDetails:data.orders});
             
         } catch (error) {
             toast.error(error.message,{ id: "user_orders_error" });

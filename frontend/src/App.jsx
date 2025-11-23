@@ -26,13 +26,11 @@ import { UserPublicRoute } from './routes/UserPublicRoute';
 import About from './pages/Shopfront/About';
 import WishlistProducts from './pages/Shopfront/WishlistProducts';
 import { OrderListPage } from './pages/Shopfront/Order-List-Page';
+import { OrderDetailPage } from './pages/Shopfront/Order-detail-page';
 
 
 function App() {
   
-  
-
-
   return (
     <>
       <Toaster position="top-right" />
@@ -57,6 +55,7 @@ function App() {
           <Route path="/cart/checkout/order-success" element={<OrderConfirmation />} />
           <Route path="/wishlist" element={<WishlistProducts/>} />
           <Route path="/orders" element={<OrderListPage/>} />
+          <Route path="/orders/:orderId" element={<OrderDetailPage/>} />
         </Route>
         
         //admin routes
