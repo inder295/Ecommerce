@@ -28,11 +28,6 @@ export const placeOrder=async(req,res)=>{
         })
     }
 
-   
-    
-     
-
-    
         if(!(shipmentMehod=="FREE") && !(shipmentMehod=="PAID")){
             return res.status(401).json({
                 message:"Please select shipment method"
@@ -242,7 +237,7 @@ export const getAllOrders=async(req,res)=>{
 
 export const getAllOrderOfUser=async(req,res)=>{
     const userId=req.user.id;
-
+   
     try {
         const orders=await Prisma.order.findMany({
             where:{
@@ -250,10 +245,26 @@ export const getAllOrderOfUser=async(req,res)=>{
             },
             orderBy:{
                 createdAt:"desc"
+            },
+            select:{
+                id:true,
+                grandTotal:true,
+                orderStatus:true,
+                orderItem:{
+                    select:{
+                        name:true
+                    }
+                }
             }
         })
 
-        res.status(200).json({
+        if(!orders){
+            return res.status(404).json({
+                message:"No Orders found "
+            })
+        }
+
+        return res.status(200).json({
             message:"Orders fetched successfully",
             orders:orders
         })

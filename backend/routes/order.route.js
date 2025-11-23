@@ -9,7 +9,7 @@ const orderRouter=express.Router();
 orderRouter.post("/place-order",authMiddleware,placeOrder);
 orderRouter.patch("/update-order-status/:orderId",isAdmin ,changeOrderStatus);
 orderRouter.get("/all-orders",isAdmin,getAllOrders);
-orderRouter.get("/my-orders",getAllOrderOfUser);
+orderRouter.get("/my-orders",authMiddleware,getAllOrderOfUser);
 orderRouter.get("/my-order/:orderId",getUserOrderById);
 orderRouter.get("/order-confirmation/:session_id", authMiddleware, orderConfirmation);
 

@@ -25,6 +25,7 @@ import { UserPrivateRoutes } from './routes/UserPrivateRoutes';
 import { UserPublicRoute } from './routes/UserPublicRoute';
 import About from './pages/Shopfront/About';
 import WishlistProducts from './pages/Shopfront/WishlistProducts';
+import { OrderListPage } from './pages/Shopfront/Order-List-Page';
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
           <Route path="/cart/checkout" element={<CheckoutPage />} />
           <Route path="/cart/checkout/order-success" element={<OrderConfirmation />} />
           <Route path="/wishlist" element={<WishlistProducts/>} />
+          <Route path="/orders" element={<OrderListPage/>} />
         </Route>
         
         //admin routes

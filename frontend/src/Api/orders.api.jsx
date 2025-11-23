@@ -9,3 +9,8 @@ export const orderConfirmation=async(session_id)=>{
     const res=await Api.get(`/order/order-confirmation/${session_id}`);
     return res.data;
 }
+
+export const getUsersOrders=async()=>{
+    const res=await Api.get("/order/my-orders");
+    return res.data;
+}

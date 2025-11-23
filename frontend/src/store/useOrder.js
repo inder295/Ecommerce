@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { orderConfirmation, placeOrder } from "../Api/orders.api";
+import { getUsersOrders, orderConfirmation, placeOrder } from "../Api/orders.api";
 import toast from "react-hot-toast";
 
 
@@ -9,6 +9,7 @@ export const useOrders=create((set)=>({
     orderDetails:null,
     orderAddress:null,
     orderedProducts:null,
+    fetchingUserOrders:false,
 
     placeOrder:async (formData)=>{
         try {
@@ -49,6 +50,18 @@ export const useOrders=create((set)=>({
            toast.error(toast.message+","+ error.message,{ id: "order_error" }); 
         }finally{
             set({loadingOrder:false})
+        }
+    },
+
+    userOrders:async()=>{
+        try {
+            set({fetchingUserOrders:true});
+            const data=await getUsersOrders();
+            
+        } catch (error) {
+            toast.error(error.message,{ id: "user_orders_error" });
+        }finally{
+            set({fetchingUserOrders:false})
         }
     }
 }))
