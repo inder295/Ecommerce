@@ -27,6 +27,7 @@ import About from './pages/Shopfront/About';
 import WishlistProducts from './pages/Shopfront/WishlistProducts';
 import { OrderListPage } from './pages/Shopfront/Order-List-Page';
 import { OrderDetailPage } from './pages/Shopfront/Order-detail-page';
+import { Profile } from './pages/Shopfront/Profile';
 
 
 function App() {
@@ -51,7 +52,9 @@ function App() {
         
         <Route element={<UserPrivateRoutes />}>
           <Route path="/cart" element={<CartPage />} />
+          <Route path='/profile' element={<Profile/>} />
           <Route path="/cart/checkout" element={<CheckoutPage />} />
+
           <Route path="/cart/checkout/order-success" element={<OrderConfirmation />} />
           <Route path="/wishlist" element={<WishlistProducts/>} />
           <Route path="/orders" element={<OrderListPage/>} />

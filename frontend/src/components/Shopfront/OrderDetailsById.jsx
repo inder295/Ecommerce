@@ -65,58 +65,7 @@ export const OrderDetailsById = () => {
                       
                    </div>
 
-                   <div className='flex py-3'>
-                      <img src={orderItem[0].image} className='h-28 w-28' />
-                      <div className='mx-3'>
-                        <p className='font-semibold'> {orderItem[0].name}</p>
-                        <p>${orderItem[0].price}</p>
-                        <p>Quantity : {orderItem[0].quantity}</p>
-                        <p>TotalPrice: ${orderItem[0].totalPrice}</p>
-
-                      </div>
-
-                      
-                   </div>
-
-
-                   <div className='flex py-3'>
-                      <img src={orderItem[0].image} className='h-28 w-28' />
-                      <div className='mx-3'>
-                        <p>{orderItem[0].name}</p>
-                        <p>${orderItem[0].price}</p>
-                        <p>Quantity : {orderItem[0].quantity}</p>
-                        <p>TotalPrice: ${orderItem[0].totalPrice}</p>
-
-                      </div>
-
-                      
-                   </div>
-
-                   <div className='flex py-3'>
-                      <img src={orderItem[0].image} className='h-28 w-28' />
-                      <div className='mx-3'>
-                        <p>{orderItem[0].name}</p>
-                        <p>${orderItem[0].price}</p>
-                        <p>Quantity : {orderItem[0].quantity}</p>
-                        <p>TotalPrice: ${orderItem[0].totalPrice}</p>
-
-                      </div>
-
-                      
-                   </div>
-
-                   <div className='flex py-3'>
-                      <img src={orderItem[0].image} className='h-28 w-28' />
-                      <div className='mx-3'>
-                        <p>{orderItem[0].name}</p>
-                        <p>${orderItem[0].price}</p>
-                        <p>Quantity : {orderItem[0].quantity}</p>
-                        <p>TotalPrice: ${orderItem[0].totalPrice}</p>
-
-                      </div>
-
-                      
-                   </div>
+                  
 
 
               </div>

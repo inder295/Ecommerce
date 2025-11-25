@@ -35,12 +35,15 @@ export const Avatar = () => {
 
         <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg opacity-0 group-hover:opacity-100 group-hover:translate-y-1 transform transition-all duration-200 z-[9999]">
           <ul className="text-gray-700">
+           <Link to="/profile">
             <li
               // onClick={handleLogout}
               className="px-4 py-2 hover:bg-gray-100 cursor-pointer "
             >
               Profile
             </li>
+           
+           </Link>
           <Link to="/wishlist">
             <li
               
