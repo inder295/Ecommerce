@@ -19,13 +19,15 @@ export const OrderDetails = () => {
             return <h1 className='text-2xl font-semibold mx-48'>No Orders Found</h1>
         }
 
-    },1000)
+    },1)
+
+    
 
   return fetchingUserOrders ? <Spinner/> : (
     <>
-       <div className=''>
-           <h1 className='text-3xl font-bold mx-48'>Orders</h1>        
-            <div className='grid grid-cols-3 my-8 ml-48 gap-6 '>
+       <div className='max-w-[1920px] mx-auto  '>
+           <p className='text-3xl font-bold mx-48 text-center'>Orders</p>        
+            <div className='grid grid-cols-3 my-8 place-items-centergap-4 mx-40 gap-6'>
                 {
                     userOrdersDetails.map((order)=>{
                         return (
@@ -34,9 +36,9 @@ export const OrderDetails = () => {
                               whileTap={{ scale: 0.95 }}>
 
                                     <Link to={"/orders/"
-                                        +order.id} class="bg-neutral-primary-soft block max-w-sm p-6 border border-default rounded-base shadow-xs hover:bg-neutral-secondary-medium">
+                                        +order.id} class="bg-neutral-primary-soft block max-w-sm p-6 border border-default rounded-base shadow-xs hover:bg-neutral-secondary-medium hover:shadow-md">
                                     <h5 class="mb-3 text-2xl font-semibold tracking-tight text-heading leading-8 line-clamp-1">OrderId : {order.id}</h5>
-                                    <p className="text-body line-clamp-2">
+                                    <p className="text-body line-clamp-2 ">
                                         OrderItems: {
                                             order?.orderItem?.map((item) => (
                                             <span key={item.id} >

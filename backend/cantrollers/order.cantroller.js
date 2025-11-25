@@ -292,6 +292,10 @@ export const getUserOrderById=async(req,res)=>{
         const order=await Prisma.order.findUnique({
             where:{
                 id:orderId
+            },
+            include:{
+                orderItem:true,
+                address:true
             }
         })
 

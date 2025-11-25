@@ -1,13 +1,16 @@
 import React from 'react'
 import { Header } from '../../components/Shopfront/Header'
 import { Category } from '../../components/Shopfront/Category'
+import { OrderDetailsById } from '../../components/Shopfront/OrderDetailsById'
+import BackNavigation from '../../components/Shopfront/BackNavigation'
 
 export const OrderDetailPage = () => {
   return (
     <>
       <Header/>
       <Category/>
-      <h1 className='m-40 font-bold'>Order Details</h1>
+      <BackNavigation/>
+      <OrderDetailsById/>
     </>
   )
 }
