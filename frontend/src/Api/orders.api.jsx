@@ -14,3 +14,8 @@ export const getUsersOrders=async()=>{
     const res=await Api.get("/order/my-orders");
     return res.data;
 }
+
+export const getOrderById=async(orderId)=>{
+    const res=await Api.get(`/order/my-order/${orderId}`);
+    return res.data;
+}

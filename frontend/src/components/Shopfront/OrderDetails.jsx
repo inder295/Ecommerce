@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useOrders } from '../../store/useOrder'
-import { Spinner } from 'flowbite-react';
+import Spinner  from './Spinner';
 import { useEffect } from 'react';
 import {motion} from 'motion/react';
 
@@ -59,9 +59,6 @@ export const OrderDetails = () => {
                         )
                     })
                 }
-
-                
-               
 
             </div>
         </div>  
