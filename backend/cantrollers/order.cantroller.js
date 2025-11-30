@@ -158,7 +158,7 @@ export const changeOrderStatus=async(req,res)=>{
             })
         }
 
-        if(order.orderStatus==="DELIVERED"){
+        if(order.orderStatus==="COMPLETE"){
             return res.status(400).json({
                 message:"Order already delivered"
             })
@@ -187,7 +187,7 @@ export const changeOrderStatus=async(req,res)=>{
                 user:true
             }
         })
-
+        // mails 
         // if(status==="OUT_FOR_DELIVERY"){
         //     await outForDelivery(updatedOrder);
         // }
