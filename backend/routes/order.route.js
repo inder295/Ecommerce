@@ -7,7 +7,7 @@ const orderRouter=express.Router();
 
 
 orderRouter.post("/place-order",authMiddleware,placeOrder);
-orderRouter.patch("/update-order-status/:orderId",isAdmin ,changeOrderStatus);
+orderRouter.patch("/update-order-status/:orderId" ,changeOrderStatus);
 orderRouter.get("/all-orders",getAllOrders);
 orderRouter.get("/my-orders",authMiddleware,getAllOrderOfUser);
 orderRouter.get("/my-order/:orderId",authMiddleware,getUserOrderById);

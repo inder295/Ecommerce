@@ -188,13 +188,13 @@ export const changeOrderStatus=async(req,res)=>{
             }
         })
 
-        if(status==="OUT_FOR_DELIVERY"){
-            await outForDelivery(updatedOrder);
-        }
+        // if(status==="OUT_FOR_DELIVERY"){
+        //     await outForDelivery(updatedOrder);
+        // }
 
-        if(status==="COMPLETE"){
-            await orderCompleted(updatedOrder);
-        }
+        // if(status==="COMPLETE"){
+        //     await orderCompleted(updatedOrder);
+        // }
 
         res.status(200).json({
             message:"Order status updated successfully",

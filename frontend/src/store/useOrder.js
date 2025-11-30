@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { getAdminOrderById, getAllOrders, getOrderById, getUsersOrders, orderConfirmation, placeOrder } from "../Api/orders.api";
+import { changeOrderStatus, getAdminOrderById, getAllOrders, getOrderById, getUsersOrders, orderConfirmation, placeOrder } from "../Api/orders.api";
 import toast from "react-hot-toast";
 
 
@@ -17,6 +17,7 @@ export const useOrders=create((set)=>({
     adminOrdersList:[],
     fetchingAdminOrderById:false,
     adminOrderDetailsById:null,
+    changingOrderStatus:false,
 
     placeOrder:async (formData)=>{
         try {
@@ -112,6 +113,21 @@ export const useOrders=create((set)=>({
        }finally{
          set({fetchingAdminOrderById:false})
        }
+    },
+    orderStatus:async(orderId,status)=>{
+        try {
+            set({changingOrderStatus:true});
+            const data=await changeOrderStatus(orderId,status);
+            await toast.success(data.message)
+ 
+            
+           
+           
+        } catch (error) {
+            toast.error(error?.response?.data?.message || error.message);
+        }finally{
+            set({changingOrderStatus:false})
+        }
     }
 
 }))

@@ -29,3 +29,16 @@ export const getAdminOrderById=async(orderId)=>{
     const res=await Api.get(`/order/order-by-id/${orderId}`);
     return res.data;
 }
+
+export const changeOrderStatus=async(orderId,status)=>{
+
+    console.log(orderId,status);
+    
+    const res=await Api.patch(`/order/update-order-status/${orderId}`,{status:status},{
+         headers: { "Content-Type": "application/json" } ,
+        }
+
+    )
+
+    return res.data;
+}
