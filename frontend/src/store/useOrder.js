@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { getOrderById, getUsersOrders, orderConfirmation, placeOrder } from "../Api/orders.api";
+import { getAdminOrderById, getAllOrders, getOrderById, getUsersOrders, orderConfirmation, placeOrder } from "../Api/orders.api";
 import toast from "react-hot-toast";
 
 
@@ -13,6 +13,10 @@ export const useOrders=create((set)=>({
     userOrdersDetails:[],
     order:null,
     fetchingOrderDatilsById:false,
+    fetchingAdminOrders:false,
+    adminOrdersList:[],
+    fetchingAdminOrderById:false,
+    adminOrderDetailsById:null,
 
     placeOrder:async (formData)=>{
         try {
@@ -82,6 +86,32 @@ export const useOrders=create((set)=>({
         }finally{
             set({fetchingOrderDatilsById:false})
         }
+    },
+
+    adminOrders:async()=>{
+        try {
+            set({fetchingAdminOrders:true});
+            const data=await getAllOrders();
+            set({adminOrdersList:data.orders})
+        } catch (error) {
+            toast.error(error.message);
+
+        }finally{
+            set({fetchingAdminOrders:false})
+        }
+
+    },
+
+    getOrderByIdForAdmin:async(orderId)=>{
+       try {
+         set({fetchingAdminOrderById:true})
+         const data=await getAdminOrderById(orderId);
+         set({adminOrderDetailsById:data.order})
+       } catch (error) {
+         toast.error(error.message)
+       }finally{
+         set({fetchingAdminOrderById:false})
+       }
     }
 
 }))

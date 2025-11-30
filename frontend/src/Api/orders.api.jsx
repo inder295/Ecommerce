@@ -19,3 +19,13 @@ export const getOrderById=async(orderId)=>{
     const res=await Api.get(`/order/my-order/${orderId}`);
     return res.data;
 }
+
+export const getAllOrders=async()=>{
+    const res=await Api.get('/order/all-orders');
+    return res.data;
+}
+
+export const getAdminOrderById=async(orderId)=>{
+    const res=await Api.get(`/order/order-by-id/${orderId}`);
+    return res.data;
+}

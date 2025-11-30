@@ -28,6 +28,7 @@ import WishlistProducts from './pages/Shopfront/WishlistProducts';
 import { OrderListPage } from './pages/Shopfront/Order-List-Page';
 import { OrderDetailPage } from './pages/Shopfront/Order-detail-page';
 import { Profile } from './pages/Shopfront/Profile';
+import { OrderDetailsByUser } from './components/AdminPanel/OrderDetailsByUser';
 
 
 function App() {
@@ -71,6 +72,7 @@ function App() {
           <Route path="create-product" element={<CreateProduct />} />
           <Route path="customers" element={<AdminCustomers />} />
           <Route path="orders" element={<AdminOrders />} />
+          <Route path="orders/:orderId" element={<OrderDetailsByUser />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>

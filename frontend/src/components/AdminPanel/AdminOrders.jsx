@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
 import { useOrders } from '../../store/useOrder';
-import { LuGrip } from "react-icons/lu";
+import { LuSkipForward } from "react-icons/lu";
+import { Link } from 'react-router-dom';
+
 
 
 const AdminOrders = () => {
   
-  const {fetchingUserOrders,userOrders,userOrdersDetails}=useOrders();
+  const {adminOrders,fetchingAdminOrders,adminOrdersList}=useOrders();
 
   useEffect(()=>{
-    userOrders();
-  },[userOrders])
+    adminOrders();
+  },[])
 
   
 
@@ -39,17 +41,21 @@ const AdminOrders = () => {
           <tbody className="divide-y divide-gray-200">
 
             {
-              fetchingUserOrders ? <tr>
+              fetchingAdminOrders ? <tr>
                 <td className="px-4 py-2 text-sm" colSpan="3">Loading....</td>
               </tr> :
-              userOrdersDetails && userOrdersDetails.length > 0 ? (
-                userOrdersDetails.map((item)=>(
+              adminOrdersList && adminOrdersList.length > 0 ? (
+                adminOrdersList.map((item)=>(
                   <tr key={item.id}>
                       <td className="px-4 py-2 text-left text-sm ">{item.id}</td>
                       <td className="px-4 py-2 text-left text-sm">${item.grandTotal}</td>
                       <td className="px-4 py-2 text-left text-sm">{item.orderStatus}</td>
+
+                      
                       <td>
-                         <LuGrip  className='hover:cursor-pointer mx-5'/>
+                        <Link to= {`${item.id}`}>
+                          <LuSkipForward  className='hover:cursor-pointer mx-5'/>
+                        </Link>
 
                       </td>
 

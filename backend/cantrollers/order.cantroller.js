@@ -217,6 +217,10 @@ export const getAllOrders=async(req,res)=>{
         const orders=await Prisma.order.findMany({
             orderBy:{
                 createdAt:"desc"
+            },
+             include:{
+                orderItem:true,
+                address:true
             }
 
         })
@@ -281,6 +285,47 @@ export const getAllOrderOfUser=async(req,res)=>{
 export const getUserOrderById=async(req,res)=>{
     const userId=req.user.id;
     const {orderId}=req.params;
+
+    if(!orderId){
+        return res.status(400).json({
+            message:"Order ID is required"
+        })
+    }
+
+    try {
+        const order=await Prisma.order.findUnique({
+            where:{
+                id:orderId
+            },
+            include:{
+                orderItem:true,
+                address:true
+            }
+        })
+
+        if(!order){
+            return res.status(404).json({
+                message:"Order not found"
+            })
+        }
+
+        res.status(200).json({
+            message:"Order fetched successfully",
+            order:order
+        })
+
+    } catch (error) {
+        
+        return res.status(500).json({
+            message:"Error in fetching order",
+            error:error.message
+        })
+        
+    }
+}
+
+export const getOrderById=async(req,res)=>{
+     const {orderId}=req.params;
 
     if(!orderId){
         return res.status(400).json({
