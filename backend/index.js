@@ -13,6 +13,7 @@ import path from "path";
 import orderRouter from "./routes/order.route.js";
 import wishlistRouter from './routes/wishlist.route.js';
 import { verifyStripePayment } from './utils/webhooks/verify-payment.js';
+import analyticsRouter from './routes/analytics.route.js';
 
 const app= express();
 
@@ -56,6 +57,7 @@ app.use("/api/v1/cart",cartRouter);
 app.use('/api/v1/address',addressRouter)
 app.use("/api/v1/order",orderRouter);
 app.use("/api/v1/wishlist",wishlistRouter);
+app.use("/api/v1/data",analyticsRouter)
  
 
 io.on("connection", (socket) => {

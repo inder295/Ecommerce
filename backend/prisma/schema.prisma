@@ -58,7 +58,6 @@ model User {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   role Role @default(USER)
-//  products   Product[]
   orders     Order[] 
   reviews    Review[]
   cartItems  CartItems[]
@@ -79,7 +78,7 @@ model Product {
   rating      Float      @default(0)
   ratingCount Int        @default(0)
   attributes  Json? 
-  
+  sellerId    String 
   categories  Category[] @relation("Products")
   reviews     Review[]
   cartItems  CartItems[]
