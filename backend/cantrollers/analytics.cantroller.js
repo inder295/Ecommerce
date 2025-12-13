@@ -39,20 +39,39 @@ export const ordersData=async (req,res)=>{
 
 }
 
-export const weeklySales=async(req,res)=>{
+export const sales=async(req,res)=>{
     
     try {
-        const weeklySales= await prisma.$queryRaw ` 
-             SELECT 
-             DATE_TRUNC('week', "createdAt") AS week,
-             SUM("grandTotal") AS total_sales
-             FROM "Order"
-             GROUP BY week
-             ORDER BY week;
-         `;
+        const { type } = req.query; 
+
+        let groupBy;
+        if (type === "weekly") groupBy = "week";
+        else if (type === "monthly") groupBy = "month";
+        else if (type === "yearly") groupBy = "year";
+        else groupBy = "week";
+
+        const sales = await prisma.$queryRawUnsafe(`
+            SELECT 
+            DATE_TRUNC('${groupBy}', "createdAt") AS period,
+            SUM("grandTotal") AS totalSales,
+            COUNT(*) AS orderCount
+            FROM "Order"
+            GROUP BY 1
+            ORDER BY 1 ASC;
+        `);
+
+       
+
+         const result = sales.map(item => ({
+            period: item.period,
+            totalSales: Number(item.totalsales),
+            orderCount: Number(item.ordercount)
+            }));
+
+        
         
         return res.status(200).json({
-            weeklySales
+            result
         })
 
 

@@ -1,11 +1,11 @@
 import express from "express"
-import { weeklySales, ordersData } from "../cantrollers/analytics.cantroller.js";
+import { sales, ordersData } from "../cantrollers/analytics.cantroller.js";
 
 const analyticsRouter=express.Router();
 
 
 
 analyticsRouter.get('/orders',ordersData)
-analyticsRouter.get("/weeklySales",weeklySales)
+analyticsRouter.get("/sales",sales)
 
 export default analyticsRouter;
