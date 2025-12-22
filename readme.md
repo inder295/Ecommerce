@@ -81,6 +81,45 @@ This is a full-stack E-commerce web application designed to provide a seamless o
 
 - **Wishlist** management (save products for later)
 
+## Admin Featured 
+
+- Real-time **analytics** dashboard
+
+- **Sales, revenue, and order** insights
+
+- **Product management system**
+
+    - Create products
+
+    - Update product details
+
+    - Delete products
+
+- **Category management**
+
+    - Create categories
+
+    - Update categories
+
+- **Order management**
+
+    - **View** complete order details
+
+    - Update order status:
+
+        - **Pending**
+
+        - **Out for Delivery**
+
+        - **Completed**
+
+        - **Cancelled**
+
+- User management
+
+    - View registered **users** list
+
+
 
 
 
