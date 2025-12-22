@@ -12,41 +12,41 @@ This is a full-stack E-commerce web application designed to provide a seamless o
 
  ### **Frontend**
 
-**React.js** – Component-based UI development
+- **React.js** – Component-based UI development
 
-**Tailwind CSS** – Utility-first styling
+- **Tailwind CSS** – Utility-first styling
 
-**Zustand** – Global state management
+- **Zustand** – Global state management
 
-**Flowbite UI** – Pre-built UI components
+- **Flowbite UI** – Pre-built UI components
 
-**Chart.js** – Data visualization & analytics
+- **Chart.js** – Data visualization & analytics
 
-**Axios**  – API communication
+- **Axios**  – API communication
 
 ### **Backend**
 
-**Node.js** – JavaScript runtime environment
+- **Node.js** – JavaScript runtime environment
 
-**Express.js** – REST API & backend framework
+- **Express.js** – REST API & backend framework
 
-**JWT (JSON Web Tokens)** – Authentication & authorization
+- **JWT (JSON Web Tokens)** – Authentication & authorization
 
-**Prisma ORM** – Database modeling & querying
+- **Prisma ORM** – Database modeling & querying
 
-**Cloudinary** – Image storage & media management
+- **Cloudinary** – Image storage & media management
 
-**Stripe API** – Secure online payments
+- **Stripe API** – Secure online payments
 
-**PostgreSQL** – Database
+- **PostgreSQL** – Database
 
-**Bcrypt.js**– Password hashing
+- **Bcrypt.js**– Password hashing
 
-**Multer** – File upload handling
+- **Multer** – File upload handling
 
-**CORS** – Cross-origin request handling
+- **CORS** – Cross-origin request handling
 
-**Dotenv** – Environment variable management
+- **Dotenv** – Environment variable management
 
 ## **Features**
 
@@ -77,9 +77,9 @@ This is a full-stack E-commerce web application designed to provide a seamless o
 
   - Order **status** 
 
-Product **reviews & ratings**
+- Product **reviews & ratings**
 
-**Wishlist** management (save products for later)
+- **Wishlist** management (save products for later)
 
 
 
