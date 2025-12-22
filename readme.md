@@ -50,27 +50,27 @@ This is a full-stack E-commerce web application designed to provide a seamless o
 
 ## **Features**
 
-### **User** 
+### **User Features** 
 
-Role-based authentication & authorization
+Role-based **authentication** & authorization
 
-Shopping cart management system (add, update, remove items)
+Shopping **cart management system** (add, update, remove items)
 
-Advanced product search (by attributes, brand, and keywords)
+Advanced **product** **search** (by attributes, brand, and keywords)
 
-Filtering options (price, category, brand, rating, etc.)
+**Filtering** options (price, category, brand, rating, etc.)
 
-Pagination for efficient product browsing
+**Pagination** for efficient product browsing
 
-Category-based product navigation
+**Category**-based product navigation
 
-Multiple payment options:
+**Multiple payment options**:
 
-Stripe (online payment)
+**Stripe** (online payment)
 
 Cash on Delivery (COD)
 
-Order management system:
+**Order management system**:
 
 Order history
 
@@ -78,9 +78,9 @@ Order details & invoices
 
 Order status & real-time tracking
 
-Product reviews & ratings
+Product **reviews & ratings**
 
-Wishlist management (save products for later)
+**Wishlist** management (save products for later)
 
 
 
