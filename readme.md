@@ -8,3 +8,50 @@ This is a full-stack E-commerce web application designed to provide a seamless o
 
  The project focuses on scalability, performance, and user experience, making it suitable for real-world e-commerce use cases.
 
+ ## **Tech Stack**
+
+ ### **Frontend**
+
+**React.js** – Component-based UI development
+
+**Tailwind CSS** – Utility-first styling
+
+**Zustand** – Global state management
+
+**Flowbite UI** – Pre-built UI components
+
+**Chart.js** – Data visualization & analytics
+
+**Axios**  – API communication
+
+### **Backend**
+
+**Node.js** – JavaScript runtime environment
+
+**Express.js** – REST API & backend framework
+
+**JWT (JSON Web Tokens)** – Authentication & authorization
+
+**Prisma ORM** – Database modeling & querying
+
+**Cloudinary** – Image storage & media management
+
+**Stripe API** – Secure online payments
+
+**PostgreSQL** – Database
+
+**Bcrypt.js**– Password hashing
+
+**Multer** – File upload handling
+
+**CORS** – Cross-origin request handling
+
+**Dotenv** – Environment variable management
+
+
+
+
+
+
+
+
