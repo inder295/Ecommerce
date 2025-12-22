@@ -66,17 +66,17 @@ Advanced **product** **search** (by attributes, brand, and keywords)
 
 **Multiple payment options**:
 
-**Stripe** (online payment)
+-  **Stripe** (online payment)
 
-Cash on Delivery (COD)
+- Cash on Delivery (COD)
 
 **Order management system**:
 
-Order history
+  - Order history
 
-Order details & invoices
+  - Order details & invoices
 
-Order status & real-time tracking
+  - Order status & real-time tracking
 
 Product **reviews & ratings**
 
