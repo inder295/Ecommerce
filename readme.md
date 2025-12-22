@@ -1,4 +1,4 @@
-# E2e Pern Stack E-Commerce Application With Admin Dashboard 
+# E2e Pern Stack E-Commerce Application With Admin Dashboard 🛒🎁
 
 ## Overview 
 
