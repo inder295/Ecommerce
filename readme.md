@@ -48,6 +48,44 @@ This is a full-stack E-commerce web application designed to provide a seamless o
 
 **Dotenv** – Environment variable management
 
+## **Features**
+
+### **User** 
+
+Role-based authentication & authorization
+
+Shopping cart management system (add, update, remove items)
+
+Advanced product search (by attributes, brand, and keywords)
+
+Filtering options (price, category, brand, rating, etc.)
+
+Pagination for efficient product browsing
+
+Category-based product navigation
+
+Multiple payment options:
+
+Stripe (online payment)
+
+Cash on Delivery (COD)
+
+Order management system:
+
+Order history
+
+Order details & invoices
+
+Order status & real-time tracking
+
+Product reviews & ratings
+
+Wishlist management (save products for later)
+
+
+
+
+
 
 
 
