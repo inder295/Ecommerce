@@ -1,6 +1,6 @@
-# E2e Pern Stack E-Commerce Application With Admin Dashboard 🛒🎁
+# **E2e Pern Stack E-Commerce Application With Admin Dashboard** 🛒🎁
 
-## Overview 
+## **Overview** 
 
 This is a full-stack E-commerce web application designed to provide a seamless online shopping experience for users while offering powerful management tools for administrators. The application supports essential e-commerce features such as product browsing, cart management, secure checkout, and order tracking.
 
