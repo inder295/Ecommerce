@@ -123,6 +123,8 @@ This is a full-stack E-commerce web application designed to provide a seamless o
 
 # **Installation & Setup Guide** 📖 
 
+![Home page](https://prnt.sc/lNLXpkmm2iWB)
+
 
 
 
