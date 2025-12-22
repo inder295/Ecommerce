@@ -5,6 +5,7 @@ import { BiCube } from "react-icons/bi";
 import { BiGhost } from "react-icons/bi";
 import { useEffect } from 'react';
 import { useAnalytics } from '../../store/useAnalytics';
+import { SalesAnalytics } from './SalesAnalytics';
 
 
 
@@ -71,6 +72,8 @@ export const Sales = () => {
               </p>
           </div>
      </div>
+
+     <SalesAnalytics/>
   
    </div>;
 };

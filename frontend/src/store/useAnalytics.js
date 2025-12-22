@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import {create} from "zustand";
-import { getData } from "../Api/analytics.api";
+import { getData, salesData } from "../Api/analytics.api";
 
 export const useAnalytics=create((set)=>({
     
@@ -9,7 +9,9 @@ export const useAnalytics=create((set)=>({
     completedOrders:0,
     canceledOrders:0,
     fetchingOrderData:false,
-
+    fetchingSalesData:false,
+    salesData:[],
+    
     getOrderData:async ()=>{
         try {
             set({fetchingOrderData:true})
@@ -23,6 +25,17 @@ export const useAnalytics=create((set)=>({
             toast.error(error.message)
         } finally{
             set({fetchingOrderData:false})
+        }
+    },
+    getSalesData:async(type)=>{
+        try {
+            set({fetchingSalesData:true});
+            const data=await salesData(type);
+            set({salesData:data.result});
+        } catch (error) {
+            toast.error(error.message);
+        }finally{
+            set({fetchingSalesData:false});
         }
     }
 }))
