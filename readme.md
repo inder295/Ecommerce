@@ -119,7 +119,9 @@ This is a full-stack E-commerce web application designed to provide a seamless o
 
     - View registered **users** list
 
+# **Images** 📸
 
+# **Installation & Setup Guide** 📖 
 
 
 
