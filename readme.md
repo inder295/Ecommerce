@@ -127,6 +127,7 @@ This is a full-stack E-commerce web application designed to provide a seamless o
 
 
 
+<img width="1635" height="877" alt="Screenshot (1234) (1)" src="https://github.com/user-attachments/assets/3e60bbc2-8fea-4a42-b293-4e4e80194c3c" />
 
 
 
