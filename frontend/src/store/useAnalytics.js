@@ -27,6 +27,7 @@ export const useAnalytics=create((set)=>({
             set({fetchingOrderData:false})
         }
     },
+    
     getSalesData:async(type)=>{
         try {
             set({fetchingSalesData:true});
