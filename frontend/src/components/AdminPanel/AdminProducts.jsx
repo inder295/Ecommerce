@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { useProduct } from '../../store/useProduct';
+import { LuSend } from "react-icons/lu";
+import { MdDelete } from "react-icons/md";
+import { SlOptionsVertical } from "react-icons/sl";
+
 
 export const AdminProducts = () => {
 
@@ -28,6 +32,10 @@ export const AdminProducts = () => {
         <table className="min-w-full border border-gray-200 divide-y divide-gray-200">
           <thead className="bg-gray-100">
             <tr>
+              <th className="px-4 py-2 text-sm text-gray-600 cursor-pointer">
+                 <SlOptionsVertical />
+
+              </th>
               <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">
                 ID
               </th>
@@ -44,6 +52,10 @@ export const AdminProducts = () => {
               <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">
                 Stock
               </th>
+              
+               <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">
+                Action
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -54,18 +66,25 @@ export const AdminProducts = () => {
               </tr> :
               (products.map((product,index)=>(
                 <tr className="hover:bg-gray-50" key={product.id || index}>
+                  <td className="px-4 py-2 text-sm">
+                    <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                  </td>
                   <td className="px-4 py-2 text-sm">{product.id}</td>
                   <td className="px-4 py-2 text-sm">
                     <img
-            src={product.image[0]}
-            alt={product.name}
-            className="w-12 h-15 object-cover rounded"
-          />
+                      src={product.image[0]}
+                      alt={product.name}
+                      className="w-12 h-15 object-cover rounded"
+                    />
                   </td>
                   <td className="px-4 py-2 text-sm w-20">{product.name}</td>
                   <td className="px-4 py-2 text-sm">${product.price}</td>
                   
                   <td className="px-4 py-2 text-sm">{product.inventory}</td>
+                  <td className="px-4 py-3 text-2xl cursor-pointer ">
+                    
+                     <LuSend />
+                  </td>
                 </tr>
 
               )))
