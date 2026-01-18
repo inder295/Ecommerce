@@ -5,52 +5,37 @@ import { useAuth } from '../../store/useAuth';
 import Spinner from '../../components/Shopfront/Spinner';
 
 export const Signup = () => {
+  const { isSigningUp, signup } = useAuth();
 
-  const {isSigningUp,signup}=useAuth();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
 
-   const [formData,setFormData]=useState({
-    name:"",
-    email:"",
-    password:""
+  const navigate = useNavigate();
 
-  })
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-  const navigate=useNavigate();
-
-
-  const handleChange=(e)=>{
-    const {name,value}=e.target;
-    setFormData({...formData,[name]:value});
-    
-    
-  }
-
-  const submit=async (e)=>{
-
+  const submit = async (e) => {
     e.preventDefault();
 
     try {
-      if(await signup(formData)){
-        await navigate("/signin"); 
-
+      if (await signup(formData)) {
+        await navigate('/signin');
       }
-      
-     
-     
-      
     } catch (error) {
-      
       console.log(error);
-      
     }
+  };
 
-    
-
-  }
-
-  return isSigningUp ? <Spinner /> : (
+  return isSigningUp ? (
+    <Spinner />
+  ) : (
     <>
-      
       <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
@@ -138,7 +123,7 @@ export const Signup = () => {
                 type="submit"
                 class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                {isSigningUp? <Loader className='animate-spin'/> : "Sign Up"}
+                {isSigningUp ? <Loader className="animate-spin" /> : 'Sign Up'}
               </button>
             </div>
           </form>

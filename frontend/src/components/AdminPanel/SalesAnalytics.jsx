@@ -1,30 +1,20 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { useAnalytics } from "../../store/useAnalytics";
-import { Graph } from "../../utils/graph";
-
+import { useAnalytics } from '../../store/useAnalytics';
+import { Graph } from '../../utils/graph';
 
 export const SalesAnalytics = () => {
-  
-  const [type, setType] = useState("weekly");
-  
+  const [type, setType] = useState('weekly');
 
-  const {getSalesData,fetchingSalesData,salesData}=useAnalytics();
+  const { getSalesData, fetchingSalesData, salesData } = useAnalytics();
 
-  useEffect(()=>{
+  useEffect(() => {
     getSalesData(type);
-   
-    
-  },[type])
-  
-  
-  
+  }, [type]);
 
-
-  if(fetchingSalesData){
-    return <div className="h-80 w-full my-11 bg-slate-300 "></div>
+  if (fetchingSalesData) {
+    return <div className="h-80 w-full my-11 bg-slate-300 "></div>;
   }
-
 
   return (
     <div className="w-full max-w-5xl p-4 bg-white rounded my-11 shadow-xl ">
@@ -41,8 +31,8 @@ export const SalesAnalytics = () => {
         </select>
       </div>
 
-      <Graph salesData={salesData}  type={type}/>
-     
+      <Graph salesData={salesData} type={type} />
+
       <p className="text-center font-bold text-gray">{}</p>
     </div>
   );

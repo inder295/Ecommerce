@@ -1,6 +1,6 @@
 import { Signup } from './pages/Shopfront/Signup';
 import { Signin } from './pages/Shopfront/Signin';
-import { Routes, Route,  } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Home } from './pages/Shopfront/Home';
 import { ProductListPage } from './pages/Shopfront/ProductListPage';
 import { ProductDetailPage } from './pages/Shopfront/Product-Detail-Page';
@@ -30,45 +30,58 @@ import { OrderDetailPage } from './pages/Shopfront/Order-detail-page';
 import { Profile } from './pages/Shopfront/Profile';
 import { OrderDetailsByUser } from './components/AdminPanel/OrderDetailsByUser';
 
-
 function App() {
-  
   return (
     <>
       <Toaster position="top-right" />
-       <ScrollToTop/>
+      <ScrollToTop />
       <Routes>
-
-       
         //user routes wishlist and review
-        <Route element={<UserPublicRoute/>} >
+        <Route element={<UserPublicRoute />}>
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
         </Route>
-          <Route path='/about' element={<About/>} />
-          <Route path='/' element={<Home/>} />
+        <Route path="/about" element={<About />} />
+        <Route path="/" element={<Home />} />
         <Route path="/product-list" element={<ProductListPage />} />
         <Route path="/category/:categoryId" element={<ProductListPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
-        
         <Route element={<UserPrivateRoutes />}>
           <Route path="/cart" element={<CartPage />} />
-          <Route path='/profile' element={<Profile/>} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/cart/checkout" element={<CheckoutPage />} />
 
-          <Route path="/cart/checkout/order-success" element={<OrderConfirmation />} />
-          <Route path="/wishlist" element={<WishlistProducts/>} />
-          <Route path="/orders" element={<OrderListPage/>} />
-          <Route path="/orders/:orderId" element={<OrderDetailPage/>} />
+          <Route
+            path="/cart/checkout/order-success"
+            element={<OrderConfirmation />}
+          />
+          <Route path="/wishlist" element={<WishlistProducts />} />
+          <Route path="/orders" element={<OrderListPage />} />
+          <Route path="/orders/:orderId" element={<OrderDetailPage />} />
         </Route>
-        
         //admin routes
-        <Route path="/admin-login" element={<AdminPublicRoute> <AdminSignin /></AdminPublicRoute>  } />
-        <Route path="/admin/*" element={<AdminPrivateRoute> <Admin /> </AdminPrivateRoute> }>
+        <Route
+          path="/admin-login"
+          element={
+            <AdminPublicRoute>
+              {' '}
+              <AdminSignin />
+            </AdminPublicRoute>
+          }
+        />
+        <Route
+          path="/admin/*"
+          element={
+            <AdminPrivateRoute>
+              {' '}
+              <Admin />{' '}
+            </AdminPrivateRoute>
+          }
+        >
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="products" element={<AdminProducts />} />
-          <Route path="category" element={<AdminCategories/>} />
-          <Route path='create-category' element={<CreateCategory/>} />
+          <Route path="category" element={<AdminCategories />} />
+          <Route path="create-category" element={<CreateCategory />} />
           <Route path="create-product" element={<CreateProduct />} />
           <Route path="customers" element={<AdminCustomers />} />
           <Route path="orders" element={<AdminOrders />} />

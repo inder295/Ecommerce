@@ -3,11 +3,10 @@ import { useAuth } from '../store/useAuth';
 import { useEffect } from 'react';
 import { Loader } from 'lucide-react';
 
-
 export const AdminPrivateRoute = ({ children }) => {
   const { checkAdminAuth, checkingAdmin } = useAuth();
   const navigate = useNavigate();
-   
+
   useEffect(() => {
     let mounted = true;
     const run = async () => {
@@ -23,7 +22,7 @@ export const AdminPrivateRoute = ({ children }) => {
     };
   }, [checkAdminAuth, navigate]);
 
-    if (checkingAdmin) {
+  if (checkingAdmin) {
     return (
       <div className="flex items-center justify-center h-screen">
         <Loader className="animate-spin w-8 h-8 text-blue-500" />
@@ -31,9 +30,5 @@ export const AdminPrivateRoute = ({ children }) => {
     );
   }
 
-
-   
-
   return children;
 };
-  

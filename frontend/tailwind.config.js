@@ -9,8 +9,5 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [
-    import('flowbite/plugin'),
-    import('@tailwindcss/line-clamp'),
-],
+  plugins: [import('flowbite/plugin'), import('@tailwindcss/line-clamp')],
 };

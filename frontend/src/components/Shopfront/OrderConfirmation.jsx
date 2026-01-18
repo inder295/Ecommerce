@@ -1,14 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useOrders } from "../../store/useOrder";
-import { useEffect } from "react";
-import Spinner from "./Spinner";
+import { Link, useNavigate } from 'react-router-dom';
+import { useOrders } from '../../store/useOrder';
+import { useEffect } from 'react';
+import Spinner from './Spinner';
 
 export default function OrderConfirmation() {
-
   const { orderDetails, orderAddress, checkOrder, loadingOrder } = useOrders();
   const navigate = useNavigate();
 
-  
   const searchParams = new URLSearchParams(window.location.search);
   const session_id = searchParams.get('session_id');
 
@@ -20,12 +18,10 @@ export default function OrderConfirmation() {
     checkOrder(session_id);
   }, [session_id, navigate]);
 
-  
   if (loadingOrder) {
     return <Spinner />;
   }
 
-  
   if (!orderDetails || !orderAddress) {
     return (
       <div className="min-h-screen flex justify-center bg-gray-50 py-10 px-4">
@@ -57,8 +53,10 @@ export default function OrderConfirmation() {
         </h2>
         <p className="text-center text-gray-600 mb-6">
           Thank you for your purchase,{' '}
-          <span className="font-medium">{orderDetails?.user?.name || 'Customer'}</span>. Your order has
-          been placed successfully.
+          <span className="font-medium">
+            {orderDetails?.user?.name || 'Customer'}
+          </span>
+          . Your order has been placed successfully.
         </p>
 
         {/* Order Details */}
@@ -67,26 +65,29 @@ export default function OrderConfirmation() {
             <h3 className="font-semibold text-lg mb-2">Shipping Address</h3>
             <p className="text-gray-700">{orderAddress?.fullname}</p>
             <p className="text-gray-700">{orderAddress?.state}</p>
-            <p className="text-gray-700">
-              {orderAddress?.address}
-            </p>
+            <p className="text-gray-700">{orderAddress?.address}</p>
             <p className="text-gray-700">📞 {orderAddress?.phone}</p>
           </div>
 
           <div className="border p-4 rounded-lg">
             <h3 className="font-semibold text-lg mb-2">Payment Method</h3>
-            <p className="text-gray-700 capitalize">{orderDetails?.paymentMethod}</p>
+            <p className="text-gray-700 capitalize">
+              {orderDetails?.paymentMethod}
+            </p>
           </div>
 
           <div className="border p-4 rounded-lg">
             <h3 className="font-semibold text-lg mb-2">Shipment</h3>
-            <p className="text-gray-700 capitalize">{orderDetails?.shipmentMehod}</p>
+            <p className="text-gray-700 capitalize">
+              {orderDetails?.shipmentMehod}
+            </p>
           </div>
         </div>
 
         {/* Back to Home */}
         <div className="mt-6 text-center">
-          <Link to="/product-list"
+          <Link
+            to="/product-list"
             className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
           >
             Continue Shopping

@@ -1,7 +1,14 @@
 import { create } from 'zustand';
-import { adminLogin, adminLogout, check, checkAdmin, logout, signin, signup } from '../Api/auth.api';
+import {
+  adminLogin,
+  adminLogout,
+  check,
+  checkAdmin,
+  logout,
+  signin,
+  signup,
+} from '../Api/auth.api';
 import toast from 'react-hot-toast';
-
 
 export const useAuth = create((set) => ({
   authUser: null,
@@ -10,38 +17,35 @@ export const useAuth = create((set) => ({
   isAdminSignin: false,
   isCheckingAuth: false,
   authAdmin: null,
-  isAuthenticatedUser:false,
-  adminLoggingOut:false,
-  checkingAdmin:false,
-  loggingOut:false,
+  isAuthenticatedUser: false,
+  adminLoggingOut: false,
+  checkingAdmin: false,
+  loggingOut: false,
 
   checkAuth: async () => {
     set({ isCheckingAuth: true });
     try {
-      const data = await check();     
-        set({ authUser: data.user });
-        await set({isAuthenticatedUser:true})     
+      const data = await check();
+      set({ authUser: data.user });
+      await set({ isAuthenticatedUser: true });
     } catch (error) {
-       console.log(error); 
-       
+      console.log(error);
     } finally {
       set({ isCheckingAuth: false });
     }
   },
 
-  checkAdminAuth:async()=>{
-    let data; 
+  checkAdminAuth: async () => {
+    let data;
     try {
-       set({checkingAdmin:true});
-        data=await checkAdmin();
-        set({authAdmin:data.user});
-     } catch (error) {
-        console.log('Error in checking admin auth',error);
-        
-     }finally{
-      set({checkingAdmin:false})
-     }
-
+      set({ checkingAdmin: true });
+      data = await checkAdmin();
+      set({ authAdmin: data.user });
+    } catch (error) {
+      console.log('Error in checking admin auth', error);
+    } finally {
+      set({ checkingAdmin: false });
+    }
   },
 
   signup: async (formData) => {
@@ -52,8 +56,8 @@ export const useAuth = create((set) => ({
       return true;
     } catch (error) {
       console.log(error);
-      
-      toast.error("Error in Signup",error);
+
+      toast.error('Error in Signup', error);
     } finally {
       set({ isSigningUp: false });
     }
@@ -63,16 +67,15 @@ export const useAuth = create((set) => ({
     set({ isSigningIn: true });
     try {
       const data = await signin(formData);
-      await set({ authUser: data.user })
-     
+      await set({ authUser: data.user });
+
       await toast.success(data.message);
-      set({isAuthenticatedUser:true})
+      set({ isAuthenticatedUser: true });
 
       return true;
-      
     } catch (error) {
       console.log(error);
-      
+
       toast.error('Please Enter Valid Email or Password !');
     } finally {
       set({ isSigningIn: false });
@@ -95,34 +98,31 @@ export const useAuth = create((set) => ({
     }
   },
 
-  adminLogout:async()=>{
+  adminLogout: async () => {
     try {
-      set({adminLoggingOut:true})
-      const data=await adminLogout();
-      set({authAdmin:null});
+      set({ adminLoggingOut: true });
+      const data = await adminLogout();
+      set({ authAdmin: null });
       toast.success(data.message);
       return true;
     } catch (error) {
-       toast.error('Error in admin logout',error);
-    }finally{
-      set({adminLoggingOut:false})
+      toast.error('Error in admin logout', error);
+    } finally {
+      set({ adminLoggingOut: false });
     }
   },
 
   logout: async () => {
     try {
-      set({loggingOut:true})
+      set({ loggingOut: true });
       const data = await logout();
       set({ authUser: null });
       toast.success(data.message);
-      set({isAuthenticatedUser:false})
-      
-
+      set({ isAuthenticatedUser: false });
     } catch (error) {
-
-      toast.error('Error in logout',error);
-    }finally{
-      set({loggingOut:false})
+      toast.error('Error in logout', error);
+    } finally {
+      set({ loggingOut: false });
     }
   },
 }));

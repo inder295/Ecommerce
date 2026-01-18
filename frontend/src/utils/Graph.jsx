@@ -1,4 +1,12 @@
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(
@@ -10,23 +18,19 @@ ChartJS.register(
   Legend
 );
 
-
-
-
 export const Graph = ({ salesData }) => {
-
   const data = {
-    labels: salesData.map(item =>
-      new Date(item.period).toLocaleDateString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
+    labels: salesData.map((item) =>
+      new Date(item.period).toLocaleDateString('en-IN', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
       })
     ),
     datasets: [
       {
-        label: "Order Count",
-        data: salesData.map(item => Number(item.orderCount)),
+        label: 'Order Count',
+        data: salesData.map((item) => Number(item.orderCount)),
       },
     ],
   };
@@ -35,28 +39,28 @@ export const Graph = ({ salesData }) => {
     responsive: true,
     plugins: {
       legend: {
-        position: "top",
+        position: 'top',
       },
       title: {
         display: true,
-        text: "Orders Over Time",
+        text: 'Orders Over Time',
       },
     },
     scales: {
-        x: {
-          title: {
-            display: true,
-            text: "Date",
-          },
+      x: {
+        title: {
+          display: true,
+          text: 'Date',
         },
-        y: {
-          title: {
-            display: true,
-            text: "Order Count",
-          },
-          beginAtZero: true,
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Order Count',
         },
-   },
+        beginAtZero: true,
+      },
+    },
   };
 
   return (

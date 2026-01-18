@@ -1,18 +1,16 @@
 import React, { useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { useProduct } from '../../store/useProduct';
-import { LuSend } from "react-icons/lu";
-import { MdDelete } from "react-icons/md";
-import { SlOptionsVertical } from "react-icons/sl";
-
+import { LuSend } from 'react-icons/lu';
+import { MdDelete } from 'react-icons/md';
+import { SlOptionsVertical } from 'react-icons/sl';
 
 export const AdminProducts = () => {
+  const { fetchAllProducts, isProductFetching, products } = useProduct();
 
-  const {fetchAllProducts,isProductFetching,products}=useProduct();
-
-  useEffect(()=>{
-    fetchAllProducts()
-  },[])
+  useEffect(() => {
+    fetchAllProducts();
+  }, []);
 
   return (
     <div className="ml-64 p-5">
@@ -33,8 +31,7 @@ export const AdminProducts = () => {
           <thead className="bg-gray-100">
             <tr>
               <th className="px-4 py-2 text-sm text-gray-600 cursor-pointer">
-                 <SlOptionsVertical />
-
+                <SlOptionsVertical />
               </th>
               <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">
                 ID
@@ -48,26 +45,31 @@ export const AdminProducts = () => {
               <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">
                 Price
               </th>
-              
+
               <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">
                 Stock
               </th>
-              
-               <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">
+
+              <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">
                 Action
               </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-
-            {
-              isProductFetching ? <tr>
+            {isProductFetching ? (
+              <tr>
                 <td className="px-4 py-2 text-sm">Loading....</td>
-              </tr> :
-              (products.map((product,index)=>(
+              </tr>
+            ) : (
+              products.map((product, index) => (
                 <tr className="hover:bg-gray-50" key={product.id || index}>
                   <td className="px-4 py-2 text-sm">
-                    <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                    <input
+                      id="default-checkbox"
+                      type="checkbox"
+                      value=""
+                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
                   </td>
                   <td className="px-4 py-2 text-sm">{product.id}</td>
                   <td className="px-4 py-2 text-sm">
@@ -79,17 +81,14 @@ export const AdminProducts = () => {
                   </td>
                   <td className="px-4 py-2 text-sm w-20">{product.name}</td>
                   <td className="px-4 py-2 text-sm">${product.price}</td>
-                  
+
                   <td className="px-4 py-2 text-sm">{product.inventory}</td>
                   <td className="px-4 py-3 text-2xl cursor-pointer ">
-                    
-                     <LuSend />
+                    <LuSend />
                   </td>
                 </tr>
-
-              )))
-            }
-            
+              ))
+            )}
           </tbody>
         </table>
       </div>

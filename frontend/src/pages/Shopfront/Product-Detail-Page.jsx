@@ -10,10 +10,10 @@ export const ProductDetailPage = () => {
     <div>
       <Header />
       <Category />
-      <BackNavigation/>
+      <BackNavigation />
       <PdpSection />
-       <ProductReviews /> 
-      <Footer /> 
+      <ProductReviews />
+      <Footer />
     </div>
   );
 };

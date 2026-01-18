@@ -1,23 +1,21 @@
-import Spinner from '../Shopfront/Spinner'
+import Spinner from '../Shopfront/Spinner';
 import { useState } from 'react';
 import { useAddress } from '../../store/useAddress';
 
 export default function Address({ onChange }) {
-  
-  const {addAddress,addingAddress,fetchingAddresses,getAddresses}=useAddress();
-  
-  
+  const { addAddress, addingAddress, fetchingAddresses, getAddresses } =
+    useAddress();
+
   const [form, setForm] = useState({
     fullname: '',
     phone: '',
     address: '',
     city: '',
     state: '',
-    country:'',
-    email:'',
+    country: '',
+    email: '',
     zip: '',
   });
-
 
   const handleChange = (e) => {
     const updated = { ...form, [e.target.name]: e.target.value };
@@ -25,8 +23,8 @@ export default function Address({ onChange }) {
     onChange(updated);
   };
 
-  async function handleSubmit(e){
-    e.preventDefault();   
+  async function handleSubmit(e) {
+    e.preventDefault();
     await addAddress(form);
     await getAddresses();
     setForm({
@@ -35,13 +33,15 @@ export default function Address({ onChange }) {
       address: '',
       city: '',
       state: '',
-      country:'',
-      email:'',
+      country: '',
+      email: '',
       zip: '',
-    })
+    });
   }
 
-  return (addingAddress || fetchingAddresses)  ? <Spinner/> : (
+  return addingAddress || fetchingAddresses ? (
+    <Spinner />
+  ) : (
     <div className="p-4 border rounded-2xl">
       <h3 className="text-lg font-semibold mb-4">Shipping Address</h3>
       <form className="grid grid-cols-2 gap-4" onSubmit={handleSubmit}>
@@ -104,7 +104,7 @@ export default function Address({ onChange }) {
 
         <div className="flex justify-end col-span-2">
           <button
-            type='submit'
+            type="submit"
             className="px-6 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
           >
             Add Address

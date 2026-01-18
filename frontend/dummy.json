@@ -1,16 +1,4 @@
 [
-    [
-        "color",
-        [
-            "red",
-            "blue"
-        ]
-    ],
-    [
-        "storage",
-        [
-            "128 GB",
-            "246 GB"
-        ]
-    ]
+  ["color", ["red", "blue"]],
+  ["storage", ["128 GB", "246 GB"]]
 ]

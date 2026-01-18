@@ -4,8 +4,7 @@ import { useState } from 'react';
 import { useAuth } from '../../store/useAuth';
 
 export const AdminSignin = () => {
-
-   const { adminSignin, authAdmin, isAdminSignin } = useAuth();
+  const { adminSignin, authAdmin, isAdminSignin } = useAuth();
   const [formData, setFormData] = useState({
     email: 'admin@example.com',
     password: 'admin123',
@@ -15,9 +14,8 @@ export const AdminSignin = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
+
     setFormData({ ...formData, [name]: value });
-    
   };
 
   const handleSubmit = async (e) => {
@@ -26,13 +24,11 @@ export const AdminSignin = () => {
 
     const { email, password } = formData;
     await adminSignin({ email, password });
-    
 
     if (authAdmin) {
       navigate('admin/dashboard');
     }
   };
-
 
   return (
     <>
@@ -45,7 +41,7 @@ export const AdminSignin = () => {
 
         <div class="my-5 sm:mx-auto sm:w-full sm:max-w-sm">
           <form onSubmit={handleSubmit}>
-            <div className='my-3'>
+            <div className="my-3">
               <label
                 htmlFor="email"
                 class="block text-sm/6 font-medium text-gray-900"
@@ -94,5 +90,4 @@ export const AdminSignin = () => {
       </div>
     </>
   );
- 
 };

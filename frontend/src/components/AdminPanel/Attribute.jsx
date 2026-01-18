@@ -1,17 +1,14 @@
-import React from "react";
+import React from 'react';
 
-export const Attribute = ({attribute}) => {
-  
+export const Attribute = ({ attribute }) => {
   return (
     <div className="space-y-6  p-2 pt-2 mt-2 rounded text-sm">
       {Object.entries(attribute).map(([key, values]) => (
         <div key={key} className="bg-gray-100 p-4 rounded">
-         
           <h3 className="text-sm font-medium text-gray-900 mb-3 capitalize">
             {key}
           </h3>
 
-          
           <div className="flex flex-wrap gap-2">
             {values.map((val) => (
               <button
@@ -25,8 +22,6 @@ export const Attribute = ({attribute}) => {
           </div>
         </div>
       ))}
-
-    
     </div>
   );
 };

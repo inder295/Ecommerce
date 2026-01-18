@@ -1,4 +1,3 @@
-
 import { Loader } from 'lucide-react';
 
 const Spinner = () => {
@@ -6,9 +5,9 @@ const Spinner = () => {
     <>
       <div className="flex justify-center items-center h-screen">
         <Loader className="animate-spin h-10 w-10 text-indigo-600" />
-    </div>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Spinner
+export default Spinner;

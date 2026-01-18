@@ -3,9 +3,9 @@ import { useAuth } from '../store/useAuth';
 import { useEffect } from 'react';
 
 export const AdminPublicRoute = ({ children }) => {
- const { checkAdminAuth, authAdmin } = useAuth();
-  const location=useLocation();
-  const navigate=useNavigate();
+  const { checkAdminAuth, authAdmin } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     let mounted = true;
@@ -21,9 +21,9 @@ export const AdminPublicRoute = ({ children }) => {
     };
   }, [checkAdminAuth, navigate]);
 
-   if (authAdmin && location.pathname === ("/admin-login") ) {
+  if (authAdmin && location.pathname === '/admin-login') {
     return <Navigate to="/admin/dashboard" />;
   }
 
   return children;
-}
+};
