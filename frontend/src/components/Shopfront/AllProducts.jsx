@@ -43,7 +43,7 @@ export const AllProducts = ({ products }) => {
               >
                 <img
                   class="p-2 rounded-t-lg h-80 w-full object-contain"
-                  src={`${p.image}` || '/camera.jpg'}
+                  src={`${p.image[0]}` || '/camera.jpg'}
                   alt="product image"
                 />
 

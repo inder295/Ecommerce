@@ -51,15 +51,15 @@ export const PdpSection = () => {
   return isPdpFetching ? (
     <Spinner />
   ) : (
-    <>
-      <div className="mt-2 w-[80%] m-auto flex justify-center">
-        <div className="grid grid-cols-2 pt-0 mx-auto ">
-          {/* image ... will add corosel */}
-          <div className="col-span-1 w-full">
+    < >
+      <div className="mt-2 max-w-screen-xl m-auto flex justify-center ">
+        <div className="grid grid-cols-8 pt-0 mx-auto ">
+         
+          <div className="col-start-1 col-span-5 w-full">
             <PdpImageCorosel image={productDetails.image} />
           </div>
-          {/* name */}
-          <div className="col-span-1 font-bold text-wrap mx-10">
+         
+          <div className="col-start-6 col-span-3 font-bold text-wrap mx-10">
             <div className=" flex justify-between">
               <div className="text-2xl">{productDetails.name}</div>
               <div className="mx-10 mr-0">
@@ -143,17 +143,18 @@ export const PdpSection = () => {
                 )}
               </button>
             </form>
+
+            <div>
+              <h1>Description</h1>
+              <p className="m-2 text-wrap">{productDetails.description}</p>
+            </div>
+
+
           </div>
         </div>
       </div>
 
-      <div className="w-[80%] mx-auto">
-        <hr class=" h-px bg-gray-300 border-0 shadow-md dark:bg-gray-700" />
-        <div className="">
-          <div className="m-2 text-lg font-bold ">Description</div>
-          <p className="m-2 text-wrap">{productDetails.description}</p>
-        </div>
-      </div>
+      
     </>
   );
 };
