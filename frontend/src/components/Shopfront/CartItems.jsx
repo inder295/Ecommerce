@@ -4,7 +4,7 @@ import Spinner from './Spinner';
 import { Link } from 'react-router-dom';
 
 export const CartItems = () => {
-  // use selectors to subscribe only to the pieces we need
+  // use selectors to subscribe only  to the pieces we need
 
   const fetchCartSummary = useCart((state) => state.cartSummary);
   const fetchingSummary = useCart((state) => state.fetchingSummary);

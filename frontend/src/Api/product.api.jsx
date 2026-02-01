@@ -39,3 +39,13 @@ export const searchProducts = async (search) => {
   );
   return res.data;
 };
+
+export const filter=async (attribute,priceRange)=>{
+ 
+   const res=await Api.post('/product/filter',{attribute:attribute,priceRange:priceRange}, {
+      withCredentials: true,
+      headers: { 'Content-Type': 'application/json' },
+    })
+   
+    return res.data;
+}

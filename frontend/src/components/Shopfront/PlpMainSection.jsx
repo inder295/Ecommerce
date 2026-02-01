@@ -19,11 +19,11 @@ export const PlpMainSection = () => {
 
   useEffect(() => {
     fetchAllProducts(page);
-  }, [location.pathname === '/product-list']);
+  }, [location.pathname === '/product-list',page, fetchAllProducts]);
 
-  function handlePage(e, value) {
+  async function handlePage(e, value) {
     setPage(value);
-    fetchAllProducts(value);
+    await fetchAllProducts(value);
   }
 
   return isProductFetching || categoryProductFetching ? (

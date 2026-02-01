@@ -326,6 +326,59 @@ export const searchProduct=async(req,res)=>{
     }
 }
 
+export const filterProducts = async (req, res) => {
+  try {
+    const { attribute, priceRange } = req.body;
+
+    let whereClause = {};
+
+    
+    if (attribute && Object.keys(attribute).length > 0) {
+      const orConditions = Object.entries(attribute)
+        .filter(([_, values]) => Array.isArray(values) && values.length > 0)
+        .map(([key, values]) => ({
+          attributes: {
+            path: [key],
+            array_contains: values
+          }
+        }));
+
+      if (orConditions.length > 0) {
+        whereClause.OR = orConditions;
+      }
+    }
+
+   
+    if (priceRange?.length === 2) {
+      whereClause.price = {
+        gte: Number(priceRange[0]),
+        lte: Number(priceRange[1])
+      };
+    }
+
+    const products = await Prisma.product.findMany({
+      where: whereClause,
+      orderBy:{
+        createdAt:"desc"
+      }
+    });
+
+    if (products.length === 0) {
+      return res.status(404).json({
+        message: "No products found for the given filters"
+      });
+    }
+
+    res.status(200).json({ products });
+
+  } catch (error) {
+    res.status(500).json({
+      message: "Error in filtering products",
+      error: error.message
+    });
+  }
+};
+
 
  
 

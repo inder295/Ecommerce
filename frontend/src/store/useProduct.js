@@ -5,6 +5,7 @@ import {
   getProductById,
   getProductByCategory,
   searchProducts,
+  filter,
 } from '../Api/product.api';
 import toast from 'react-hot-toast';
 
@@ -88,4 +89,19 @@ export const useProduct = create((set) => ({
       set({ isProductFetching: false });
     }
   },
+
+
+  async filterProducts(attribute,priceRange){
+    
+    try {
+
+      const data=await filter(attribute,priceRange);
+      set({products:data.products});
+
+    } catch (error) {
+       console.log(error);
+       toast.error(error.message);
+       
+    }
+  }
 }));
