@@ -1,6 +1,6 @@
 export const Cards = () => {
   return (
-    <div className="flex flex-wrap justify-center gap-2 p-4">
+    <div className="flex flex-wrap justify-center gap-2 p-4 ">
       <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg">
         <a href="#">
           <img

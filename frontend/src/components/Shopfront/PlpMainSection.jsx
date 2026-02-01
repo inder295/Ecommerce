@@ -30,15 +30,15 @@ export const PlpMainSection = () => {
     <Spinner />
   ) : (
     <>
-      <div className="w-80% mx-auto">
-        <p className="flex justify-end m-3 mx-20 font-semibold">
-          {pagination.totalProducts} products
+      <div className="w-80% mx-auto font-serif">
+        <p className=" max-w-screen-xl mx-auto flex justify-end m-3 mx-20 font-semibold">
+          {pagination.totalProducts} Products
         </p>
         <div className="flex justify-center items-start flex-col gap-20 md:flex-row  py-0 sm:w-full px-5 m-0 ">
           <Filters products={products} />
           <AllProducts products={products} />
         </div>
-        <div className="flex justify-end m-10 mx-25">
+        <div className="max-w-screen-xl mx-auto flex justify-end m-10 mx-25">
           <Pagination
             count={pagination.totalPages}
             color="primary"

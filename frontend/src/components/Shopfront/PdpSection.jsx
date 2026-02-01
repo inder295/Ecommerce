@@ -52,7 +52,7 @@ export const PdpSection = () => {
     <Spinner />
   ) : (
     < >
-      <div className="mt-2 max-w-screen-xl m-auto flex justify-center ">
+      <div className="mt-2 max-w-screen-xl m-auto flex justify-center font-serif ">
         <div className="grid grid-cols-8 pt-0 mx-auto ">
          
           <div className="col-start-1 col-span-5 w-full">
@@ -62,12 +62,12 @@ export const PdpSection = () => {
           <div className="col-start-6 col-span-3 font-bold text-wrap mx-10">
             <div className=" flex justify-between">
               <div className="text-2xl">{productDetails.name}</div>
-              <div className="mx-10 mr-0">
+              <div className="mx-1">
                 <Wishlist />
               </div>
             </div>
 
-            <div className=" text-xl mt-5 ml-0">${productDetails.price}</div>
+            <div className="text-xl mt-4 ml-0">${productDetails.price}</div>
             <PdpAttributes attributes={productDetails.attributes} />
 
             <form>
@@ -134,10 +134,10 @@ export const PdpSection = () => {
               <button
                 type="button"
                 onClick={submitForm}
-                class="text-white mt-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-3 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                class="text-white mt-6 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-3 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
                 {addingInCart ? (
-                  <Loader className="animate-spin" />
+                  <span className='flex'> <Loader className="animate-spin mr-2" /> Add To Cart</span>
                 ) : (
                   'Add To Cart'
                 )}
@@ -145,11 +145,9 @@ export const PdpSection = () => {
             </form>
 
             <div>
-              <h1>Description</h1>
-              <p className="m-2 text-wrap">{productDetails.description}</p>
+              <h1 className='text-2xl mt-4 font-serif font-semibold'>Description</h1>
+              <p className="mt-2 text-wrap font-serif font-light">{productDetails.description}</p>
             </div>
-
-
           </div>
         </div>
       </div>

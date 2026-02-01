@@ -105,7 +105,7 @@ export const Filters = ({ products }) => {
   }
 
   return (
-    <div className="max-w-screen-xl flex flex-wrap items-center justify-between p-2 mt-0 pt-0 md:w-64 sm:w-full z-0">
+    <div className="max-w-screen-xl flex flex-wrap items-center justify-between p-2 mt-0 pt-0 md:w-64 sm:w-full z-0 font-serif">
       <aside className="w-full m-auto md:w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 p-4 md:h-screen md:sticky top-0  ">
        
 

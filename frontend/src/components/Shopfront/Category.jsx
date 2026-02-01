@@ -29,7 +29,7 @@ export const Category = () => {
   }
 
   return (
-    <div className="fixed top-16 left-0 right-0 mb-6 z-10 ">
+    <div className="fixed top-16 left-0 right-0 mb-6 z-10 font-serif">
       <nav className="bg-gray-50 dark:bg-gray-700">
         <div className="max-w-screen-xl px-4 py-3 mx-auto">
           <div className="flex items-center">
