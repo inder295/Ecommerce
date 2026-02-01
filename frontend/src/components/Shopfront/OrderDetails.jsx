@@ -22,7 +22,7 @@ export const OrderDetails = () => {
     <Spinner />
   ) : (
     <>
-      <div className="max-w-[1920px] mx-auto  ">
+      <div className="max-w-[1920px] mx-auto font-serif">
         <p className="text-3xl font-bold mx-48 text-center">Orders</p>
         <div className="grid grid-cols-3 my-8 place-items-centergap-4 mx-40 gap-6">
           {userOrdersDetails.map((order) => {

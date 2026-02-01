@@ -21,7 +21,7 @@ export const OrderDetailsById = () => {
   // Show error state if order not found
   if (!order) {
     return (
-      <div className="max-w-[1920px] w-auto mx-auto py-12">
+      <div className="max-w-[1920px] w-auto mx-auto py-12 font-serif">
         <h1 className="text-3xl font-bold text-center text-red-600">
           Order Not Found
         </h1>
@@ -34,7 +34,7 @@ export const OrderDetailsById = () => {
 
   return (
     <>
-      <div className="max-w-[1920px] w-auto mx-auto">
+      <div className="max-w-[1920px] w-auto mx-auto font-serif">
         <h1 className="text-3xl font-bold text-center">Order Details</h1>
 
         <div className="grid grid-cols-4 gap-4 p-12 max-w-screen-xl mx-auto">
