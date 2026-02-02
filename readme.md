@@ -127,8 +127,28 @@ This is a full-stack E-commerce web application designed to provide a seamless o
 
 
 
-<img width="1635" height="877" alt="Screenshot (1234) (1)" src="https://github.com/user-attachments/assets/3e60bbc2-8fea-4a42-b293-4e4e80194c3c" />
-
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/3325600b-c79c-4c5d-973b-f82ab8894d52" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/7d0644ae-a9b3-4335-8e94-7e0efcce647c" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/cb0dc953-3853-40ff-8f36-3b346c080cad" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/59de1817-e177-4dac-8584-89b133f42d49" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/30cc894d-aea8-4c5f-8ff4-9b60ab715436" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/64e56811-9942-42a7-b8bc-173d7c765564" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/79e64760-9439-4614-a538-1f6da4fb7570" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/62e389f7-aaa5-45b8-aa12-0186c588aa69" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/6aa4553a-2d1e-4520-8fbc-a32f23a5cb3a" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/f8eae9b7-9a77-4332-a461-513fa9360cbc" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/289e48ad-a303-49e9-a1ce-d51ec8e75b22" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/431e9699-8238-4fef-ada7-dd04755fde8b" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/d33ee03c-94bb-4f7e-ada2-2c771c494891" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/d6342cb7-16ee-4e0a-b362-8cfe00efe448" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/f3da2851-8996-430f-be9e-ec7b77a788f7" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/48f5becb-9fdc-455a-bc61-37367aa04852" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/7b19302f-afa2-4805-b97e-a42fcf350c4e" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/d829b4c3-c431-4fd3-b9be-9fa510fddc45" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/44100a47-94ff-42c6-bec6-b3f27dcf9930" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/6d04f53d-16e8-4e11-8bbe-d7ef2d2c9e3c" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/1ebfd58f-491a-430f-9725-8401f73ea9e4" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/49e443b8-4a86-403a-881e-a6e18e1b5612" />
 
 
 
