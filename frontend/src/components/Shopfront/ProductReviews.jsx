@@ -1,66 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Star, X, User } from 'lucide-react';
+import { useParams } from 'react-router-dom';
+import { useReview } from '../../store/useReview';
 
 export const ProductReviews = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newReview, setNewReview] = useState({
-    name: '',
-    rating: 0,
-    title: '',
-    comment: '',
-  });
 
-  const [reviews, setReviews] = useState([
-    {
-      id: 1,
-      name: 'Sarah Johnson',
-      rating: 5,
-      title: 'Excellent product!',
-      comment:
-        'Really impressed with the quality. Would definitely recommend to others.',
-      date: 'August 15, 2024',
-    },
-    {
-      id: 2,
-      name: 'Mike Chen',
-      rating: 4,
-      title: 'Good value for money',
-      comment:
-        'Great features and build quality. Minor issues but overall satisfied.',
-      date: 'August 12, 2024',
-    },
-    {
-      id: 3,
-      name: 'Emily Rodriguez',
-      rating: 5,
-      title: 'Love it!',
-      comment: 'Perfect for my needs. Exactly what I was looking for.',
-      date: 'August 10, 2024',
-    },
-  ]);
+  const [form,setForm]=useState({
+    name:"",
+    rating:0,
+    title:'',
+    description:''
+  })
+  
 
-  const handleSubmitReview = (e) => {
+  const productId=useParams();
+  const {fetchReviews,reviews,isReviewFetching,addReview,submittingReview}=useReview();
+  
+
+  useEffect( ()=>{
+    fetchReviews(productId);
+  },[productId])
+
+  const handleSubmitReview =async (e)=>{
     e.preventDefault();
-    if (
-      newReview.name &&
-      newReview.rating &&
-      newReview.title &&
-      newReview.comment
-    ) {
-      const review = {
-        id: reviews.length + 1,
-        ...newReview,
-        date: new Date().toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        }),
-      };
-      setReviews([review, ...reviews]);
-      setNewReview({ name: '', rating: 0, title: '', comment: '' });
-      setIsModalOpen(false);
-    }
-  };
+    console.log(form);
+    await addReview(productId,form);
+    setIsModalOpen(false);
+
+  }
+
+  
 
   const renderStars = (rating, interactive = false, onStarClick = null) => {
     return [...Array(5)].map((_, i) => (
@@ -75,8 +45,8 @@ export const ProductReviews = () => {
   };
 
   return (
-    <div className="w-[80%] mx-auto px-4 py-8">
-      {/* Header */}
+    <div className="w-[80%] mx-auto px-4 py-8 font-serif">
+    
       <div className="flex items-center justify-between mb-8">
         <h2 className="text-2xl font-bold text-gray-900">Customer Reviews</h2>
         <button
@@ -86,8 +56,7 @@ export const ProductReviews = () => {
           Write a Review
         </button>
       </div>
-
-      {/* Reviews List */}
+      
       <div className="space-y-6">
         {reviews.map((review) => (
           <div
@@ -100,23 +69,29 @@ export const ProductReviews = () => {
               </div>
               <div className="flex-1">
                 <div className="flex items-center space-x-3 mb-2">
-                  <h3 className="font-semibold text-gray-900">{review.name}</h3>
+                  <h3 className="font-semibold text-gray-900">{review.user.name}</h3>
                   <div className="flex items-center space-x-1">
                     {renderStars(review.rating)}
                   </div>
-                  <span className="text-sm text-gray-500">{review.date}</span>
+                  <span className="text-sm text-gray-500">{
+                       new Date(review.createdAt).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })
+                    }</span>
                 </div>
                 <h4 className="font-medium text-gray-900 mb-2">
                   {review.title}
                 </h4>
-                <p className="text-gray-700">{review.comment}</p>
+                <p className="text-gray-700">{review.description}</p>
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Review Modal */}
+    
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg max-w-md w-full p-6">
@@ -133,44 +108,45 @@ export const ProductReviews = () => {
             </div>
 
             <form onSubmit={handleSubmitReview} className="space-y-4">
-              {/* Name */}
+             
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Your Name
                 </label>
                 <input
                   type="text"
-                  value={newReview.name}
+                  value={form.name}
+                  placeholder='John Doe'
                   onChange={(e) =>
-                    setNewReview({ ...newReview, name: e.target.value })
+                    setForm({ ...form, name: e.target.value })
                   }
                   className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   required
                 />
               </div>
 
-              {/* Rating */}
+             
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Rating
                 </label>
                 <div className="flex items-center space-x-1">
-                  {renderStars(newReview.rating, true, (rating) =>
-                    setNewReview({ ...newReview, rating })
+                  {renderStars(form.rating, true, (rating) =>
+                    setForm({ ...form, rating })
                   )}
                 </div>
               </div>
 
-              {/* Title */}
+             
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Review Title
                 </label>
                 <input
                   type="text"
-                  value={newReview.title}
+                  value={form.title}
                   onChange={(e) =>
-                    setNewReview({ ...newReview, title: e.target.value })
+                    setForm({ ...form, title: e.target.value })
                   }
                   className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Give your review a title"
@@ -178,15 +154,15 @@ export const ProductReviews = () => {
                 />
               </div>
 
-              {/* Comment */}
+           
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Your Review
                 </label>
                 <textarea
-                  value={newReview.comment}
+                  value={form.description}
                   onChange={(e) =>
-                    setNewReview({ ...newReview, comment: e.target.value })
+                    setForm({ ...form, description: e.target.value })
                   }
                   rows="4"
                   className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -208,7 +184,7 @@ export const ProductReviews = () => {
                   type="submit"
                   className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md font-medium hover:bg-blue-700 transition-colors"
                 >
-                  Submit Review
+                 <span>{submittingReview ? "Submitting..." : "Submit Review"}</span>
                 </button>
               </div>
             </form>
