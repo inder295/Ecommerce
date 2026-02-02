@@ -123,7 +123,7 @@ This is a full-stack E-commerce web application designed to provide a seamless o
 
 
 
-# **Installation & Setup Guide** 📖 
+
 
 
 
@@ -170,6 +170,8 @@ This is a full-stack E-commerce web application designed to provide a seamless o
 <img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/1ebfd58f-491a-430f-9725-8401f73ea9e4" />
 
 <img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/49e443b8-4a86-403a-881e-a6e18e1b5612" />
+
+# **Installation & Setup Guide** 📖 
 
 
 
