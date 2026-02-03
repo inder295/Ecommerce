@@ -122,6 +122,23 @@ This is a full-stack E-commerce web application designed to provide a seamless o
 # **Images** 📸
 
 
+<img width="1920" height="866" alt="Image" src="https://github.com/user-attachments/assets/fa903a11-bf28-46fb-9ebc-af21a6971c6d" />
+<br /><br />
+
+<img width="1920" height="836" alt="Image" src="https://github.com/user-attachments/assets/62411307-c3d8-4208-bbbd-1a5e4f67f443" />
+<br /><br />
+
+<img width="1920" height="872" alt="Image" src="https://github.com/user-attachments/assets/f1269503-2283-40d5-8b91-cee2c6a593be" />
+<br /><br />
+
+<img width="1920" height="870" alt="Image" src="https://github.com/user-attachments/assets/f8aa3809-ac35-450d-8767-cd88e15542f3" />
+<br /><br />
+
+<img width="1920" height="875" alt="Image" src="https://github.com/user-attachments/assets/718658c1-fdb0-4954-b455-41b6321c773d" />
+<br /><br />
+
+<img width="1920" height="879" alt="Image" src="https://github.com/user-attachments/assets/947f8247-3828-4fab-a71a-d5a0381bfacb" />
+<br /><br />
 
 <img width="1920" height="869" alt="Image" src="https://github.com/user-attachments/assets/c957e195-4368-4bcf-b759-feefc0104136" />
 <br /><br />
@@ -171,23 +188,6 @@ This is a full-stack E-commerce web application designed to provide a seamless o
 <img width="1920" height="857" alt="Image" src="https://github.com/user-attachments/assets/0c972df0-03f9-4385-adc5-c8668966271a" />
 <br /><br />
 
-<img width="1920" height="866" alt="Image" src="https://github.com/user-attachments/assets/fa903a11-bf28-46fb-9ebc-af21a6971c6d" />
-<br /><br />
-
-<img width="1920" height="836" alt="Image" src="https://github.com/user-attachments/assets/62411307-c3d8-4208-bbbd-1a5e4f67f443" />
-<br /><br />
-
-<img width="1920" height="872" alt="Image" src="https://github.com/user-attachments/assets/f1269503-2283-40d5-8b91-cee2c6a593be" />
-<br /><br />
-
-<img width="1920" height="870" alt="Image" src="https://github.com/user-attachments/assets/f8aa3809-ac35-450d-8767-cd88e15542f3" />
-<br /><br />
-
-<img width="1920" height="875" alt="Image" src="https://github.com/user-attachments/assets/718658c1-fdb0-4954-b455-41b6321c773d" />
-<br /><br />
-
-<img width="1920" height="879" alt="Image" src="https://github.com/user-attachments/assets/947f8247-3828-4fab-a71a-d5a0381bfacb" />
-<br /><br />
 
 
 # **Installation & Setup Guide** 📖 
