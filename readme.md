@@ -121,13 +121,6 @@ This is a full-stack E-commerce web application designed to provide a seamless o
 
 # **Images** 📸
 
-
-<img width="1920" height="866" alt="Image" src="https://github.com/user-attachments/assets/fa903a11-bf28-46fb-9ebc-af21a6971c6d" />
-<br /><br />
-
-<img width="1920" height="836" alt="Image" src="https://github.com/user-attachments/assets/62411307-c3d8-4208-bbbd-1a5e4f67f443" />
-<br /><br />
-
 <img width="1920" height="872" alt="Image" src="https://github.com/user-attachments/assets/f1269503-2283-40d5-8b91-cee2c6a593be" />
 <br /><br />
 
@@ -170,6 +163,13 @@ This is a full-stack E-commerce web application designed to provide a seamless o
 <img width="1920" height="875" alt="Image" src="https://github.com/user-attachments/assets/d58255cb-800d-442d-8a4c-7b5cefcbea42" />
 <br /><br />
 
+<img width="1920" height="873" alt="Image" src="https://github.com/user-attachments/assets/ea2498b0-a268-4dd0-820e-cdd9465a0d33" />
+<br /><br />
+
+<img width="1920" height="857" alt="Image" src="https://github.com/user-attachments/assets/0c972df0-03f9-4385-adc5-c8668966271a" />
+<br /><br />
+
+
 <img width="1920" height="863" alt="Image" src="https://github.com/user-attachments/assets/6f7cbe28-a4a9-4026-b79a-89d6f7ac5624" />
 <br /><br />
 
@@ -182,11 +182,6 @@ This is a full-stack E-commerce web application designed to provide a seamless o
 <img width="1920" height="857" alt="Image" src="https://github.com/user-attachments/assets/76ce5c0f-5b7a-424f-99f3-33d31e2927c5" />
 <br /><br />
 
-<img width="1920" height="873" alt="Image" src="https://github.com/user-attachments/assets/ea2498b0-a268-4dd0-820e-cdd9465a0d33" />
-<br /><br />
-
-<img width="1920" height="857" alt="Image" src="https://github.com/user-attachments/assets/0c972df0-03f9-4385-adc5-c8668966271a" />
-<br /><br />
 
 
 
