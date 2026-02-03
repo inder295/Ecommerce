@@ -58,6 +58,7 @@ model User {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   role Role @default(USER)
+  productHistory  ProductHistory[] 
   orders     Order[] 
   reviews    Review[]
   cartItems  CartItems[]
@@ -77,8 +78,9 @@ model Product {
   brand       String     @default("Unknown")
   rating      Float      @default(0)
   ratingCount Int        @default(0)
-  attributes  Json? 
-  sellerId    String 
+  attributes  Json?  
+  deleted   Boolean    @default(false)
+  productHistory  ProductHistory[]
   categories  Category[] @relation("Products")
   reviews     Review[]
   cartItems  CartItems[]
@@ -88,6 +90,15 @@ model Product {
    
 
 }
+
+model ProductHistory {
+  id String @id @default(uuid())
+  userId String
+  productId String
+  viewedAt DateTime @default(now())
+  user User @relation(fields: [userId],references: [id])
+  product Product @relation(fields: [productId],references: [id])
+} 
 
 model Category {
   id          String     @id @default(uuid())
@@ -188,25 +199,7 @@ model Address{
  
 }
 
-// model Shipment{
-//   id String @id @default(uuid())
-//   method Method
-//   Delivered Boolean @default(false)
-//   orderId String 
-//   userId String
-//   addressId String
-//   status Status @default(Pending)
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
 
-//   user User @relation(fields: [userId],references: [id])
-//   address Address @relation(fields: [addressId],references: [id])
-//   order Order @relation(fields: [orderId],references: [id])
-
-
-
-  
-// }
 
 
 

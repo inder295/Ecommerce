@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Star, X, User } from 'lucide-react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useReview } from '../../store/useReview';
+import { useAuth } from '../../store/useAuth';
 
 export const ProductReviews = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,6 +17,8 @@ export const ProductReviews = () => {
 
   const productId=useParams();
   const {fetchReviews,reviews,isReviewFetching,addReview,submittingReview}=useReview();
+  const {authUser}=useAuth();
+  const navigate=useNavigate();
   
 
   useEffect( ()=>{
@@ -28,6 +31,15 @@ export const ProductReviews = () => {
     await addReview(productId,form);
     setIsModalOpen(false);
 
+  }
+
+  const openReviewModal =async () =>{
+    if(!(await authUser)){
+      await navigate('/signin');
+      
+    }else{
+      setIsModalOpen(true);
+    }
   }
 
   
@@ -50,7 +62,7 @@ export const ProductReviews = () => {
       <div className="flex items-center justify-between mb-8">
         <h2 className="text-2xl font-bold text-gray-900">Customer Reviews</h2>
         <button
-          onClick={() => setIsModalOpen(true)}
+          onClick={() => openReviewModal()}
           className="bg-blue-600 text-white px-6 py-2 rounded-md font-medium hover:bg-blue-700 transition-colors"
         >
           Write a Review
