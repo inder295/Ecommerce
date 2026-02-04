@@ -14,7 +14,7 @@ import { Wishlist } from './wishlist';
 export const PdpSection = () => {
   const { id } = useParams();
 
-  const { fetchProductById, isPdpFetching, productDetails } = useProduct();
+  const { fetchProductById, isPdpFetching, productDetails,setProductHistory } = useProduct();
   const { addToCart, addingInCart } = useCart();
   const cartTotalCount = useCart((state) => state.cartTotalCount);
   const { authUser } = useAuth();
@@ -23,6 +23,9 @@ export const PdpSection = () => {
 
   useEffect(() => {
     fetchProductById(id);
+    if(authUser){
+      setProductHistory(id);
+    }
   }, []);
 
   const [quantity, setQuantity] = useState(1);

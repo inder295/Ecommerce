@@ -18,8 +18,6 @@ productRouter.get("/getProductsByCategory/:categoryId",getProductsByCategory);
 productRouter.post("/search",searchProduct);
 productRouter.post('/filter',filterProducts);
 productRouter.post('/history/:productId',authMiddleware,productHistory);
-productRouter.get('/get-product-history',authMiddleware,getProductHistory)
-
-
+productRouter.get('/get-product-history',authMiddleware,getProductHistory);
 
 export default productRouter;

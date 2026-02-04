@@ -6,6 +6,8 @@ import {
   getProductByCategory,
   searchProducts,
   filter,
+  productHistory,
+  getProductHistory,
 } from '../Api/product.api';
 import toast from 'react-hot-toast';
 
@@ -17,6 +19,7 @@ export const useProduct = create((set) => ({
   productDetails: {},
   pagination: {},
   categoryProductFetching: false,
+  recentlyViewed:[],
 
   async fetchAllProducts(page = 1) {
     set({ isProductFetching: true });
@@ -103,5 +106,27 @@ export const useProduct = create((set) => ({
        toast.error(error.message);
        
     }
+  },
+
+  async setProductHistory(id){
+    try {
+       await productHistory(id);
+
+         
+    } catch (error) {
+      console.log(error);
+      
+    }
+  },
+
+  async recentViewedProducts(){
+    try {
+      const res =await getProductHistory();
+      set({recentlyViewed:res.products});
+    } catch (error) {
+      console.log(error);
+    }
   }
+
+
 }));

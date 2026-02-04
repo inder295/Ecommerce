@@ -4,6 +4,7 @@ import { Header } from '../../components/Shopfront/Header';
 import { PdpSection } from '../../components/Shopfront/PdpSection';
 import { ProductReviews } from '../../components/Shopfront/ProductReviews';
 import BackNavigation from '../../components/Shopfront/BackNavigation';
+import RecentlyViewed from '../../components/Shopfront/RecentlyViewed';
 
 export const ProductDetailPage = () => {
   return (
@@ -13,6 +14,7 @@ export const ProductDetailPage = () => {
       <BackNavigation />
       <PdpSection />
       <ProductReviews />
+      <RecentlyViewed/>
       <Footer />
     </div>
   );

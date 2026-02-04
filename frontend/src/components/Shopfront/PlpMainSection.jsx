@@ -19,6 +19,8 @@ export const PlpMainSection = () => {
 
   useEffect(() => {
     fetchAllProducts(page);
+
+    
   }, [location.pathname === '/product-list',page, fetchAllProducts]);
 
   async function handlePage(e, value) {

@@ -49,3 +49,20 @@ export const filter=async (attribute,priceRange)=>{
    
     return res.data;
 }
+
+export const productHistory=async(id)=>{
+  const res=await Api.post(`/product/history/${id}`, {
+     withCredentials: true,
+     headers: { 'Content-Type': 'application/json' },
+   })
+   return res.data;
+}
+
+export const getProductHistory=async()=>{
+   const res=await Api.get('/product/get-product-history', {
+      withCredentials: true,
+      headers: { 'Content-Type': 'application/json' },
+    })
+    return res.data;  
+   
+}
