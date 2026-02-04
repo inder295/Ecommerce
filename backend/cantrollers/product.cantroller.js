@@ -379,6 +379,87 @@ export const filterProducts = async (req, res) => {
   }
 };
 
+export const productHistory=async(req,res)=>{
+    const productId=req.params.id;
+    const userId=req.user.id;
+
+    try {
+        const product=await Prisma.product.findUnique({
+            where:{
+                userId:userId,
+                productId:productId
+            }
+        })
+
+        if(!product){
+
+            await Prisma.productHistory.create({
+              data:{
+                 userId:userId,
+                 productId:productId
+              }
+            })
+            
+            return res.status(201).json({
+                message:"Product history added successfully."
+            })
+        } 
+
+        await Prisma.productHistory.update({
+            createdAt:new Date(),
+            where:{
+                userId:userId,
+                productId:productId
+            }
+        })
+
+        return res.status(200).json({
+            message:"Product history updated successfully."
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            message:"Error in adding product history.",
+            error:error.message
+        })
+    }
+}
+
+export const getProductHistory=async(req,res)=>{
+    const userId=req.user.id;
+    try {
+        const productHistory=await Prisma.productHistory.findMany({
+            where:{
+                userId:userId
+            },
+            include:{
+                product:true
+            },
+            orderBy:{
+                viewedAt:'desc'
+            },
+            take:5
+        })
+
+        if(productHistory.length>=5){
+            return res.status(200).json({
+                message:"Product history fetched successfully.",
+                productHistory:productHistory
+            })
+        }
+
+        return res.status(200).json({
+            message:"Product history is not efficient to display recomended products."
+        })
+
+    } catch (error) {
+        
+        return res.status(500).json({
+            message:"Error in fetching product history.",
+            error:error.message
+        })
+    }
+}
 
  
 

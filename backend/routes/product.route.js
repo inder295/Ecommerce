@@ -1,6 +1,6 @@
 import express from "express";
-import { createProduct,deleteProducts,filterProducts,getAllProducts, getProductById, getProductsByCategory, searchProduct, updateProductById } from "../cantrollers/product.cantroller.js";
-import { checkAdminToken } from "../middleware/auth.middleware.js";
+import { createProduct,deleteProducts,filterProducts,getAllProducts, getProductById, getProductHistory, getProductsByCategory, productHistory, searchProduct, updateProductById } from "../cantrollers/product.cantroller.js";
+import { authMiddleware, checkAdminToken } from "../middleware/auth.middleware.js";
 import multer from "multer";
 
 const storage=multer.diskStorage({});
@@ -17,6 +17,8 @@ productRouter.get("/:id",getProductById)
 productRouter.get("/getProductsByCategory/:categoryId",getProductsByCategory);
 productRouter.post("/search",searchProduct);
 productRouter.post('/filter',filterProducts);
+productRouter.post('/history/:productId',authMiddleware,productHistory);
+productRouter.get('/get-product-history',authMiddleware,getProductHistory)
 
 
 
