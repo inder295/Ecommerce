@@ -380,14 +380,14 @@ export const filterProducts = async (req, res) => {
 };
 
 export const productHistory=async(req,res)=>{
-    const productId=req.params.id;
+    const productId=req.params.productId;
     const userId=req.user.id;
 
     try {
         const product=await Prisma.product.findUnique({
             where:{
-                userId:userId,
-                productId:productId
+                
+                id:productId
             }
         })
 
@@ -405,13 +405,19 @@ export const productHistory=async(req,res)=>{
             })
         } 
 
-        await Prisma.productHistory.update({
-            createdAt:new Date(),
-            where:{
-                userId:userId,
-                productId:productId
+       await Prisma.productHistory.upsert({
+            where: {
+                userId_productId: {
+                userId,
+                productId
+                }
+            },
+            update: {},
+            create: {
+                userId,
+                productId
             }
-        })
+        })          
 
         return res.status(200).json({
             message:"Product history updated successfully."
@@ -427,19 +433,22 @@ export const productHistory=async(req,res)=>{
 
 export const getProductHistory=async(req,res)=>{
     const userId=req.user.id;
+    console.log(userId);
+    
     try {
-        const productHistory=await Prisma.productHistory.findMany({
-            where:{
-                userId:userId
+          const productHistory = await Prisma.productHistory.findMany({
+            where: {
+                userId: userId
             },
-            include:{
-                product:true
+            include: {
+                product: true
             },
-            orderBy:{
-                viewedAt:'desc'
+            orderBy: {
+                viewedAt: 'desc'
             },
-            take:5
-        })
+            take: 5
+        });
+
 
         if(productHistory.length>=5){
             return res.status(200).json({
