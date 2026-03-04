@@ -187,6 +187,54 @@ This is a full-stack E-commerce web application designed to provide a seamless o
 
 # **Installation & Setup Guide** 📖 
 
+~~~ bash
+git clone https://github.com/inder295/Ecommerce.git
+cd Ecommerce
+~~~ 
+
+### Backend Setup
+
+~~~ bash
+cd backend
+npm install
+npm run dev
+~~~
+
+### frontend Setup
+
+~~~ bash
+cd backend
+npm install
+npm run dev
+~~~
+
+### 🔐 Environment Variables
+
+Create a .env file in backend:
+
+~~~bash
+DATABASE_URL=
+PORT=
+JWT_SECRET=
+
+MAIL_HOST=
+port=
+
+EMAIL_USER=
+EMAIL_PASS=
+
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+
+STRIPE_PUBLISHABLE_KEY=
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+
+FRONTEND_URL=
+~~~
+
+
 
 
 
