@@ -16,6 +16,7 @@ import { verifyStripePayment } from './utils/webhooks/verify-payment.js';
 import analyticsRouter from './routes/analytics.route.js';
 import reviewRouter from './routes/review.route.js';
 
+
 const app= express();
 
 const server=http.createServer(app);
@@ -49,6 +50,15 @@ app.post("/verify-payment/webhook",express.raw({ type: "application/json" }),ver
 dotenv.config();
 
 const port= process.env.PORT || 3000;
+const __dirname=path.resolve();
+
+if(process.env.NODE_ENV==="production"){
+    app.use(express.static(path.join(__dirname,"../frontend/dist")))
+
+    app.get("/{*splat}",(req,res)=>{
+        res.sendFile(path.join(__dirname,"../frontend","dist","index.html"))
+    })
+}
 
 app.use(express.json());
 app.use("/api/v1/auth",authRouter);
