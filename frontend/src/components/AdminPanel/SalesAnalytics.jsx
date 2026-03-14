@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { useAnalytics } from '../../store/useAnalytics';
-import { Graph } from '../../utils/graph';
+import { Graph } from '../../utils/Graph';
 
 export const SalesAnalytics = () => {
   const [type, setType] = useState('weekly');
