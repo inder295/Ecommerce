@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useProduct } from '../../store/useProduct';
 import { PdpImageCorosel } from './PdpImageCorosel';
-import { PdpAttributes } from './pdpAttributes';
+import {PdpAttributes} from "./PdpAttributes"
 import { useCart } from '../../store/useCart';
 import { Loader } from 'lucide-react';
 import { useAuth } from '../../store/useAuth';
