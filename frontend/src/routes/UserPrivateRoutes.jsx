@@ -1,13 +1,11 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { useAuth } from '../store/useAuth';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import Spinner from '../components/Shopfront/Spinner';
 
 export const UserPrivateRoutes = () => {
   const { checkAuth, authUser, isCheckingAuth } = useAuth();
-  const navigate = useNavigate();
-
-  useState(() => {
+  useEffect(() => {
     setTimeout(() => {
       checkAuth();
     }, 500);
@@ -17,7 +15,7 @@ export const UserPrivateRoutes = () => {
     if (isCheckingAuth) {
       return <Spinner />;
     }
-    return navigate('signin');
+    return <Navigate to="/signin" replace />;
   }
 
   return (

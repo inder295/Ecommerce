@@ -4,6 +4,8 @@ import { useProduct } from '../../store/useProduct';
 import { LuSend } from 'react-icons/lu';
 import { MdDelete } from 'react-icons/md';
 import { SlOptionsVertical } from 'react-icons/sl';
+import { Trash } from 'lucide-react';
+
 
 export const AdminProducts = () => {
   const { fetchAllProducts, isProductFetching, products } = useProduct();
@@ -84,7 +86,16 @@ export const AdminProducts = () => {
 
                   <td className="px-4 py-2 text-sm">{product.inventory}</td>
                   <td className="px-4 py-3 text-2xl cursor-pointer ">
-                    <LuSend />
+                   
+                   <div className='flex gap-2 text-md text-gray-600'>
+
+                      <span><LuSend /></span>
+                      <span><Trash/></span>
+                   </div>
+
+                    
+                    
+
                   </td>
                 </tr>
               ))

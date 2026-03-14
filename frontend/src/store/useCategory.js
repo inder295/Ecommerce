@@ -11,9 +11,10 @@ export const useCategory = create((set) => ({
     set({ isCategoryFetching: true });
     try {
       const data = await getAllCategories();
-      set({ categories: data.categories });
+      set({ categories: data?.categories ?? [] });
     } catch (error) {
       console.log('error in fetching categories', error);
+      set({ categories: [] });
     } finally {
       set({ isCategoryFetching: false });
     }

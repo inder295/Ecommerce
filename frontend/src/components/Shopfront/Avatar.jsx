@@ -3,7 +3,7 @@ import { useAuth } from '../../store/useAuth';
 import { Link, useNavigate } from 'react-router-dom';
 
 export const Avatar = () => {
-  const { logout, authUser, checkAuth } = useAuth();
+  const { logout, authUser, checkAuth,isCheckingAuth } = useAuth();
 
   const navigate = useNavigate(0);
 
@@ -15,6 +15,15 @@ export const Avatar = () => {
     await logout();
     await navigate(0);
   }
+  
+  if(isCheckingAuth){
+    return <>
+      <div className='h-8 w-12  px-5 py-2 bg-gray-300 rounded animate-pulse   '>
+          
+      </div>
+    </>
+  }
+
   return (
     <>
       {!authUser ? (

@@ -36,7 +36,7 @@ function App() {
       <Toaster position="top-right" />
       <ScrollToTop />
       <Routes>
-        //user routes wishlist and review
+        {/* user routes wishlist and review */}
         <Route element={<UserPublicRoute />}>
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
@@ -59,7 +59,7 @@ function App() {
           <Route path="/orders" element={<OrderListPage />} />
           <Route path="/orders/:orderId" element={<OrderDetailPage />} />
         </Route>
-        //admin routes
+        {/* admin routes */}
         <Route
           path="/admin-login"
           element={

@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 
 export const Cards = () => {
    
-  const {fetchAllProducts}=useProduct();
+  const {fetchAllProducts,isProductFetching}=useProduct();
   
+
   const products=useProduct((state)=>state.products);
   useEffect(()=>{
      fetchAllProducts();
@@ -14,7 +15,18 @@ export const Cards = () => {
  
   return (
     <div className="flex flex-wrap justify-center gap-2 p-4 ">
-    {
+    { isProductFetching ?  <>
+    
+    { 
+      [1,2,3,4,5,6].map(()=>(
+           <div role="status" class="w-full flex items-center justify-center h-64 max-w-sm bg-neutral-quaternary rounded-base animate-pulse bg-slate-200">
+            <span class="sr-only">Loading...</span>
+        </div>
+      ))
+    }
+
+    
+    </> :
       products.map((p)=>(
            <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg">
         <Link to={`/product/${p.id}`} >

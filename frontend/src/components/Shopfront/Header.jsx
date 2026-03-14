@@ -137,8 +137,10 @@ export const Header = () => {
           </Link>
 
           {/* User Avatar */}
+         {
+           <Avatar />
 
-          <Avatar />
+         }
 
           {/* Mobile menu button */}
           <button

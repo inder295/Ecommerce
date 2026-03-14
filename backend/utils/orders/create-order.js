@@ -1,4 +1,7 @@
-import {PrismaClient,PaymentStatus} from '@prisma/client';
+import pkg from '@prisma/client';
+
+const { PrismaClient, PaymentStatus } = pkg;
+
  
 const Prisma=new PrismaClient();
 

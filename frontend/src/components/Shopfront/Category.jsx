@@ -37,7 +37,7 @@ export const Category = () => {
               {isCategoryFetching ? (
                 <p className="">Loading...</p>
               ) : (
-                categories.map((category) => (
+                (categories ?? []).map((category) => (
                   <li
                     className="cursor-pointer hover:text-blue-600"
                     key={category.id}
