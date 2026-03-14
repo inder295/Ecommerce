@@ -10,6 +10,7 @@ import categoryrouter  from "./routes/category.route.js";
 import cartRouter from "./routes/cart.route.js";   
 import addressRouter from "./routes/address.route.js";
 import path from "path";
+import { fileURLToPath } from "url";
 import orderRouter from "./routes/order.route.js";
 import wishlistRouter from './routes/wishlist.route.js';
 import { verifyStripePayment } from './utils/webhooks/verify-payment.js';
@@ -32,7 +33,7 @@ export const io=new Server(server,{
 
 app.use(express.urlencoded({extended:false}));
 app.use(cors({
-  origin: "http://localhost:5173",   // allow only frontend
+  origin: process.env.FRONTEND_URL || "http://localhost:5173",   // allow only frontend
   credentials: true                  // allow cookies/headers
 }));
 app.use(cookieParser());
@@ -51,13 +52,15 @@ app.post("/verify-payment/webhook",express.raw({ type: "application/json" }),ver
 dotenv.config();
 
 const port= process.env.PORT || 3000;
-const __dirname=path.resolve();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const frontendDistPath = path.resolve(__dirname, "..", "frontend", "dist");
 
 if(process.env.NODE_ENV==="production"){
-    app.use(express.static(path.join(__dirname,"../frontend/dist")))
+    app.use(express.static(frontendDistPath))
 
-    app.get("/{*splat}",(req,res)=>{
-        res.sendFile(path.join(__dirname,"../frontend","dist","index.html"))
+    app.get("*",(req,res)=>{
+        res.sendFile(path.join(frontendDistPath, "index.html"))
     })
 }
 
