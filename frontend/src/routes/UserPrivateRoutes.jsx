@@ -6,10 +6,8 @@ import Spinner from '../components/Shopfront/Spinner';
 export const UserPrivateRoutes = () => {
   const { checkAuth, authUser, isCheckingAuth } = useAuth();
   useEffect(() => {
-    setTimeout(() => {
-      checkAuth();
-    }, 500);
-  }, [authUser]);
+    checkAuth();
+  }, [checkAuth]);
 
   if (!authUser) {
     if (isCheckingAuth) {

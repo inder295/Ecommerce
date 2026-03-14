@@ -7,20 +7,14 @@ export const UserPublicRoute = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    let mounted = true;
-    const run = async () => {
-      await checkAuth();
-      if (mounted) {
-        if (isAuthenticatedUser) {
-          navigate('/');
-        }
-      }
-    };
-    run();
-    return () => {
-      mounted = false;
-    };
-  }, [checkAuth, isAuthenticatedUser, navigate]);
+    checkAuth();
+  }, [checkAuth]);
+
+  useEffect(() => {
+    if (isAuthenticatedUser) {
+      navigate('/');
+    }
+  }, [isAuthenticatedUser, navigate]);
 
   return (
     <>
