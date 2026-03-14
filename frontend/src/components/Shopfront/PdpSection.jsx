@@ -9,7 +9,7 @@ import { Loader } from 'lucide-react';
 import { useAuth } from '../../store/useAuth';
 import Spinner from './Spinner';
 
-import { Wishlist } from './wishlist';
+import { Wishlist } from './Wishlist';
 
 export const PdpSection = () => {
   const { id } = useParams();
